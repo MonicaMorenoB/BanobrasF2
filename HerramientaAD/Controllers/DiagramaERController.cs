@@ -18,13 +18,15 @@ namespace HerramientaAD.Controllers
         List<ListasDesplegables> baseLista = new List<ListasDesplegables>();
         DatosDetalleTecnico datosDetalleTecnico = new DatosDetalleTecnico();
         DatosDiagramaER datosDiagramaER = new DatosDiagramaER();
-        
+
         // GET: DiagramaER
         public ActionResult Index(int BaseDeDatosID)
         {
             var diagramaERModel = new DiagramaERModel(int.Parse(Session["UsuarioID"].ToString()), BaseDeDatosID);
             return View(diagramaERModel);
         }
+
+
 
         public JsonResult ActualizarAplicaciones(int AreaID)
         {
@@ -67,9 +69,11 @@ namespace HerramientaAD.Controllers
             return Json(new SelectList(baseLista, "Indice", "Texto"), JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult ActualizarDiagrama(int BaseDeDatosID, DiagramaERModel diagramaERModel)
+        public DiagramaERModel ActualizarDiagrama(int BaseDeDatosID)
         {
-            diagramaERModel.ResultadoXML = ObtenerDatos(1, int.Parse(Session["UsuarioID"].ToString()), BaseDeDatosID);
+            var diagramaERModel = new DiagramaERModel(int.Parse(Session["UsuarioID"].ToString()), BaseDeDatosID);
+
+            diagramaERModel.ResultadoXML = ObtenerDatos(1,  BaseDeDatosID);
             XmlNode xmlNode = datosDiagramaER.ResultadoXML.DocumentElement.SelectSingleNode("DatosBD");
             foreach (XmlNode elemento in xmlNode.SelectNodes("row"))
             {
@@ -78,8 +82,9 @@ namespace HerramientaAD.Controllers
                     elemento.Attributes["Tabla"].Value.ToString())
                     );
             }
+            Session["SessiCuadros"] = diagramaERModel.ResultadoXML;
 
-            diagramaERModel.ResultadoXML = ObtenerDatos(2, int.Parse(Session["UsuarioID"].ToString()), BaseDeDatosID);
+            diagramaERModel.ResultadoXML = ObtenerDatos(2,  BaseDeDatosID);
             xmlNode = datosDiagramaER.ResultadoXML.DocumentElement.SelectSingleNode("DatosBD");
             foreach (XmlNode elemento in xmlNode.SelectNodes("row"))
             {
@@ -90,20 +95,62 @@ namespace HerramientaAD.Controllers
                     );
             }
 
-            return PartialView("Diagrama", diagramaERModel);
+            return diagramaERModel;
         }
 
-        public XmlDocument ObtenerDatos(int Tipo, int UsuarioID, int BaseDeDatosID)
+        public XmlDocument ObtenerDatos(int Tipo,  int BaseDeDatosID)
         {
             XmlDocument detalleXML = new XmlDocument();
-            if (datosDiagramaER.DiagramaERConsulta(Tipo, UsuarioID, BaseDeDatosID))
+            if (datosDiagramaER.DiagramaERConsulta(Tipo, int.Parse(Session["UsuarioID"].ToString()), BaseDeDatosID))
             {
                 detalleXML = datosDiagramaER.ResultadoXML;
             }
             return detalleXML;
         }
 
-     
+        //MMOB
+
+        public string ArregloCuadroC(int BaseDeDatosID)
+        {
+
+           
+            var diagramaERModel = new DiagramaERModel(int.Parse(Session["UsuarioID"].ToString()), BaseDeDatosID, 1);
+
+            diagramaERModel.ResultadoXML = ObtenerDatos(1, BaseDeDatosID);
+            XmlNode xmlNode = datosDiagramaER.ResultadoXML.DocumentElement.SelectSingleNode("DatosBD");
+            foreach (XmlNode elemento in xmlNode.SelectNodes("row"))
+            {
+                diagramaERModel.Cuadros.Add(new ElementosDiagramaER.Cuadros(
+                    int.Parse(elemento.Attributes["Numero"].Value.ToString()),
+                    elemento.Attributes["Tabla"].Value.ToString())
+                    );
+            }
+            Session["SessiCuadros"] = diagramaERModel.ResultadoXML;
+            return xmlNode.OuterXml.ToString();
+
+        }
+
+        public string ArregloRelacionesoC(int BaseDeDatosID)
+        {
+
+
+            var diagramaERModel = new DiagramaERModel(int.Parse(Session["UsuarioID"].ToString()), BaseDeDatosID, 1);
+            diagramaERModel.ResultadoXML = ObtenerDatos(2, BaseDeDatosID);
+            XmlNode xmlNode = datosDiagramaER.ResultadoXML.DocumentElement.SelectSingleNode("DatosBD");
+            foreach (XmlNode elemento in xmlNode.SelectNodes("row"))
+            {
+                diagramaERModel.Relaciones.Add(new ElementosDiagramaER.Relaciones(
+                     int.Parse(elemento.Attributes["From"].Value.ToString()),
+                     int.Parse(elemento.Attributes["To"].Value.ToString()),
+                     elemento.Attributes["Text"].Value.ToString())
+                     );
+            }
+            return xmlNode.OuterXml.ToString();
+
+        
+           
+        }
+
 
     }
 }

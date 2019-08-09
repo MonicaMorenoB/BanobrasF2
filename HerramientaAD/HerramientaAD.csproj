@@ -132,16 +132,19 @@
     <Compile Include="com.Datos\Aplicaciones.cs" />
     <Compile Include="com.Datos\Areas.cs" />
     <Compile Include="com.Datos\DatosDetalleTecnico.cs" />
+    <Compile Include="com.Datos\DatosDiagramaER.cs" />
     <Compile Include="com.Datos\DatosObjetosBD.cs" />
     <Compile Include="com.Datos\DatosObjetosCM.cs" />
     <Compile Include="com.Datos\DatosObjetosWS.cs" />
     <Compile Include="com.Utilerias\ElementosDeGrupo.cs" />
     <Compile Include="com.Datos\Usuarios.cs" />
+    <Compile Include="com.Utilerias\ElementosDiagramaER.cs" />
     <Compile Include="com.Utilerias\GestionBD.cs" />
     <Compile Include="com.Log\Log.cs" />
     <Compile Include="com.Utilerias\ListasImagen.cs" />
     <Compile Include="com.Utilerias\ListasDesplegables.cs" />
     <Compile Include="Controllers\DetalleTecnicoController.cs" />
+    <Compile Include="Controllers\DiagramaERController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\TablerosController.cs" />
@@ -150,6 +153,7 @@
     </Compile>
     <Compile Include="Models\AnalisisBD.cs" />
     <Compile Include="Models\DetalleTecnicoModel.cs" />
+    <Compile Include="Models\DiagramaERModel.cs" />
     <Compile Include="Models\DiagramaUMLModel.cs" />
     <Compile Include="Models\GrupoBDModel.cs" />
     <Compile Include="Models\GrupoCMModel.cs" />
@@ -278,6 +282,8 @@
     <Content Include="Views\Tableros\DiagramaUML.cshtml" />
     <Content Include="Views\DetalleTecnico\Index.cshtml" />
     <Content Include="Views\DetalleTecnico\Detalle.cshtml" />
+    <Content Include="Views\DiagramaER\Diagrama.cshtml" />
+    <Content Include="Views\DiagramaER\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

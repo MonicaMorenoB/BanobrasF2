@@ -16,7 +16,7 @@
     <!-- Copyright 1998-2019 by Northwoods Software Corporation. -->
     <script src="~/Scripts/go.js"></script>
 
-        @*<script id="code">
+    @*<script id="code">
         function init() {
           var $ = go.GraphObject.make;  // for conciseness in defining templates
           myDiagram =
@@ -88,10 +88,11 @@
         }
         </script>*@
 </head>
-<body onload="init()">
+<body>
+    @*onload="init()"*@
 
     <div class="jumbotron">
-        <h1 class="display-3">Diagrama E-R</h1>
+        <h1 class="display-3">SICOFIN</h1>
         <p class="lead">Resultados del Análisis de Base de Datos</p>
         <hr class="my-4">
     </div>
@@ -122,7 +123,7 @@
                 </tr>
                 <tr style="height: 50px">
                     <td width="370px" align="center">
-                        <button type="button" class="btn btn-primary" style="width:300px" id="btnBuscar">Buscar</button>
+                        <button type="button" class="btn btn-primary" style="width:300px" id="btnBuscar" >Buscar</button>
                     </td>
                     <td width="370px" align="center">
                         <button type="button" class="btn btn-primary" style="width:300px" id="btnLimpiar">Limpiar</button>
@@ -133,10 +134,16 @@
         </fieldset>
     </form>
     <br />
-    @{
-        Html.RenderPartial("Diagrama");
-    }
-        @*<div id="sample">
+
+    <div id="divdet" style="width:100%;">
+        <div id="sample">
+            <div id="myDiagramDiv" style="background-color: whitesmoke; border: solid 1px black; width: 100%; height: 700px"></div>
+        </div>
+    </div>
+    @*@{
+            Html.RenderPartial("Diagrama");
+        }*@
+    @*<div id="sample">
             <div id="myDiagramDiv" style="background-color: whitesmoke; border: solid 1px black; width: 100%; height: 700px"></div>
         </div>*@
 </body>
@@ -144,7 +151,8 @@
 
 <script src="~/Scripts/jquery-3.3.1.js"></script>
 <script>
-
+    var datosCuadrossFinal = [];
+    var datosRelacionesFinal = [];
     function limpiarfiltros() {
         $("#AreasLista").empty;
         $("#AreasLista")[0].selectedIndex = 0;
@@ -154,18 +162,104 @@
         $("#BasesLista")[0].selectedIndex = 0;
     }
 
-    function ActualizaDiagrama(idbd) {
+    function CargaCuadros(idbd) {
+        var datosCuadross = [];
         $.ajax({
-            type: "POST",
-            url: "/DiagramaER/ActualizarDiagrama",
+            async:false,
+            type: "GET",
+            url: "/DiagramaER/ArregloCuadroC",
             data: { BaseDeDatosID: idbd },
-            success: function (viewHTML) {
-                $("#myDiagramDiv").empty;
-                $("#myDiagramDiv").html(viewHTML);
+            success: function (data) {
+                var cadena = data,
+                    patron = /DatosBD/g,
+                    nuevoValor = "",
+                    data = cadena.replace(patron, nuevoValor);
+                cadena = data
+                separador = "row",
+                    data = cadena.split(separador);
+
+                for (var i = 1; i < data.length; i++) {
+                    var roww = data[i]
+                    var a = roww
+                    var b = " "
+                    roww = roww.replace(/['"]+/g, '')
+                    roww = roww.split(b)
+                    var Numerito = roww[1].replace(/Numero=/g, '')
+                    var tablita = roww[2].replace(/Tabla=/g, '')
+                    datosCuadross.push({ key: parseInt(Numerito), text: tablita });
+                }
             },
             error: function (errorData) { console.log("Request Failed: " + errorData); }
         });
+
+
+        return datosCuadross;
     }
+
+    @*function CargaRelaciones() {
+         @{
+                foreach (HerramientaAD.com.Utilerias.ElementosDiagramaER.Relaciones relaciones in Model.Relaciones)
+                {
+                    @:datosRelaciones.push({ from: @relaciones.Desde, to: @relaciones.Para, text: "@relaciones.Nombre" });
+                }
+            }
+        return datosRelaciones;
+    }*@
+
+    function CargaRelaciones(idbd) {
+        var datosRelacioness = [];
+        $.ajax({
+            async:false,
+            type: "GET",
+            url: "/DiagramaER/ArregloRelacionesoC",
+            data: { BaseDeDatosID: idbd },
+            success: function (data) {
+                var cadena = data,
+                    patron = /DatosBD/g,
+                    nuevoValor = "",
+                    data = cadena.replace(patron, nuevoValor);
+                cadena = data
+                separador = "row",
+                    data = cadena.split(separador);
+
+                for (var i = 1; i < data.length; i++) {
+                    var roww = data[i]
+                    var a = roww
+                    var b = " "
+                    roww = roww.replace(/['"]+/g, '')
+                    roww = roww.split(b)
+                    var formm = roww[1].replace(/From=/g, '')
+                    var too = roww[2].replace(/To=/g, '')
+                    var Texte = roww[3].replace(/Text=/g, '')
+                    datosRelacioness.push({ from: parseInt(formm), to:parseInt(too), text: Texte });
+                }
+            },
+            error: function (errorData) { console.log("Request Failed: " + errorData); }
+        });
+
+
+        return datosRelacioness;
+    }
+
+
+    function ActualizaDiagrama(idbd) {
+        if (datosCuadrossFinal.length==0) {
+            datosCuadrossFinal = CargaCuadros(idbd)
+            datosRelacionesFinal = CargaRelaciones(idbd)
+           
+              
+            $("#myDiagramDiv").html(onload = initER(datosCuadrossFinal, datosRelacionesFinal));
+           
+        }
+
+    }
+
+
+
+
+
+
+
 
     $(document).ready(function() {
 
@@ -207,10 +301,81 @@
             limpiarfiltros();
         });
 
-        $('#btnBuscar').click(function () {
-            var idbd = $("#BasesLista Option:Selected").val();
-           
+
+   $('#btnBuscar').click(function () {
+       var idbd = $("#BasesLista Option:Selected").val();
+        document.getElementById("myDiagramDiv").innerHTML="";
+       datosCuadrossFinal = []
+       datosRelacionesFinal=[]
             ActualizaDiagrama(idbd)
         });
+
+
     });
+
+
+</script>
+
+<script src="~/Scripts/go.js"></script>
+<script id="code">
+
+    function initER(_datosCuadros, _datosRelaciones) {
+        
+        var datosCuadros = _datosCuadros;
+        var datosRelaciones = _datosRelaciones;
+        var datosCuadros = _datosCuadros;
+        myDiagram = null
+       
+        var $ = go.GraphObject.make;  // for conciseness in defining templates
+        myDiagram =
+            $(go.Diagram, "myDiagramDiv",  // must name or refer to the DIV HTML element
+                {                  
+                    initialAutoScale: go.Diagram.Uniform,  // an initial automatic zoom-to-fit
+                    contentAlignment: go.Spot.Center,  // align document to the center of the viewport
+                    layout:
+                        $(go.ForceDirectedLayout,  // automatically spread nodes apart
+                            { maxIterations: 200, defaultSpringLength: 30, defaultElectricalCharge: 100 })
+                });
+        // define each Node's appearance
+        myDiagram.nodeTemplate =
+            $(go.Node, "Auto",  // the whole node panel
+                { locationSpot: go.Spot.Center },
+                // define the node's outer shape, which will surround the TextBlock
+                $(go.Shape, "Rectangle",
+                    { fill: $(go.Brush, "Linear", { 0: "rgb(254, 201, 0)", 1: "rgb(254, 162, 0)" }), stroke: "black" }),
+                $(go.TextBlock,
+                    { font: "bold 10pt helvetica, bold arial, sans-serif", margin: 4 },
+                    new go.Binding("text", "text"))
+            );
+        // replace the default Link template in the linkTemplateMap
+        myDiagram.linkTemplate =
+            $(go.Link,  // the whole link panel
+                $(go.Shape,  // the link shape
+                    { stroke: "black" }),
+                $(go.Shape,  // the arrowhead
+                    { toArrow: "standard", stroke: null }),
+                $(go.Panel, "Auto",
+                    $(go.Shape,  // the label background, which becomes transparent around the edges
+                        {
+                            fill: $(go.Brush, "Radial", { 0: "rgb(240, 240, 240)", 0.3: "rgb(240, 240, 240)", 1: "rgba(240, 240, 240, 0)" }),
+                            stroke: null
+                        }),
+                    $(go.TextBlock,  // the label text
+                        {
+                            textAlign: "center",
+                            font: "10pt helvetica, arial, sans-serif",
+                            stroke: "#555555",
+                            margin: 4
+                        },
+                        new go.Binding("text", "text"))
+                )
+            );
+
+        // create the model for the concept map
+        var nodeDataArray = datosCuadros;
+        var linkDataArray = datosRelaciones;
+      
+        myDiagram.model = new go.GraphLinksModel(nodeDataArray, linkDataArray);
+        
+    }
 </script>

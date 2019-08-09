@@ -14,8 +14,11 @@ namespace HerramientaAD.Models
         Areas areas = new Areas();
         DatosDiagramaER datosDiagramaER = new DatosDiagramaER();
 
+
         const int Tipo1 = 1;
         const int Tipo2 = 2;
+
+
 
         private int areaID;
         public int AreaID
@@ -79,14 +82,20 @@ namespace HerramientaAD.Models
             get { return resultadoXML; }
             set { resultadoXML = value; }
         }
-
-        public DiagramaERModel()
+        private List<string> resultadoXMLa;
+        public List<string> ResultadoXMLa
         {
-
+            get { return resultadoXMLa; }
+            set { resultadoXMLa = value; }
         }
+
+
+
+
 
         public DiagramaERModel(int UsuarioID, int BaseDeDatosID)
         {
+
             if (areas.AreasConsulta(UsuarioID))
             {
                 XmlNode xmlNode = areas.ResultadoXML.DocumentElement.SelectSingleNode("Areas");
@@ -97,6 +106,7 @@ namespace HerramientaAD.Models
                         elemento.Attributes["Descripcion"].Value.ToString()));
                 }
             }
+
 
             if (datosDiagramaER.DiagramaERConsulta(Tipo1, UsuarioID, BaseDeDatosID))
             {
@@ -109,6 +119,8 @@ namespace HerramientaAD.Models
                         );
                 }
             }
+
+
 
             if (datosDiagramaER.DiagramaERConsulta(Tipo2, UsuarioID, BaseDeDatosID))
             {
@@ -123,5 +135,29 @@ namespace HerramientaAD.Models
                 }
             }
         }
+
+        //Moni 
+        private List<string> arregloCuadro;
+        public List<string> ArregloCuadro
+        {
+            get { return arregloCuadro; }
+            set { arregloCuadro = value; }
+        }
+
+        public DiagramaERModel(int UsuarioID, int BaseDeDatosID, int tipo)
+        {
+            if (datosDiagramaER.DiagramaERConsulta(Tipo1, UsuarioID, BaseDeDatosID))
+            {
+                XmlNode xmlNode = datosDiagramaER.ResultadoXML.DocumentElement.SelectSingleNode("DatosBD");
+                foreach (XmlNode elemento in xmlNode.SelectNodes("row"))
+                {
+                    cuadros.Add(new ElementosDiagramaER.Cuadros(
+                        int.Parse(elemento.Attributes["Numero"].Value.ToString()),
+                        elemento.Attributes["Tabla"].Value.ToString())
+                        );
+                }
+            }
+        }
     }
+
 }
