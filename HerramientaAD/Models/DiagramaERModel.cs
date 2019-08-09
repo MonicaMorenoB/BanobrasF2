@@ -14,11 +14,8 @@ namespace HerramientaAD.Models
         Areas areas = new Areas();
         DatosDiagramaER datosDiagramaER = new DatosDiagramaER();
 
-
         const int Tipo1 = 1;
         const int Tipo2 = 2;
-
-
 
         private int areaID;
         public int AreaID
@@ -82,19 +79,33 @@ namespace HerramientaAD.Models
             get { return resultadoXML; }
             set { resultadoXML = value; }
         }
-        private List<string> resultadoXMLa;
-        public List<string> ResultadoXMLa
+
+        public DiagramaERModel()
         {
-            get { return resultadoXMLa; }
-            set { resultadoXMLa = value; }
+
         }
 
+        public DiagramaERModel(int UsuarioID)
+        {
+            if (areas.AreasConsulta(UsuarioID))
+            {
+                XmlNode xmlNode = areas.ResultadoXML.DocumentElement.SelectSingleNode("Areas");
+                foreach (XmlNode elemento in xmlNode.SelectNodes("row"))
+                {
+                    areasLista.Add(new ListasDesplegables(
+                        int.Parse(elemento.Attributes["AreaID"].Value.ToString()),
+                        elemento.Attributes["Descripcion"].Value.ToString()));
+                }
 
-
-
+                cuadros.Add(new ElementosDiagramaER.Cuadros(0, ""));
+                relaciones.Add(new ElementosDiagramaER.Relaciones(0, 0, ""));
+            }
+        }
 
         public DiagramaERModel(int UsuarioID, int BaseDeDatosID)
         {
+            //cuadros = null;
+            //relaciones = null;
 
             if (areas.AreasConsulta(UsuarioID))
             {
@@ -105,8 +116,10 @@ namespace HerramientaAD.Models
                         int.Parse(elemento.Attributes["AreaID"].Value.ToString()),
                         elemento.Attributes["Descripcion"].Value.ToString()));
                 }
-            }
 
+                cuadros.Add(new ElementosDiagramaER.Cuadros(0, ""));
+                relaciones.Add(new ElementosDiagramaER.Relaciones(0, 0, ""));
+            }
 
             if (datosDiagramaER.DiagramaERConsulta(Tipo1, UsuarioID, BaseDeDatosID))
             {
@@ -120,8 +133,6 @@ namespace HerramientaAD.Models
                 }
             }
 
-
-
             if (datosDiagramaER.DiagramaERConsulta(Tipo2, UsuarioID, BaseDeDatosID))
             {
                 XmlNode xmlNode = datosDiagramaER.ResultadoXML.DocumentElement.SelectSingleNode("DatosBD");
@@ -134,14 +145,6 @@ namespace HerramientaAD.Models
                         );
                 }
             }
-        }
-
-        //Moni 
-        private List<string> arregloCuadro;
-        public List<string> ArregloCuadro
-        {
-            get { return arregloCuadro; }
-            set { arregloCuadro = value; }
         }
 
         public DiagramaERModel(int UsuarioID, int BaseDeDatosID, int tipo)
@@ -159,5 +162,4 @@ namespace HerramientaAD.Models
             }
         }
     }
-
 }
