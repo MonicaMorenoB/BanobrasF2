@@ -285,6 +285,7 @@
     <Content Include="Views\DetalleTecnico\Detalle.cshtml" />
     <Content Include="Views\DiagramaER\Diagrama.cshtml" />
     <Content Include="Views\DiagramaER\Index.cshtml" />
+    <Content Include="Views\Dependecias\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
