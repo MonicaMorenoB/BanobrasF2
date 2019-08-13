@@ -1,0 +1,35 @@
+﻿/* Prevent the text contents of draggable elements from being selectable. */
+
+body {
+}
+
+
+#divflotante1 {
+    position: absolute;
+    display: none;
+    z-index: 4;
+    border: 1px solid black;
+    background-color: lightcyan;
+    font-size: 15px;
+    border-radius: 10px;
+  
+}
+
+#lblauxc1 {
+    color: darkblue;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+#lblauxc2 {
+    color: darkred;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+#lblauxc3 {
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+
