@@ -12,8 +12,9 @@
 </head>
 <body>
     <style>
-        th, td {
+        th {
             padding: 10px;
+            text-align:center;
         }
     </style>
 
@@ -86,12 +87,38 @@
             </table>
         </fieldset>
     </form>
+    <div id="HGrid">
+        <br />
+        <br />
+        <table cellspacing="0" id="Tabla0" style="width: 100%; border-collapse: collapse; color: #fff; ">
+            <tr class="GridViewScrollHeader">
+                <th class="CampoMasCorto"># Línea</th>
+                <th class="CampoDescarga">Lenguaje</th>
+                <th class="CampoAnalisis">Archivo</th>
+                <th class="CampoAnalisis">Padre</th>
+                <th class="CampoAnalisis">Nombre</th>
+                <th>Tipo</th>
+            </tr>
+        </table>
+    </div>
+    <div id="divdet" >
+        @{
+            Html.RenderPartial("Detalle");
+        }
+    </div>
 
-    @{
-        Html.RenderPartial("Detalle");
-    }
+    <div id="divflotante1">
+        <table>
+            <tr>
+                <td>
+                    <label id="lblauxc1"></label><br />
+                    <label id="lblauxc2"></label><br />
+                    <label id="lblauxc3"></label>
+                </td>
+            </tr>
+        </table>
 
-
+    </div>
 
 
 </body>
@@ -101,6 +128,21 @@
 
 <script src="~/Scripts/jquery-3.3.1.js"></script>
 <script>
+
+    function show_divline(e, relacion,archivo,numlinea,ruta) {
+        var top = e.pageY + 'px';
+        var left = (e.pageX + 10) + 'px'
+        console.log(top + left + relacion);
+        $('#lblauxc1').text("Archivo: " + archivo);
+        $('#lblauxc2').text("Línea: " + numlinea);
+        $('#lblauxc3').text(relacion);
+        document.getElementById("divflotante1").style.left = left;
+        document.getElementById("divflotante1").style.top = top;
+        document.getElementById("divflotante1").style.display = "block";
+    }
+    function hide_divline() {
+        document.getElementById("divflotante1").style.display = "none";
+    }
 
     var tpfil = "BD";
     var tipo;
@@ -298,4 +340,6 @@
             ActualizaBusqueda(tpfil,idapp,fil1,fil2,fil3,fil4)
         });
     });
+
+    
 </script>

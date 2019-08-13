@@ -186,6 +186,7 @@
     <Content Include="Content\jquery-ui-1.10.4.css" />
     <Content Include="Content\jquery.jqChart.css" />
     <Content Include="Content\style.css" />
+    <Content Include="Estilos\dependencias.css" />
     <Content Include="Images\archivos.png" />
     <Content Include="Images\clase.png" />
     <Content Include="Images\conexion.png" />

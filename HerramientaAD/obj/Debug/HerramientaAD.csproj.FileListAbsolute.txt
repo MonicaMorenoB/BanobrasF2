@@ -483,3 +483,4 @@ C:\Users\monica.moreno\Documents\Codigo_base\FASE_2\HerramientaAD\HerramientaAD\
 C:\Users\monica.moreno\Documents\Codigo_base\FASE_2\HerramientaAD\HerramientaAD\obj\Debug\HerramientaAD.csproj.CopyComplete
 C:\Users\monica.moreno\Documents\Codigo_base\FASE_2\HerramientaAD\HerramientaAD\obj\Debug\HerramientaAD.dll
 C:\Users\monica.moreno\Documents\Codigo_base\FASE_2\HerramientaAD\HerramientaAD\obj\Debug\HerramientaAD.pdb
+C:\Users\monica.moreno\Documents\Codigo_base\FASE_2\HerramientaAD\HerramientaAD\obj\Debug\HerramientaAD.csprojAssemblyReference.cache
