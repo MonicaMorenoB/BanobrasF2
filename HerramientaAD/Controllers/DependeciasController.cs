@@ -39,11 +39,22 @@ namespace HerramientaAD.Controllers
 
             return Json(new SelectList(aplicacionesLista, "Indice", "Texto"), JsonRequestBehavior.AllowGet);
         }
-
+        /// <summary>
+        /// carga tabla
+        /// </summary>
+        /// <param name="appid"></param>
+        /// <param name="nombre"></param>
+        /// <returns></returns>
         public ActionResult ActualizaDetalle(int appid, string nombre)
         {
             DependeciasModel objdep = new DependeciasModel(appid, int.Parse(Session["usuid"].ToString()), nombre);
             return PartialView("Detalle", objdep);
+        }
+
+        public JsonResult GeneraDiagrama(int appid, int maxe, int tipoid, string nomapp)
+        {            
+            string diagramahtml = string.Empty;           
+            return Json(diagramahtml, JsonRequestBehavior.AllowGet);
         }
     }
 }
