@@ -1,5 +1,228 @@
-﻿@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+﻿@model HerramientaAD.Models.DependeciasModel
+
+    @{
+        ViewBag.Title = "Dependecias";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+       
+    </head>
+    <body>
+
+        <div class="jumbotron">
+            <h1 class="display-3">Dependencias</h1>
+            <p class="lead">ABC</p>
+            <hr class="my-4">
+        </div>
+
+        <form>
+            <fieldset>
+                <legend>Filtros</legend>
+                <table align="center">
+                    <tr style="height: 50px">
+                        <td width="370px" align="center">
+
+                            <button type="button" class="btn btn-primary" style="width:300px" id="btnFiltrosBD">Objetos de Base de Datos</button>
+                        </td>
+                        <td width="370px" align="center">
+                            <button type="button" class="btn btn-primary" style="width:300px" id="btnFiltrosWS">Objetos de Interfases y Servicios</button>
+                        </td>
+                        <td width="370px" align="center">
+                            <button type="button" class="btn btn-primary" style="width:300px" id="btnFiltrosCM">Objetos de Clases y Métodos</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.AreaID, "Area:")
+                                @Html.DropDownListFor(m => m.AreasLista, new SelectList(Model.AreasLista, "Indice", "Texto"), "Selecciona", new { @class = "form-control" })
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.AplicacionID, "Aplicación:")
+                                @Html.DropDownListFor(m => m.AplicacionesLista, new SelectList(Model.AplicacionesLista, "Indice", "Texto"), "Selecciona", new { @class = "form-control" })
+                            </div>
+                        </td>
+
+                    </tr>
+                    <tr style="height: 50px">
+                        <td width="370px" align="center">
+                            <button type="button" class="btn btn-primary" style="width:300px" id="btnBuscar">Buscar</button>
+                        </td>
+                    </tr>
+
+
+                    <tr style="height: 50px">
+                    </tr>
+                </table>
+            </fieldset>
+        </form>
+
+        <div id="HGrid">
+            <br />
+            <br />
+            <table cellspacing="0" id="Tabla0" style="width: 100%; border-collapse: collapse; color: #fff; ">
+                <tr class="GridViewScrollHeader">
+                    <th class="CampoMasCorto">USO</th>
+                    <th class="CampoDescarga">Objeto -> Dependencias</th>
+                </tr>
+            </table>
+        </div>
+
+
+
+        <table>
+            <tr>
+                <th>
+                    <div id="divdet">
+                        @{
+                            Html.RenderPartial("Detalle");
+                        }
+                    </div>
+                </th>
+
+                <th style="text-align: center;">
+                    <h1>INDICADORES</h1>
+                    <label for="checking" , id="lbl1" class="lblDetalle">A</label><br />
+                    <label for="checking" , id="lbl2" class="lblDetalle">A</label><br />
+                    <label for="checking" , id="lbl3" class="lblDetalle">A</label><br />
+                    <label for="checking" , id="lbl4" class="lblDetalle">A</label><br />
+                    <label for="checking" , id="lbl5" class="lblDetalle">A</label><br />
+                    <label for="checking" , id="lbl6" class="lblDetalle">A</label>
+                </th>
+            </tr>
+        </table>
+        <br />
+        <br />
+        <h1 style="text-align: center;">DIAGRAMA</h1>
+        <div id="divdet2" style="width:100%;">
+            @{
+                Html.RenderPartial("Diagrama");
+            }
+        </div>
+
+
+    </body>
+</html>
+
+
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+<script>
+
+   
+
+        var tpfil = "BD";
+    var tipo;
+
+    function limpiarfiltros() {
+        $("#AreasLista").empty;
+        $("#AreasLista")[0].selectedIndex = 0;
+        $("#AplicacionesLista").empty;
+        $("#AplicacionesLista")[0].selectedIndex = 0;
+    }
+
+    $(document).ready(function () {
+
+        $("#AreasLista").change(function () {
+            var a = $("#AreasLista Option:Selected").val();
+            var url = '@Url.Content("~/")' + "Dependecias/ActualizarAplicaciones";
+            var ddlsource = "#AreasLista Option:Selected";
+            $.getJSON(url, { areaid: $(ddlsource).val() }, function (data) {
+                var items = '';
+                $("#AplicacionesLista").empty;
+                $.each(data, function (i, row) {
+                    items += "<option value='" + row.Value + "'>" + row.Text + "</option>";
+                });
+                $("#AplicacionesLista").html(items);
+            }).fail(function (jqxhr, textStatus, error) {
+                var err = textStatus + ", " + error;
+                console.log("Request Failed: " + err);
+            });
+        });
+
+        $('#btnFiltrosBD').click(function () {
+            tpfil = "BD";
+            limpiarfiltros();
+        });
+
+        $('#btnFiltrosWS').click(function () {
+            tpfil = "WS";
+            limpiarfiltros();
+        });
+
+        $('#btnFiltrosCM').click(function () {
+            tpfil = "CM";
+            limpiarfiltros();
+        });
+
+        $('#btnBuscar').click(function () {
+            var idapp = $("#AplicacionesLista Option:Selected").val();
+            if (tpfil == "BD") {
+                var fil1 = $("#AplicacionesLista Option:Selected").val();
+            }
+
+            if (tpfil == "WS") {
+                var fil1 = $("#AplicacionesLista Option:Selected").val();
+            }
+
+            if (tpfil == "CM") {
+               var fil1 = $("#AplicacionesLista Option:Selected").val();
+            }
+
+            ActualizaBusqueda(tpfil, fil1)
+        });
+    });
+
+
+      function ActualizaBusqueda(tpfil,appid) {            
+            var namedef = "";
+            switch (tpfil) {
+                case "BD":
+                    ActNavegacion("ObjetosDB>>Indicadores>>");
+                    opcion = "ObjetosDB>>";
+                    namedef = "Tablas";
+                    break;
+                case "WS":
+                    ActNavegacion("Clases y Funciones>>Indicadores>>");
+                    opcion = "Clases y Funciones>>";
+                    namedef = "Clase";
+                    break;
+                case "CM":
+                    ActNavegacion("Servicios Web>>Indicadores>>");
+                    opcion = "Servicios Web>>";
+                    namedef = "Interface";
+                    break;
+            }
+            ActualizaDetalle(appid, namedef);
+    }
+
+    function ActualizaDetalle(appid1,nombre1) {
+            //$.ajax({
+            //    type: "GET",
+            //    url: "/Dependencias/ActualizaDetalle",
+            //    data: { appid: appid1, nombre:nombre1 },
+            //    success: function (viewHTML) {
+            //        $("#divtree").html(viewHTML);
+            //        var cols = document.querySelectorAll('#treeview1 .alineacion');
+            //        [].forEach.call(cols, function (col) {
+            //            col.addEventListener('dragstart', handleDragStart, false);
+            //            col.addEventListener('dragend', handleDragEnd, false);
+            //        });
+            //        var cols = document.querySelectorAll('#treeview1 .alineacion2');
+            //        [].forEach.call(cols, function (col) {
+            //            col.addEventListener('dragstart', handleDragStart, false);
+            //            col.addEventListener('dragend', handleDragEnd, false);
+            //        });
+            //    },
+            //    error: function (errorData) { console.log("Request Failed: " + errorData); }
+            //});
+            //if ($("#hhideL").text() == 'mostrar')
+            //    ocultaL();
+        }
+</script>
 
 

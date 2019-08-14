@@ -131,6 +131,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="com.Datos\Aplicaciones.cs" />
     <Compile Include="com.Datos\Areas.cs" />
+    <Compile Include="com.Datos\DatosDependencias.cs" />
     <Compile Include="com.Datos\DatosDetalleTecnico.cs" />
     <Compile Include="com.Datos\DatosDiagramaER.cs" />
     <Compile Include="com.Datos\DatosObjetosBD.cs" />
@@ -143,6 +144,7 @@
     <Compile Include="com.Log\Log.cs" />
     <Compile Include="com.Utilerias\ListasImagen.cs" />
     <Compile Include="com.Utilerias\ListasDesplegables.cs" />
+    <Compile Include="Controllers\DependeciasController.cs" />
     <Compile Include="Controllers\DetalleTecnicoController.cs" />
     <Compile Include="Controllers\DiagramaERController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -152,6 +154,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AnalisisBD.cs" />
+    <Compile Include="Models\DependeciasModel.cs" />
     <Compile Include="Models\DetalleTecnicoModel.cs" />
     <Compile Include="Models\DiagramaERModel.cs" />
     <Compile Include="Models\DiagramaUMLModel.cs" />
@@ -187,6 +190,7 @@
     <Content Include="Content\jquery.jqChart.css" />
     <Content Include="Content\style.css" />
     <Content Include="Estilos\dependencias.css" />
+    <Content Include="Estilos\detalleTecnico.css" />
     <Content Include="Images\archivos.png" />
     <Content Include="Images\clase.png" />
     <Content Include="Images\conexion.png" />
@@ -286,6 +290,8 @@
     <Content Include="Views\DiagramaER\Diagrama.cshtml" />
     <Content Include="Views\DiagramaER\Index.cshtml" />
     <Content Include="Views\Dependecias\Index.cshtml" />
+    <Content Include="Views\Dependecias\Detalle.cshtml" />
+    <Content Include="Views\Dependecias\Diagrama.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -4,28 +4,46 @@ body {
 }
 
 
+#divflotante1 {
+    position: absolute;
+    display: none;
+    z-index: 4;
+    border: 1px solid black;
+    background-color: lightcyan;
+    font-size: 15px;
+    border-radius: 10px;
+  
+}
 
+#lblauxc1 {
+    color: darkblue;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+#lblauxc2 {
+    color: darkred;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+#lblauxc3 {
+    margin-right: 20px;
+    margin-left: 20px;
+}
 
 
 
 #divdet {
     position: relative;
     display: block;
-    width: 750px !important;
+    width: 1100px !important;
     height: 430px;
     overflow-y: scroll;
 }
 
-#divdet2 {
-    position: relative;
-    display: block;
-    width: 1100px !important;
-    height: 1000px;
-    overflow-y: scroll;
-}
-
 #HGrid {
-    width: 750px;
+    width: 1100px;
 }
 
 
@@ -68,11 +86,4 @@ body {
     font-weight: bold;
 }
 
-.lblDetalle {
-    width: 350px;
-    border: solid;
-    border-radius: 15px;
-    border-color: #2780e3;
-    height: 50px;
-    text-align: center;
-}
+
