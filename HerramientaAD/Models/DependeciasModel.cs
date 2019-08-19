@@ -12,8 +12,10 @@ namespace HerramientaAD.Models
     {
         Areas areas = new Areas();
 
+        DatosDependencias datosDependencias = new DatosDependencias();
+
         private List<ListasDesplegables> areasLista = new List<ListasDesplegables>();
-        DatosDetalleTecnico datosDetalle = new DatosDetalleTecnico();
+        DatosDependencias datosPed = new DatosDependencias();
         public List<ListasDesplegables> AreasLista
         {
             get { return areasLista; }
@@ -40,12 +42,12 @@ namespace HerramientaAD.Models
             set { aplicacionID = value; }
         }
 
-        private XmlDocument detalleXML;
-        public XmlDocument DetalleXML
-        {
-            get { return detalleXML; }
-            set { detalleXML = value; }
-        }
+        private List<ElementosDependencias.EleDependencias> ldep = new List<ElementosDependencias.EleDependencias>();
+        public List<ElementosDependencias.EleDependencias> Ldep { get => ldep; set => ldep = value; }
+
+        private List<ElementosDependencias.EleTablaUsos> lTabU = new List<ElementosDependencias.EleTablaUsos>();
+        public List<ElementosDependencias.EleTablaUsos> LTabU { get => lTabU; set => lTabU = value; }      
+
 
         public DependeciasModel()
         {
@@ -64,9 +66,9 @@ namespace HerramientaAD.Models
                 }
             }
 
-            if (datosDetalle.ConsultaDetalleFiltro("BD", 0, string.Empty, string.Empty, string.Empty, string.Empty))
+            if (datosPed.TablaUsosConsulta(1,2))
             {
-                detalleXML = datosDetalle.ResultadoXML;
+                detalleXML = datosPed.ResultadoXML;
             }
         }
 
@@ -76,6 +78,28 @@ namespace HerramientaAD.Models
             //Aplicaciones objapp = new Aplicaciones();
             //objapp.ObtenObjetosDB3(usuarioid, appid, nombre);
             //XobjetosDB = objapp.AplicaionXML;
+        }
+
+        public DependeciasModel(int UsuarioID, int TipoID, int AplicacionID, int ProcesoID)
+        {
+            if (datosDependencias.IndicadoresConsulta(UsuarioID, TipoID, AplicacionID, ProcesoID))
+            {
+                XmlNode xmlNode = datosDependencias.ResultadoXML.DocumentElement.SelectSingleNode("Indicadores");
+                foreach (XmlNode elemento in xmlNode.SelectNodes("row"))
+                {
+                    ldep.Add(new ElementosDependencias.EleDependencias(
+                        int.Parse(elemento.Attributes["Registros"].Value.ToString()),
+                        elemento.Attributes["TipoObjeto"].Value.ToString()));
+                }
+            }
+       
+        }
+
+        private XmlDocument detalleXML;
+        public XmlDocument DetalleXML
+        {
+            get { return detalleXML; }
+            set { detalleXML = value; }
         }
 
     }

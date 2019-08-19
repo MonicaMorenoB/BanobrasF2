@@ -68,7 +68,8 @@
             <table cellspacing="0" id="Tabla0" style="width: 100%; border-collapse: collapse; color: #fff; ">
                 <tr class="GridViewScrollHeader">
                     <th class="CampoMasCorto">USO</th>
-                    <th class="CampoDescarga">Objeto -> Dependencias</th>
+                    <th class="CampoAnalisis">Objeto -> Dependencias</th>
+                    <th class="CampoDescarga">Tipo de objeto</th>
                 </tr>
             </table>
         </div>
@@ -84,14 +85,15 @@
                         }
                     </div>
                 </th>
+                <th style="width: 50px;"></th>
                 <th style="text-align: center;">
                     <h1>INDICADORES</h1>
-                    <label for="checking" , id="lbl1" class="lblDetalle">A</label><br />
-                    <label for="checking" , id="lbl2" class="lblDetalle">A</label><br />
-                    <label for="checking" , id="lbl3" class="lblDetalle">A</label><br />
-                    <label for="checking" , id="lbl4" class="lblDetalle">A</label><br />
-                    <label for="checking" , id="lbl5" class="lblDetalle">A</label><br />
-                    <label for="checking" , id="lbl6" class="lblDetalle">A</label>
+                    <label for="checking" , id="lblIndi1" class="lblDetalle"></label><br />
+                    <label for="checking" , id="lblIndi2" class="lblDetalle"></label><br />
+                    <label for="checking" , id="lblIndi3" class="lblDetalle"></label><br />
+                    <label for="checking" , id="lblIndi4" class="lblDetalle"></label><br />
+                    <label for="checking" , id="lblIndi5" class="lblDetalle"></label><br />
+                    <label for="checking" , id="lblIndi6" class="lblDetalle"></label>
                 </th>
             </tr>
         </table>
@@ -115,7 +117,7 @@
    
 
         var tpfil = "BD";
-    var tipo;
+    var tipo =0;
 
     function limpiarfiltros() {
         $("#AreasLista").empty;
@@ -143,18 +145,23 @@
             });
         });
 
+     
+
         $('#btnFiltrosBD').click(function () {
             tpfil = "BD";
+            tipo = 1;
             limpiarfiltros();
         });
 
         $('#btnFiltrosWS').click(function () {
             tpfil = "WS";
+            tipo = 3;
             limpiarfiltros();
         });
 
         $('#btnFiltrosCM').click(function () {
             tpfil = "CM";
+            tipo = 2;
             limpiarfiltros();
         });
 
@@ -171,59 +178,54 @@
             if (tpfil == "CM") {
                var fil1 = $("#AplicacionesLista Option:Selected").val();
             }
-
-            ActualizaBusqueda(tpfil, fil1)
+            CargaIndicadores(tipo,fil1,0)
+            ActualizaDetalle(fil1)
         });
     });
 
 
-      function ActualizaBusqueda(tpfil,appid) {            
-            var namedef = "";
-            switch (tpfil) {
-                case "BD":
-                    ActNavegacion("ObjetosDB>>Indicadores>>");
-                    opcion = "ObjetosDB>>";
-                    namedef = "Tablas";
-                    break;
-                case "WS":
-                    ActNavegacion("Clases y Funciones>>Indicadores>>");
-                    opcion = "Clases y Funciones>>";
-                    namedef = "Clase";
-                    break;
-                case "CM":
-                    ActNavegacion("Servicios Web>>Indicadores>>");
-                    opcion = "Servicios Web>>";
-                    namedef = "Interface";
-                    break;
-            }
-            ActualizaDetalle(appid, namedef);
+     
+
+    function ActualizaDetalle(_AplicacionID) {
+            $.ajax({
+                type: "POST",
+                url: "/Dependecias/ActualizarConsulta",
+                data: { AplicacionID: _AplicacionID},
+                success: function (viewHTML) {
+                          $("#divdet").empty;
+                $("#divdet").html(viewHTML);     
+                },
+                error: function (errorData) { console.log("Request Failed: " + errorData); }
+            });
     }
 
-    function ActualizaDetalle(appid1, nombre1) {
+    function CargaIndicadores(_TipoID, _AplicacionID, _ProcesoID) {
 
-
-            //$.ajax({
-            //    type: "GET",
-            //    url: "/Dependencias/ActualizaDetalle",
-            //    data: { appid: appid1, nombre:nombre1 },
-            //    success: function (viewHTML) {
-            //        $("#divtree").html(viewHTML);
-            //        var cols = document.querySelectorAll('#treeview1 .alineacion');
-            //        [].forEach.call(cols, function (col) {
-            //            col.addEventListener('dragstart', handleDragStart, false);
-            //            col.addEventListener('dragend', handleDragEnd, false);
-            //        });
-            //        var cols = document.querySelectorAll('#treeview1 .alineacion2');
-            //        [].forEach.call(cols, function (col) {
-            //            col.addEventListener('dragstart', handleDragStart, false);
-            //            col.addEventListener('dragend', handleDragEnd, false);
-            //        });
-            //    },
-            //    error: function (errorData) { console.log("Request Failed: " + errorData); }
-            //});
-            //if ($("#hhideL").text() == 'mostrar')
-            //    ocultaL();
-        }
+        $.ajax({
+            async: false,
+            type: "GET",
+            url: "/Dependecias/ActualizaIndicadores",
+            data: { TipoID: _TipoID, AplicacionID: _AplicacionID, ProcesoID: _ProcesoID },
+            success: function (data) { 
+                if (data.length>0) {
+                    $("#lblIndi1").text(data[0] !== undefined ? data[0].Text : "-");
+                    $("#lblIndi2").text(data[1] !== undefined ? data[1].Text : "-");
+                    $("#lblIndi3").text(data[2] !== undefined ? data[2].Text : "-");
+                    $("#lblIndi4").text(data[3] !== undefined ? data[3].Text : "-");
+                    $("#lblIndi5").text(data[4] !== undefined ? data[4].Text : "-");
+                    $("#lblIndi6").text(data[5] !== undefined ? data[5].Text : "-");
+                } else {
+                    $("#lblIndi1").text("-");
+                    $("#lblIndi2").text("-");
+                    $("#lblIndi3").text("-");
+                    $("#lblIndi4").text("-");
+                    $("#lblIndi5").text("-");
+                    $("#lblIndi6").text("-");
+                }
+            },
+            error: function (errorData) { console.log("Request Failed: " + errorData); }
+        });
+    }
 </script>
 
 

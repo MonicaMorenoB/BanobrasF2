@@ -13,8 +13,9 @@ namespace HerramientaAD.Controllers
 {
     public class DependeciasController : Controller
     {
-       DependeciasModel datosDependecias = new DependeciasModel();
+        DependeciasModel datosDependeciasM = new DependeciasModel();
         List<ListasDesplegables> aplicacionesLista = new List<ListasDesplegables>();
+        DatosDependencias datosDependeciasSQL = new DatosDependencias();
         public ActionResult Index()
         {
             var detalleDependeciasModel = new DependeciasModel(int.Parse(Session["UsuarioID"].ToString()));
@@ -52,9 +53,41 @@ namespace HerramientaAD.Controllers
         }
 
         public JsonResult GeneraDiagrama(int appid, int maxe, int tipoid, string nomapp)
-        {            
-            string diagramahtml = string.Empty;           
+        {
+            string diagramahtml = string.Empty;
             return Json(diagramahtml, JsonRequestBehavior.AllowGet);
         }
+
+
+        public JsonResult ActualizaIndicadores(int TipoID, int AplicacionID, int ProcesoID)        
+        {
+            var grupoDepModel = new DependeciasModel(1,TipoID, AplicacionID, ProcesoID);
+            var cc = Json(grupoDepModel.Ldep, JsonRequestBehavior.AllowGet);
+            return cc;
+        }
+
+        //public JsonResult ActualizaTablaUsos(int AplicacionID)
+        //{
+        //    var grupoDepModel = new DependeciasModel(1, AplicacionID);
+        //    var cc = Json(grupoDepModel.LTabU, JsonRequestBehavior.AllowGet);
+        //    return cc;
+        //}
+
+        public ActionResult ActualizaTablaUsos(int AplicacionID)
+        {
+            datosDependeciasM.DetalleXML  =  TabUsodel(1, AplicacionID);
+            return PartialView("Detalle", datosDependeciasM);
+        }
+
+        public XmlDocument TabUsodel(int UsuarioID, int AplicacionID)
+        {
+            XmlDocument detalleXML = new XmlDocument();
+            if (datosDependeciasSQL.TablaUsosConsulta(UsuarioID,AplicacionID))
+            {
+                detalleXML = datosDependeciasSQL.ResultadoXML;
+            }
+            return detalleXML;
+        }
+        
     }
 }

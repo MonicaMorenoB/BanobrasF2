@@ -404,7 +404,6 @@ C:\Users\monica.moreno\Documents\Código base\FASE 2\HerramientaAD\HerramientaAD
 C:\Users\monica.moreno\Documents\Código base\FASE 2\HerramientaAD\HerramientaAD\obj\Debug\HerramientaAD.csproj.CopyComplete
 C:\Users\monica.moreno\Documents\Código base\FASE 2\HerramientaAD\HerramientaAD\obj\Debug\HerramientaAD.dll
 C:\Users\monica.moreno\Documents\Código base\FASE 2\HerramientaAD\HerramientaAD\obj\Debug\HerramientaAD.pdb
-C:\Users\monica.moreno\Documents\Codigo_base\FASE_2\HerramientaAD\HerramientaAD\obj\Debug\HerramientaAD.csproj.CoreCompileInputs.cache
 C:\Users\monica.moreno\Documents\Codigo_base\FASE_2\HerramientaAD\HerramientaAD\bin\HerramientaAD.dll.config
 C:\Users\monica.moreno\Documents\Codigo_base\FASE_2\HerramientaAD\HerramientaAD\bin\HerramientaAD.dll
 C:\Users\monica.moreno\Documents\Codigo_base\FASE_2\HerramientaAD\HerramientaAD\bin\HerramientaAD.pdb
@@ -480,6 +479,7 @@ C:\Users\monica.moreno\Documents\Codigo_base\FASE_2\HerramientaAD\HerramientaAD\
 C:\Users\monica.moreno\Documents\Codigo_base\FASE_2\HerramientaAD\HerramientaAD\bin\System.Diagnostics.DiagnosticSource.xml
 C:\Users\monica.moreno\Documents\Codigo_base\FASE_2\HerramientaAD\HerramientaAD\bin\Microsoft.AspNet.TelemetryCorrelation.xml
 C:\Users\monica.moreno\Documents\Codigo_base\FASE_2\HerramientaAD\HerramientaAD\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\monica.moreno\Documents\Codigo_base\FASE_2\HerramientaAD\HerramientaAD\obj\Debug\HerramientaAD.csproj.CoreCompileInputs.cache
 C:\Users\monica.moreno\Documents\Codigo_base\FASE_2\HerramientaAD\HerramientaAD\obj\Debug\HerramientaAD.csproj.CopyComplete
 C:\Users\monica.moreno\Documents\Codigo_base\FASE_2\HerramientaAD\HerramientaAD\obj\Debug\HerramientaAD.dll
 C:\Users\monica.moreno\Documents\Codigo_base\FASE_2\HerramientaAD\HerramientaAD\obj\Debug\HerramientaAD.pdb

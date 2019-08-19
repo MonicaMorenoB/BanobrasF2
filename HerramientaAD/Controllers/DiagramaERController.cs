@@ -117,10 +117,7 @@ namespace HerramientaAD.Controllers
 
         public string ArregloCuadroC(int BaseDeDatosID)
         {
-
-
             var diagramaERModel = new DiagramaERModel(int.Parse(Session["UsuarioID"].ToString()), BaseDeDatosID, 1);
-
             diagramaERModel.ResultadoXML = ObtenerDatos(1, int.Parse(Session["UsuarioID"].ToString()), BaseDeDatosID);
             XmlNode xmlNode = datosDiagramaER.ResultadoXML.DocumentElement.SelectSingleNode("DatosBD");
             foreach (XmlNode elemento in xmlNode.SelectNodes("row"))
@@ -132,13 +129,10 @@ namespace HerramientaAD.Controllers
             }
             Session["SessiCuadros"] = diagramaERModel.ResultadoXML;
             return xmlNode.OuterXml.ToString();
-
         }
 
         public string ArregloRelacionesoC(int BaseDeDatosID)
         {
-
-
             var diagramaERModel = new DiagramaERModel(int.Parse(Session["UsuarioID"].ToString()), BaseDeDatosID, 1);
             diagramaERModel.ResultadoXML = ObtenerDatos(2, int.Parse(Session["UsuarioID"].ToString()),BaseDeDatosID);
             XmlNode xmlNode = datosDiagramaER.ResultadoXML.DocumentElement.SelectSingleNode("DatosBD");
@@ -151,9 +145,6 @@ namespace HerramientaAD.Controllers
                      );
             }
             return xmlNode.OuterXml.ToString();
-
-
-
         }
 
 

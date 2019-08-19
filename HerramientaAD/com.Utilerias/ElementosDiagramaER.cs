@@ -7,6 +7,7 @@ namespace HerramientaAD.com.Utilerias
 {
     public class ElementosDiagramaER
     {
+
         public class Cuadros
         {
             private int numero;

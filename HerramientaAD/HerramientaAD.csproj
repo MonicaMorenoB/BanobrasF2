@@ -139,6 +139,7 @@
     <Compile Include="com.Datos\DatosObjetosWS.cs" />
     <Compile Include="com.Utilerias\ElementosDeGrupo.cs" />
     <Compile Include="com.Datos\Usuarios.cs" />
+    <Compile Include="com.Utilerias\ElementosDependencias.cs" />
     <Compile Include="com.Utilerias\ElementosDiagramaER.cs" />
     <Compile Include="com.Utilerias\GestionBD.cs" />
     <Compile Include="com.Log\Log.cs" />
