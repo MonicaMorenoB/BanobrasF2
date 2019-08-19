@@ -66,7 +66,7 @@ namespace HerramientaAD.Models
                 }
             }
 
-            if (datosPed.TablaUsosConsulta(1,2))
+            if (datosPed.TablaUsosConsulta(0,0))
             {
                 detalleXML = datosPed.ResultadoXML;
             }

@@ -19,6 +19,7 @@ namespace HerramientaAD.Controllers
         public ActionResult Index()
         {
             var detalleDependeciasModel = new DependeciasModel(int.Parse(Session["UsuarioID"].ToString()));
+
             return View(detalleDependeciasModel);
         }
         public JsonResult ActualizarAplicaciones(int AreaID)

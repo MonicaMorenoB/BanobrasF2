@@ -189,7 +189,7 @@
     function ActualizaDetalle(_AplicacionID) {
             $.ajax({
                 type: "POST",
-                url: "/Dependecias/ActualizarConsulta",
+                url: "/Dependecias/ActualizaTablaUsos",
                 data: { AplicacionID: _AplicacionID},
                 success: function (viewHTML) {
                           $("#divdet").empty;
