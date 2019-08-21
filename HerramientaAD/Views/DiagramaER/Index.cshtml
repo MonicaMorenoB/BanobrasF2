@@ -13,7 +13,6 @@
     <title>Concept Map</title>
     <meta name="description" content="A concept map diagram implemented with labeled links and ForceDirectedLayout." />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Copyright 1998-2019 by Northwoods Software Corporation. -->
     <script src="~/Scripts/go.js"></script>
 
         <script id="code">
@@ -77,14 +76,15 @@
 <body onload="initER([],[])">
 
     <div class="jumbotron">
-        <h1 class="display-3">SICOFIN</h1>
-        <p class="lead">Resultados del Análisis de Base de Datos</p>
+        <h1 class="display-3">Diagrama de Entidad - Relación</h1>
+        <p class="lead">Resultados del Análisis de Entidad - Relación</p>
         <hr class="my-4">
     </div>
 
     <form>
         <fieldset>
             <legend>Filtros</legend>
+            <hr style="color: #8a9bb1; background-color: #8a9bb1; width:100%;" />
             <table align="center">
                 <tr>
                     <td>
@@ -119,16 +119,15 @@
         </fieldset>
     </form>
     <br />
-    <div id="divdet" style="width:100%;">
-        @{
-            Html.RenderPartial("Diagrama");
-        }
-    </div>
-    @*<div id="divdet" style="width:100%;">
-            <div id="sample">
-                <div id="myDiagramDiv" style="background-color: whitesmoke; border: solid 1px black; width: 100%; height: 700px"></div>
-            </div>
-    </div>*@
+    <fieldset>
+        <legend>Resultados</legend>
+        <hr style="color: #8a9bb1; background-color: #8a9bb1; width:100%;" />
+        <div id="divdet" style="width:100%;">
+            @{
+                Html.RenderPartial("Diagrama");
+            }
+        </div>
+    </fieldset>
 
 </body>
 </html>

@@ -14,7 +14,7 @@
     <style>
         th {
             padding: 10px;
-            text-align:center;
+            text-align: center;
         }
     </style>
 
@@ -27,6 +27,7 @@
     <form>
         <fieldset>
             <legend>Filtros</legend>
+            <hr style="color: #8a9bb1; background-color: #8a9bb1; width:100%;" />
             <table align="center">
                 <tr style="height: 50px">
                     <td width="370px" align="center">
@@ -87,39 +88,43 @@
             </table>
         </fieldset>
     </form>
-    <div id="HGrid">
-        <br />
-        <br />
-        <table cellspacing="0" id="Tabla0" style="width: 100%; border-collapse: collapse; color: #fff; ">
-            <tr class="GridViewScrollHeader">
-                <th class="CampoMasCorto"># Línea</th>
-                <th class="CampoDescarga">Lenguaje</th>
-                <th class="CampoAnalisis">Archivo</th>
-                <th class="CampoAnalisis">Padre</th>
-                <th class="CampoAnalisis">Nombre</th>
-                <th>Tipo</th>
-            </tr>
-        </table>
-    </div>
-    <div id="divdet" >
-        @{
-            Html.RenderPartial("Detalle");
-        }
-    </div>
+    <br />
+    <fieldset>
+        <legend>Resultados</legend>
+        <hr style="color: #8a9bb1; background-color: #8a9bb1; width:100%;" />
+        <div id="HGrid">
+            <br />
+            <br />
+            <table cellspacing="0" id="Tabla0" style="width: 100%; border-collapse: collapse; color: #fff; ">
+                <tr class="GridViewScrollHeader">
+                    <th class="CampoMasCorto"># Línea</th>
+                    <th class="CampoDescarga">Lenguaje</th>
+                    <th class="CampoAnalisis">Archivo</th>
+                    <th class="CampoAnalisis">Padre</th>
+                    <th class="CampoAnalisis">Nombre</th>
+                    <th>Tipo</th>
+                </tr>
+            </table>
+        </div>
+        <div id="divdet">
+            @{
+                Html.RenderPartial("Detalle");
+            }
+        </div>
 
-    <div id="divflotante1">
-        <table>
-            <tr>
-                <td>
-                    <label id="lblauxc1"></label><br />
-                    <label id="lblauxc2"></label><br />
-                    <label id="lblauxc3"></label>
-                </td>
-            </tr>
-        </table>
+        <div id="divflotante1">
+            <table>
+                <tr>
+                    <td>
+                        <label id="lblauxc1"></label><br />
+                        <label id="lblauxc2"></label><br />
+                        <label id="lblauxc3"></label>
+                    </td>
+                </tr>
+            </table>
 
-    </div>
-
+        </div>
+        </fieldset>
 
 </body>
 </html>
@@ -286,6 +291,9 @@
         });
 
         $('#btnFiltrosBD').click(function () {
+            $('#btnFiltrosWS').removeClass().addClass("btn btn-primary");
+            $('#btnFiltrosBD').removeClass().addClass("btn btn-success");
+            $('#btnFiltrosCM').removeClass().addClass("btn btn-primary");
             tpfil = "BD";
             $("#Filtro1").text("Base de Datos:");
             $("#Filtro2").text("Objeto de Base de Datos:");
@@ -296,6 +304,9 @@
         });
 
         $('#btnFiltrosWS').click(function () {
+            $('#btnFiltrosWS').removeClass().addClass("btn btn-success");
+            $('#btnFiltrosBD').removeClass().addClass("btn btn-primary");
+            $('#btnFiltrosCM').removeClass().addClass("btn btn-primary");
             tpfil = "WS";
             $("#Filtro1").text("Tipo Servicio:");
             $("#Filtro2").text("Middleware:");
@@ -306,6 +317,9 @@
         });
 
         $('#btnFiltrosCM').click(function () {
+            $('#btnFiltrosWS').removeClass().addClass("btn btn-primary");
+            $('#btnFiltrosBD').removeClass().addClass("btn btn-primary");
+            $('#btnFiltrosCM').removeClass().addClass("btn btn-success");
             tpfil = "CM";
             $("#Filtro1").text("Tipo Objeto:");
             $("#Filtro2").text("Archivo:");

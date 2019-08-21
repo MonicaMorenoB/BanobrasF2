@@ -60,30 +60,25 @@ namespace HerramientaAD.Controllers
         }
 
 
-        public JsonResult ActualizaIndicadores(int TipoID, int AplicacionID, int ProcesoID)        
+        public JsonResult ActualizaIndicadores(int TipoID, int AplicacionID, int ProcesoID)
         {
-            var grupoDepModel = new DependeciasModel(1,TipoID, AplicacionID, ProcesoID);
+            var grupoDepModel = new DependeciasModel(1, TipoID, AplicacionID, ProcesoID);
             var cc = Json(grupoDepModel.Ldep, JsonRequestBehavior.AllowGet);
             return cc;
         }
 
-        //public JsonResult ActualizaTablaUsos(int AplicacionID)
-        //{
-        //    var grupoDepModel = new DependeciasModel(1, AplicacionID);
-        //    var cc = Json(grupoDepModel.LTabU, JsonRequestBehavior.AllowGet);
-        //    return cc;
-        //}
+
 
         public ActionResult ActualizaTablaUsos(int AplicacionID)
         {
-            datosDependeciasM.DetalleXML  =  TabUsodel(1, AplicacionID);
+            datosDependeciasM.DetalleXML = TabUsodel(1, AplicacionID);
             return PartialView("Detalle", datosDependeciasM);
         }
 
         public XmlDocument TabUsodel(int UsuarioID, int AplicacionID)
         {
             XmlDocument detalleXML = new XmlDocument();
-            if (datosDependeciasSQL.TablaUsosConsulta(UsuarioID,AplicacionID))
+            if (datosDependeciasSQL.TablaUsosConsulta(UsuarioID, AplicacionID))
             {
                 detalleXML = datosDependeciasSQL.ResultadoXML;
             }
@@ -96,7 +91,25 @@ namespace HerramientaAD.Controllers
         {
             var grupoDepModel = new DependeciasModel(int.Parse(Session["UsuarioID"].ToString()), BaseDeDatosID, Tipo);
             var cc = Json(grupoDepModel.Cuadros, JsonRequestBehavior.AllowGet);
-            return cc;           
+            return cc;
+        }
+
+
+
+        public ActionResult ActualizaTablaUsosN2(int AplicacionID, string ObjNombre)
+        {
+            datosDependeciasM.DetalleXML = TabUsodelN2(1, AplicacionID, ObjNombre);
+            return PartialView("Detalle", datosDependeciasM);
+        }
+
+        public XmlDocument TabUsodelN2(int UsuarioID, int AplicacionID, string ObjNombre)
+        {
+            XmlDocument detalleXML = new XmlDocument();
+            if (datosDependeciasSQL.DiagramaN2Consulta(UsuarioID, AplicacionID, ObjNombre))
+            {
+                detalleXML = datosDependeciasSQL.ResultadoXML;
+            }
+            return detalleXML;
         }
 
     }
