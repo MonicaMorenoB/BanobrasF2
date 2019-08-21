@@ -210,6 +210,7 @@
     <Content Include="Images\secuencia.png" />
     <Content Include="Images\tabla.png" />
     <Content Include="Images\vista.png" />
+    <Content Include="Scripts\Arrowheads.js" />
     <Content Include="Scripts\canvasjs.min.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />

@@ -13,6 +13,7 @@ namespace HerramientaAD.com.Datos
     {
         const string obtenIndicadores = "Sp_ObtenIndicadores";
         const string obtenTablaUsos = "Sp_ObtenTablaUsos";
+        const string obtenDiagramaNivel1 = "Sp_ObtenDiagramaNivel1";
         private XmlDocument resultadoXML;
         public XmlDocument ResultadoXML
         {
@@ -77,6 +78,38 @@ namespace HerramientaAD.com.Datos
             catch (Exception Err)
             {
                 EscribeLog("Excepcion: DatosDependecias.TablaUsosConsulta " + Err.Message.ToString());
+            }
+            return respuesta;
+        }
+
+        public bool DiagramaN1Consulta(int UsuarioID, int AplicacionID, int TipoID)
+        {
+            bool respuesta = false;
+            try
+            {
+                PreparaStoredProcedure(obtenDiagramaNivel1);
+                CargaParametro("@UsuarioID", SqlDbType.Int, 8, ParameterDirection.Input, UsuarioID);
+                CargaParametro("@AplicacionID", SqlDbType.Int, 8, ParameterDirection.Input, AplicacionID);
+                CargaParametro("@TipoID", SqlDbType.Int, 8, ParameterDirection.Input, TipoID);
+           
+                SqlDataReader Lector = AlmacenarStoredProcedureDataReader();
+                if (Lector.Read())
+                {
+                    resultadoXML = new XmlDocument();
+                    string Document = "<xml>" + Lector[0].ToString() + "</xml>";
+                    resultadoXML.LoadXml(Document);
+                    XmlNode xmlNode = resultadoXML.DocumentElement.SelectSingleNode("ObjetosDB");
+                    respuesta = xmlNode.HasChildNodes;
+                }
+                CerrarConexion();
+                if (respuesta)
+                    EscribeLog("Correcto: Usuario: " + UsuarioID + " Consulto Objetos de Base de Datos N1");
+                else
+                    EscribeLog("Error: Usuario: " + UsuarioID + " No Consulto Objetos de Base de Datos N1");
+            }
+            catch (Exception Err)
+            {
+                EscribeLog("Excepcion: DatosDependecias.DiagramaN1Consulta " + Err.Message.ToString());
             }
             return respuesta;
         }

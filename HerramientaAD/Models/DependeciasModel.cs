@@ -14,6 +14,12 @@ namespace HerramientaAD.Models
 
         DatosDependencias datosDependencias = new DatosDependencias();
 
+        private List<ElementosDependencias.Cuadros> cuadros = new List<ElementosDependencias.Cuadros>();
+        public List<ElementosDependencias.Cuadros> Cuadros
+        {
+            get { return cuadros; }
+            set { cuadros = value; }
+        }
         private List<ListasDesplegables> areasLista = new List<ListasDesplegables>();
         DatosDependencias datosPed = new DatosDependencias();
         public List<ListasDesplegables> AreasLista
@@ -100,6 +106,27 @@ namespace HerramientaAD.Models
         {
             get { return detalleXML; }
             set { detalleXML = value; }
+        }
+
+        /// <summary>
+        /// Diagrama
+        /// </summary>
+        /// <param name="UsuarioID"></param>
+        /// <param name="BaseDeDatosID"></param>
+        /// <param name="tipo"></param>
+        public DependeciasModel(int UsuarioID, int BaseDeDatosID, int tipo)
+        {
+            if (datosDependencias.DiagramaN1Consulta(UsuarioID, BaseDeDatosID,tipo))
+            {
+                XmlNode xmlNode = datosDependencias.ResultadoXML.DocumentElement.SelectSingleNode("ObjetosDB");
+                foreach (XmlNode elemento in xmlNode.SelectNodes("row"))
+                {
+                    cuadros.Add(new ElementosDependencias.Cuadros(
+                        int.Parse(elemento.Attributes["ObjetoID"].Value.ToString()),
+                        elemento.Attributes["Objeto"].Value.ToString())
+                        );
+                }
+            }
         }
 
     }

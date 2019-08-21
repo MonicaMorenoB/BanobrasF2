@@ -89,6 +89,15 @@ namespace HerramientaAD.Controllers
             }
             return detalleXML;
         }
-        
+
+
+        //diagrama
+        public JsonResult ArregloCuadroC(int BaseDeDatosID, int Tipo)
+        {
+            var grupoDepModel = new DependeciasModel(int.Parse(Session["UsuarioID"].ToString()), BaseDeDatosID, Tipo);
+            var cc = Json(grupoDepModel.Cuadros, JsonRequestBehavior.AllowGet);
+            return cc;           
+        }
+
     }
 }
