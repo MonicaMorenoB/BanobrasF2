@@ -207,6 +207,7 @@
     <Content Include="Images\middleware.png" />
     <Content Include="Images\objeto.png" />
     <Content Include="Images\procedimiento.png" />
+    <Content Include="Images\RiesgoMercado.png" />
     <Content Include="Images\secuencia.png" />
     <Content Include="Images\tabla.png" />
     <Content Include="Images\vista.png" />
