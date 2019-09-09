@@ -25,73 +25,76 @@
     </div>
 
     <form>
-        <fieldset>
-            <legend>Filtros</legend>
-            <hr style="color: #8a9bb1; background-color: #8a9bb1; width:100%;" />
-            <table align="center">
-                <tr style="height: 50px">
-                    <td width="370px" align="center">
-                        <button type="button" class="btn btn-primary" style="width:300px" id="btnFiltrosBD">Objetos de Base de Datos</button>
-                    </td>
-                    <td width="370px" align="center">
-                        <button type="button" class="btn btn-primary" style="width:300px" id="btnFiltrosWS">Objetos de Interfases y Servicios</button>
-                    </td>
-                    <td width="370px" align="center">
-                        <button type="button" class="btn btn-primary" style="width:300px" id="btnFiltrosCM">Objetos de Clases y Métodos</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.AreaID, "Area:")
-                            @Html.DropDownListFor(m => m.AreasLista, new SelectList(Model.AreasLista, "Indice", "Texto"), "Selecciona", new { @class = "form-control" })
-                        </div>
-                    </td>
-                    <td>
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.AplicacionID, "Aplicación:")
-                            @Html.DropDownListFor(m => m.AplicacionesLista, new SelectList(Model.AplicacionesLista, "Indice", "Texto"), "Selecciona", new { @class = "form-control" })
-                        </div>
-                    </td>
-                    <td>
-                        <div class="form-group">
-                            <label for="checking" , id="Filtro1">Base de Datos:</label>
-                            @Html.DropDownListFor(m => m.Filtro1Lista, new SelectList(Model.Filtro1Lista, "Indice", "Texto"), "Selecciona", new { @class = "form-control" })
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="form-group">
-                            <label for="checking" , id="Filtro2">Objeto de Base de Datos:</label>
-                            @Html.DropDownListFor(m => m.Filtro2Lista, new SelectList(Model.Filtro2Lista, "Indice", "Texto"), "Selecciona", new { @class = "form-control" })
-                        </div>
-                    </td>
-                    <td>
-                        <div class="form-group">
-                            <label for="checking" , id="Filtro3">Archivo:</label>
-                            @Html.DropDownListFor(m => m.Filtro3Lista, new SelectList(Model.Filtro3Lista, "Indice", "Texto"), "Selecciona", new { @class = "form-control" })
-                        </div>
-                    </td>
-                    <td>
-                        <div class="form-group">
-                            <label for="checking" , id="Filtro4">Línea de Código:</label>
-                            @Html.DropDownListFor(m => m.Filtro4Lista, new SelectList(Model.Filtro4Lista, "Indice", "Texto"), "Selecciona", new { @class = "form-control" })
-                        </div>
-                    </td>
-                </tr>
-                <tr style="height: 50px">
-                    <td width="370px" align="center">
-                        <button type="button" class="btn btn-primary" style="width:300px" id="btnBuscar">Buscar</button>
-                    </td>
-                </tr>
-            </table>
-        </fieldset>
+        <div class="card border-secondary mb-3" style="max-width: 200rem;">
+            <div class="card-header">Filtros</div>
+            <div class="card-body">
+                <fieldset>
+                    <table align="center">
+                        <tr style="height: 50px">
+                            <td width="370px" align="center">
+                                <button type="button" class="btn btn-primary" style="width:300px" id="btnFiltrosBD">Objetos de Base de Datos</button>
+                            </td>
+                            <td width="370px" align="center">
+                                <button type="button" class="btn btn-primary" style="width:300px" id="btnFiltrosWS">Objetos de Interfases y Servicios</button>
+                            </td>
+                            <td width="370px" align="center">
+                                <button type="button" class="btn btn-primary" style="width:300px" id="btnFiltrosCM">Objetos de Clases y Métodos</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.AreaID, "Area:")
+                                    @Html.DropDownListFor(m => m.AreasLista, new SelectList(Model.AreasLista, "Indice", "Texto"), "Selecciona", new { @class = "form-control" })
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.AplicacionID, "Aplicación:")
+                                    @Html.DropDownListFor(m => m.AplicacionesLista, new SelectList(Model.AplicacionesLista, "Indice", "Texto"), "Selecciona", new { @class = "form-control" })
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    <label for="checking" , id="Filtro1">Base de Datos:</label>
+                                    @Html.DropDownListFor(m => m.Filtro1Lista, new SelectList(Model.Filtro1Lista, "Indice", "Texto"), "Selecciona", new { @class = "form-control" })
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-group">
+                                    <label for="checking" , id="Filtro2">Objeto de Base de Datos:</label>
+                                    @Html.DropDownListFor(m => m.Filtro2Lista, new SelectList(Model.Filtro2Lista, "Indice", "Texto"), "Selecciona", new { @class = "form-control" })
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    <label for="checking" , id="Filtro3">Archivo:</label>
+                                    @Html.DropDownListFor(m => m.Filtro3Lista, new SelectList(Model.Filtro3Lista, "Indice", "Texto"), "Selecciona", new { @class = "form-control" })
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    <label for="checking" , id="Filtro4">Línea de Código:</label>
+                                    @Html.DropDownListFor(m => m.Filtro4Lista, new SelectList(Model.Filtro4Lista, "Indice", "Texto"), "Selecciona", new { @class = "form-control" })
+                                </div>
+                            </td>
+                        </tr>
+                        <tr style="height: 50px">
+                            <td width="370px" align="center">
+                                <button type="button" class="btn btn-primary" style="width:300px" id="btnBuscar">Buscar</button>
+                            </td>
+                        </tr>
+                    </table>
+                </fieldset>
+            </div>
+        </div>
+        
     </form>
     <br />
     <fieldset>
-        <legend>Resultados</legend>
-        <hr style="color: #8a9bb1; background-color: #8a9bb1; width:100%;" />
+        
         <div id="HGrid">
             <br />
             <br />

@@ -82,46 +82,51 @@
     </div>
 
     <form>
-        <fieldset>
-            <legend>Filtros</legend>
-            <hr style="color: #8a9bb1; background-color: #8a9bb1; width:100%;" />
-            <table align="center">
-                <tr>
-                    <td>
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.AreaID, "Area:")
-                            @Html.DropDownListFor(m => m.AreasLista, new SelectList(Model.AreasLista, "Indice", "Texto"), "Selecciona", new { @class = "form-control" })
-                        </div>
-                    </td>
-                    <td>
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.AplicacionID, "Aplicación:")
-                            @Html.DropDownListFor(m => m.AplicacionesLista, new SelectList(Model.AplicacionesLista, "Indice", "Texto"), "Selecciona", new { @class = "form-control" })
-                        </div>
-                    </td>
-                    <td>
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.BaseID, "Base de Datos:")
-                            @Html.DropDownListFor(m => m.BasesLista, new SelectList(Model.BasesLista, "Indice", "Texto"), "Selecciona", new { @class = "form-control" })
-                        </div>
-                    </td>
-                </tr>
-                <tr style="height: 50px">
-                    <td width="370px" align="center">
-                        <button type="button" class="btn btn-primary" style="width:300px" id="btnBuscar">Buscar</button>
-                    </td>
-                    <td width="370px" align="center">
-                        <button type="button" class="btn btn-primary" style="width:300px" id="btnLimpiar">Limpiar</button>
-                    </td>
-                    <td width="370px" align="center"></td>
-                </tr>
-            </table>
-        </fieldset>
+
+        <div class="card border-secondary mb-3" style="max-width: 200rem;">
+            <div class="card-header">Filtros</div>
+            <div class="card-body">
+                <fieldset>
+                    <table align="center">
+                        <tr>
+                            <td>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.AreaID, "Area:")
+                                    @Html.DropDownListFor(m => m.AreasLista, new SelectList(Model.AreasLista, "Indice", "Texto"), "Selecciona", new { @class = "form-control" })
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.AplicacionID, "Aplicación:")
+                                    @Html.DropDownListFor(m => m.AplicacionesLista, new SelectList(Model.AplicacionesLista, "Indice", "Texto"), "Selecciona", new { @class = "form-control" })
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.BaseID, "Base de Datos:")
+                                    @Html.DropDownListFor(m => m.BasesLista, new SelectList(Model.BasesLista, "Indice", "Texto"), "Selecciona", new { @class = "form-control" })
+                                </div>
+                            </td>
+                        </tr>
+                        <tr style="height: 50px">
+                            <td width="370px" align="center">
+                                <button type="button" class="btn btn-primary" style="width:300px" id="btnBuscar">Buscar</button>
+                            </td>
+                            <td width="370px" align="center">
+                                <button type="button" class="btn btn-primary" style="width:300px" id="btnLimpiar">Limpiar</button>
+                            </td>
+                            <td width="370px" align="center"></td>
+                        </tr>
+                    </table>
+                </fieldset>
+            </div>
+        </div>
+
+        
     </form>
     <br />
     <fieldset>
-        <legend>Resultados</legend>
-        <hr style="color: #8a9bb1; background-color: #8a9bb1; width:100%;" />
+        
         <div id="divdet" style="width:100%;">
             @{
                 Html.RenderPartial("Diagrama");

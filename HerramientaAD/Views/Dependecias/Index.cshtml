@@ -89,52 +89,57 @@
     </div>
 
     <form>
-        <fieldset>
-            <legend>Filtros</legend>
-            <hr style="color: #8a9bb1; background-color: #8a9bb1; width:100%;" />
-            <table align="center">
-                <tr style="height: 50px">
-                    <td width="370px" align="center">
+            <div class="card border-secondary mb-3" style="max-width: 200rem;">
+                <div class="card-header">Filtros</div>
+                <div class="card-body">
+                    <fieldset>
+                        <table align="center">
+                            <tr style="height: 50px">
+                                <td width="370px" align="center">
 
-                        <button type="button" class="btn btn-primary" style="width:300px" id="btnFiltrosBD">Objetos de Base de Datos</button>
-                    </td>
-                    <td width="370px" align="center">
-                        <button type="button" class="btn btn-primary" style="width:300px" id="btnFiltrosWS">Objetos de Interfases y Servicios</button>
-                    </td>
-                    <td width="370px" align="center">
-                        <button type="button" class="btn btn-primary" style="width:300px" id="btnFiltrosCM">Objetos de Clases y Métodos</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.AreaID, "Area:")
-                            @Html.DropDownListFor(m => m.AreasLista, new SelectList(Model.AreasLista, "Indice", "Texto"), "Selecciona", new { @class = "form-control" })
-                        </div>
-                    </td>
-                    <td>
-                        <div class="form-group">
-                            @Html.LabelFor(m => m.AplicacionID, "Aplicación:")
-                            @Html.DropDownListFor(m => m.AplicacionesLista, new SelectList(Model.AplicacionesLista, "Indice", "Texto"), "Selecciona", new { @class = "form-control" })
-                        </div>
-                    </td>
+                                    <button type="button" class="btn btn-primary" style="width:300px" id="btnFiltrosBD">Objetos de Base de Datos</button>
+                                </td>
+                                <td width="370px" align="center">
+                                    <button type="button" class="btn btn-primary" style="width:300px" id="btnFiltrosWS">Objetos de Interfases y Servicios</button>
+                                </td>
+                                <td width="370px" align="center">
+                                    <button type="button" class="btn btn-primary" style="width:300px" id="btnFiltrosCM">Objetos de Clases y Métodos</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.AreaID, "Area:")
+                                        @Html.DropDownListFor(m => m.AreasLista, new SelectList(Model.AreasLista, "Indice", "Texto"), "Selecciona", new { @class = "form-control" })
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.AplicacionID, "Aplicación:")
+                                        @Html.DropDownListFor(m => m.AplicacionesLista, new SelectList(Model.AplicacionesLista, "Indice", "Texto"), "Selecciona", new { @class = "form-control" })
+                                    </div>
+                                </td>
 
-                </tr>
-                <tr style="height: 50px">
-                    <td width="370px" align="center">
-                        <button type="button" class="btn btn-primary" style="width:300px" id="btnBuscar">Buscar</button>
-                    </td>
-                </tr>
+                            </tr>
+                            <tr style="height: 50px">
+                                <td width="370px" align="center">
+                                    <button type="button" class="btn btn-primary" style="width:300px" id="btnBuscar">Buscar</button>
+                                </td>
+                            </tr>
 
 
-                <tr style="height: 50px">
-                </tr>
-            </table>
-        </fieldset>
+                            <tr style="height: 50px">
+                            </tr>
+                        </table>
+                    </fieldset>
+                </div>
+            </div>
+
+            
+           
     </form>
     <fieldset>
-        <legend>Resultado</legend>
-        <hr style="color: #8a9bb1; background-color: #8a9bb1; width:100%;" />
+      
         <div id="HGrid">
             <br />
             <br />
@@ -332,12 +337,12 @@
             data: { TipoID: _TipoID, AplicacionID: _AplicacionID, ProcesoID: _ProcesoID },
             success: function (data) {
                 if (data.length > 0) {
-                    $("#lblIndi1").text(data[0] !== undefined ? data[0].Text : "-");
-                    $("#lblIndi2").text(data[1] !== undefined ? data[1].Text : "-");
-                    $("#lblIndi3").text(data[2] !== undefined ? data[2].Text : "-");
-                    $("#lblIndi4").text(data[3] !== undefined ? data[3].Text : "-");
-                    $("#lblIndi5").text(data[4] !== undefined ? data[4].Text : "-");
-                    $("#lblIndi6").text(data[5] !== undefined ? data[5].Text : "-");
+                    $("#lblIndi1").text(data[0] !== undefined ? data[0].Text + " (" + data[0].IRegistro + ")" : "-");
+                    $("#lblIndi2").text(data[1] !== undefined ? data[1].Text + " (" + data[1].IRegistro + ")" : "-");
+                    $("#lblIndi3").text(data[2] !== undefined ? data[2].Text + " (" + data[2].IRegistro + ")" : "-");
+                    $("#lblIndi4").text(data[3] !== undefined ? data[3].Text + " (" + data[3].IRegistro + ")" : "-");
+                    $("#lblIndi5").text(data[4] !== undefined ? data[4].Text + " (" + data[4].IRegistro + ")" : "-");
+                    $("#lblIndi6").text(data[5] !== undefined ? data[5].Text + " (" + data[5].IRegistro + ")" : "-");
                 } else {
                     $("#lblIndi1").text("-");
                     $("#lblIndi2").text("-");
