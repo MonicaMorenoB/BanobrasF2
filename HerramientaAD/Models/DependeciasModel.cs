@@ -97,8 +97,7 @@ namespace HerramientaAD.Models
                         int.Parse(elemento.Attributes["Registros"].Value.ToString()),
                         elemento.Attributes["TipoObjeto"].Value.ToString()));
                 }
-            }
-       
+            }      
         }
 
         private XmlDocument detalleXML;
