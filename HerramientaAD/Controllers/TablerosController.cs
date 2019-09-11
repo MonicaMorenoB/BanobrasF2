@@ -21,6 +21,7 @@ namespace HerramientaAD.Controllers
         {
             var tableroInicialModel = new TableroInicialModel(int.Parse(Session["UsuarioID"].ToString()), 0, AplicacionID);
             ViewBag.Aplicacion = AplicacionID;
+            ViewBag.NombreAplicacion = tableroInicialModel.ResultadoXML.InnerXml.Split('\"')[3]; //MMOB
             return View(tableroInicialModel);
         }
 
@@ -28,6 +29,7 @@ namespace HerramientaAD.Controllers
         {
             var grupoBDModel = new GrupoBDModel(int.Parse(Session["UsuarioID"].ToString()), AplicacionID);
             ViewBag.Aplicacion = AplicacionID;
+           ViewBag.NombreAplicacion =  grupoBDModel.Indicadores.ElementAt(0).NombreApp; //MMOB
             return View(grupoBDModel);
         }
 
@@ -35,6 +37,7 @@ namespace HerramientaAD.Controllers
         {
             var analisisBD = new AnalisisBD(int.Parse(Session["UsuarioID"].ToString()), AplicacionID);
             ViewBag.Aplicacion = AplicacionID;
+            ViewBag.NombreAplicacion = analisisBD.Indicadores.ElementAt(0).NombreApp; //MMOB
             return View(analisisBD);
         }
 
@@ -42,6 +45,7 @@ namespace HerramientaAD.Controllers
         {
             var grupoWSModel = new GrupoWSModel(int.Parse(Session["UsuarioID"].ToString()), AplicacionID);
             ViewBag.Aplicacion = AplicacionID;
+            ViewBag.NombreAplicacion = grupoWSModel.Indicadores.ElementAt(0).NombreApp; //MMOB
             return View(grupoWSModel);
         }
 
@@ -49,6 +53,7 @@ namespace HerramientaAD.Controllers
         {
             var grupoCMModel = new GrupoCMModel(int.Parse(Session["UsuarioID"].ToString()), AplicacionID);
             ViewBag.Aplicacion = AplicacionID;
+            ViewBag.NombreAplicacion = grupoCMModel.Indicadores.ElementAt(0).NombreApp; //MMOB
             return View(grupoCMModel);
         }
 

@@ -203,14 +203,17 @@
     <Content Include="Images\funcion.png" />
     <Content Include="Images\interfaz.png" />
     <Content Include="Images\libreria.png" />
+    <Content Include="Images\logo_login.png" />
     <Content Include="Images\metodo.png" />
     <Content Include="Images\middleware.png" />
     <Content Include="Images\objeto.png" />
+    <Content Include="Images\presupuesto.png" />
     <Content Include="Images\procedimiento.png" />
     <Content Include="Images\RiesgoMercado.png" />
     <Content Include="Images\secuencia.png" />
     <Content Include="Images\tabla.png" />
     <Content Include="Images\vista.png" />
+    <Content Include="Images\VisualBasic.png" />
     <Content Include="Scripts\Arrowheads.js" />
     <Content Include="Scripts\canvasjs.min.js" />
     <Content Include="favicon.ico" />

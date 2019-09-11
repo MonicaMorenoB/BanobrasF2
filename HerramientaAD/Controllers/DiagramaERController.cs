@@ -18,20 +18,18 @@ namespace HerramientaAD.Controllers
         List<ListasDesplegables> baseLista = new List<ListasDesplegables>();
         DatosDetalleTecnico datosDetalleTecnico = new DatosDetalleTecnico();
         DatosDiagramaER datosDiagramaER = new DatosDiagramaER();
-        
+
         // GET: DiagramaER
         public ActionResult Index()
         {
-            //var diagramaERModel = new DiagramaERModel(int.Parse(Session["UsuarioID"].ToString()), BaseDeDatosID);
             var diagramaERModel = new DiagramaERModel(int.Parse(Session["UsuarioID"].ToString()));
             return View(diagramaERModel);
         }
 
-        
+
         public ActionResult Actua(int BaseDeDatosID)
         {
             var diagramaERModel = new DiagramaERModel(int.Parse(Session["UsuarioID"].ToString()), BaseDeDatosID);
-            //var diagramaERModel = new DiagramaERModel(int.Parse(Session["UsuarioID"].ToString()));
             return PartialView("Diagrama", diagramaERModel);
         }
 
