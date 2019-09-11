@@ -1,0 +1,419 @@
+﻿@model HerramientaAD.Models.DependeciasModel
+
+@{
+    ViewBag.Title = "Dependecias";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="~/Scripts/go.js"></script>
+
+    <script id="code">
+        function initER(_datosCuadros, _datosRelaciones) {
+            var datosCuadros = _datosCuadros;
+            var datosRelaciones = _datosRelaciones;
+
+            var $ = go.GraphObject.make;  // for conciseness in defining templates
+            myDiagram =
+                $(go.Diagram, "myDiagramDiv",  // must name or refer to the DIV HTML element
+                    {
+                        initialAutoScale: go.Diagram.Uniform,  // an initial automatic zoom-to-fit
+                        contentAlignment: go.Spot.Center,  // align document to the center of the viewport
+                        layout:
+                            $(go.ForceDirectedLayout,  // automatically spread nodes apart
+                                { maxIterations: 200, defaultSpringLength: 30, defaultElectricalCharge: 100 })
+                    });
+            // define each Node's appearance
+            myDiagram.nodeTemplate =
+                $(go.Node, "Auto",  // the whole node panel
+                    {
+                        locationSpot: go.Spot.Center,
+                        doubleClick: function (e, node) {
+                            if (node.data.key >= 0) {
+                                var texto = datosCuadros[0].key;
+                                ActualizaDetalleN2(parseInt(-(texto)), node.data.text)
+                            }
+                        }
+                    },
+                    // define the node's outer shape, which will surround the TextBlock
+                    $(go.Shape, "Rectangle",
+                        { fill: $(go.Brush, "Linear", { 0: "rgb(39, 128, 227)", 1: "rgb(39, 128, 227)" }), stroke: "black" }),
+                    $(go.TextBlock,
+                        {
+                            font: "bold 10pt helvetica, bold arial, sans-serif", margin: 4
+                        },
+                        new go.Binding("text", "text")),
+
+                );
+            // replace the default Link template in the linkTemplateMap
+            myDiagram.linkTemplate =
+                $(go.Link,  // the whole link panel
+                    $(go.Shape,  // the link shape
+                        { stroke: "black" }),
+                    $(go.Shape,  // the arrowhead
+                        { toArrow: "line", stroke: null }),
+                    $(go.Panel, "Auto",
+                        $(go.Shape,  // the label background, which becomes transparent around the edges
+                            {
+                                fill: $(go.Brush, "Radial", { 0: "rgb(240, 240, 240)", 0.3: "rgb(240, 240, 240)", 1: "rgba(240, 240, 240, 0)" }),
+                                stroke: null
+                            }),
+                        $(go.TextBlock,  // the label text
+                            {
+                                textAlign: "center",
+                                font: "10pt helvetica, arial, sans-serif",
+                                stroke: "#555555",
+                                margin: 4
+                            },
+                            new go.Binding("text", "text")),
+
+                    )
+                );
+
+
+            var nodeDataArray = datosCuadros;
+            var linkDataArray = datosRelaciones;
+
+            myDiagram.model = new go.GraphLinksModel(nodeDataArray, linkDataArray);
+        }
+    </script>
+</head>
+<body onload="initER([],[])">
+
+    <div class="jumbotron">
+        <h1 class="display-3">Dependencias</h1>
+        <p class="lead">Resultados de Dependencias</p>
+        <hr class="my-4">
+    </div>
+
+    <form>
+            <div class="card border-secondary mb-3" style="max-width: 200rem;">
+                <div class="card-header">Filtros</div>
+                <div class="card-body">
+                    <fieldset>
+                        <table align="center">
+                            <tr style="height: 50px">
+                                <td width="370px" align="center">
+
+                                    <button type="button" class="btn btn-primary" style="width:300px" id="btnFiltrosBD">Objetos de Base de Datos</button>
+                                </td>
+                                <td width="370px" align="center">
+                                    <button type="button" class="btn btn-primary" style="width:300px" id="btnFiltrosWS">Objetos de Interfases y Servicios</button>
+                                </td>
+                                <td width="370px" align="center">
+                                    <button type="button" class="btn btn-primary" style="width:300px" id="btnFiltrosCM">Objetos de Clases y Métodos</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.AreaID, "Area:")
+                                        @Html.DropDownListFor(m => m.AreasLista, new SelectList(Model.AreasLista, "Indice", "Texto"), "Selecciona", new { @class = "form-control" })
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.AplicacionID, "Aplicación:")
+                                        @Html.DropDownListFor(m => m.AplicacionesLista, new SelectList(Model.AplicacionesLista, "Indice", "Texto"), "Selecciona", new { @class = "form-control" })
+                                    </div>
+                                </td>
+
+                            </tr>
+                            <tr style="height: 50px">
+                                <td width="370px" align="center">
+                                    <button type="button" class="btn btn-primary" style="width:300px" id="btnBuscar">Buscar</button>
+                                </td>
+                            </tr>
+
+
+                            <tr style="height: 50px">
+                            </tr>
+                        </table>
+                    </fieldset>
+                </div>
+            </div>
+
+            
+           
+    </form>
+    <fieldset>
+      
+        <div id="HGrid">
+            <br />
+            <br />
+            <table cellspacing="0" id="Tabla0" style="width: 100%; border-collapse: collapse; color: #fff; ">
+                <tr class="GridViewScrollHeader">
+                    <th class="CampoMasCorto">USO</th>
+                    <th class="CampoAnalisis">Objeto -> Dependencias</th>
+                    <th class="CampoDescarga">Tipo de objeto</th>
+                </tr>
+            </table>
+        </div>
+
+
+
+        <table>
+            <tr>
+                <th>
+                    <div id="divdet">
+                        @{
+                            Html.RenderPartial("Detalle");
+                        }
+                    </div>
+                </th>
+                <th style="width: 50px;"></th>
+                <th style="text-align: center;">
+                    <h1>INDICADORES</h1>
+                    <label for="checking" , id="lblIndi1" class="lblDetalle">-</label><br />
+                    <label for="checking" , id="lblIndi2" class="lblDetalle">-</label><br />
+                    <label for="checking" , id="lblIndi3" class="lblDetalle">-</label><br />
+                    <label for="checking" , id="lblIndi4" class="lblDetalle">-</label><br />
+                    <label for="checking" , id="lblIndi5" class="lblDetalle">-</label><br />
+                    <label for="checking" , id="lblIndi6" class="lblDetalle">-</label>
+                </th>
+            </tr>
+        </table>
+        <br />
+        <br />
+        <h1 style="text-align: center;">DIAGRAMA DE INDICADORES</h1>
+        <div id="divdet2" style="width:100%;">
+            @{
+                Html.RenderPartial("Diagrama");
+            }
+        </div>
+
+    </fieldset>
+</body>
+</html>
+
+
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<script>
+    var tpfil = "BD";
+    var nomBD = ""
+    var tipo =0;
+
+    function HabilitarDDL() {
+        document.getElementById("AreasLista").disabled = false;
+        document.getElementById("AplicacionesLista").disabled = false;
+    }
+    function desabilitarDDL() {
+        document.getElementById("AreasLista").disabled = true;
+        document.getElementById("AplicacionesLista").disabled = true;
+    }
+    function Habilitarbtn() {
+        document.getElementById("btnBuscar").disabled = false;
+    }
+    function desabilitarbtn() {
+        document.getElementById("btnBuscar").disabled = true;
+    }
+
+    function limpiarfiltros() {
+        $("#AreasLista").empty;
+        $("#AreasLista")[0].selectedIndex = 0;
+        $("#AplicacionesLista").empty;
+        $("#AplicacionesLista")[0].selectedIndex = 0;
+        ActualizaDetalleN2(0, "");
+        $("#lblIndi1").text("-");
+        $("#lblIndi2").text("-");
+        $("#lblIndi3").text("-");
+        $("#lblIndi4").text("-");
+        $("#lblIndi5").text("-");
+        $("#lblIndi6").text("-");
+        myDiagram.div = null;
+    }
+
+    $(document).ready(function () {
+        desabilitarbtn()
+        desabilitarDDL()
+
+        $("#AreasLista").change(function () {
+
+            var a = $("#AreasLista Option:Selected").val();
+            var url = '@Url.Content("~/")' + "Dependecias/ActualizarAplicaciones";
+            var ddlsource = "#AreasLista Option:Selected";
+            $.getJSON(url, { areaid: $(ddlsource).val() }, function (data) {
+                var items = '';
+                $("#AplicacionesLista").empty;
+                $.each(data, function (i, row) {
+                    items += "<option value='" + row.Value + "'>" + row.Text + "</option>";
+                });
+                $("#AplicacionesLista").html(items);
+            }).fail(function (jqxhr, textStatus, error) {
+                var err = textStatus + ", " + error;
+                console.log("Request Failed: " + err);
+            });
+        });
+
+        $("#AplicacionesLista").change(function () {
+            Habilitarbtn()
+        })
+
+
+        $('#btnFiltrosBD').click(function () {
+            HabilitarDDL()
+            desabilitarbtn()
+            $('#btnFiltrosWS').removeClass().addClass("btn btn-primary");
+            $('#btnFiltrosBD').removeClass().addClass("btn btn-success");
+            $('#btnFiltrosCM').removeClass().addClass("btn btn-primary");
+            tpfil = "BD";
+            tipo = 1;
+            limpiarfiltros();
+        });
+
+        $('#btnFiltrosWS').click(function () {
+            HabilitarDDL()
+            desabilitarbtn()
+            $('#btnFiltrosWS').removeClass().addClass("btn btn-success");
+            $('#btnFiltrosBD').removeClass().addClass("btn btn-primary");
+            $('#btnFiltrosCM').removeClass().addClass("btn btn-primary");
+
+            tpfil = "WS";
+            tipo = 3;
+            limpiarfiltros();
+        });
+
+        $('#btnFiltrosCM').click(function () {
+            HabilitarDDL()
+            desabilitarbtn()
+            $('#btnFiltrosWS').removeClass().addClass("btn btn-primary");
+            $('#btnFiltrosBD').removeClass().addClass("btn btn-primary");
+            $('#btnFiltrosCM').removeClass().addClass(" btn btn-success");
+            tpfil = "CM";
+            tipo = 2;
+            limpiarfiltros();
+        });
+
+        $('#btnBuscar').click(function () {
+            desabilitarbtn()
+            document.getElementById("btnBuscar").disabled = true;
+            var idapp = $("#AplicacionesLista Option:Selected").val();
+            if (tpfil == "BD") {
+                var fil1 = $("#AplicacionesLista Option:Selected").val();
+                nomBD = $("#AplicacionesLista Option:Selected").text();
+            }
+
+            if (tpfil == "WS") {
+                var fil1 = $("#AplicacionesLista Option:Selected").val();
+                nomBD = $("#AplicacionesLista Option:Selected").text();
+            }
+
+            if (tpfil == "CM") {
+                var fil1 = $("#AplicacionesLista Option:Selected").val();
+                nomBD = $("#AplicacionesLista Option:Selected").text();
+            }
+            CargaIndicadores(tipo, fil1, 0)
+            ActualizaDetalle(fil1)
+            myDiagram.div = null;
+            ActualizaDiagrama(fil1, tipo, nomBD)
+            document.getElementById("btnBuscar").disabled = false;
+        });
+    });
+
+
+
+
+    function ActualizaDetalle(_AplicacionID) {
+        $.ajax({
+            type: "POST",
+            url: "/Dependecias/ActualizaTablaUsos",
+            data: { AplicacionID: _AplicacionID },
+            success: function (viewHTML) {
+                $("#divdet").empty;
+                $("#divdet").html(viewHTML);
+            },
+            error: function (errorData) { console.log("Request Failed: " + errorData); }
+        });
+    }
+
+    function CargaIndicadores(_TipoID, _AplicacionID, _ProcesoID) {
+
+        $.ajax({
+            async: false,
+            type: "GET",
+            url: "/Dependecias/ActualizaIndicadores",
+            data: { TipoID: _TipoID, AplicacionID: _AplicacionID, ProcesoID: _ProcesoID },
+            success: function (data) {
+                if (data.length > 0) {
+                    $("#lblIndi1").text(data[0] !== undefined ? data[0].Text + " (" + data[0].IRegistro + ")" : "-");
+                    $("#lblIndi2").text(data[1] !== undefined ? data[1].Text + " (" + data[1].IRegistro + ")" : "-");
+                    $("#lblIndi3").text(data[2] !== undefined ? data[2].Text + " (" + data[2].IRegistro + ")" : "-");
+                    $("#lblIndi4").text(data[3] !== undefined ? data[3].Text + " (" + data[3].IRegistro + ")" : "-");
+                    $("#lblIndi5").text(data[4] !== undefined ? data[4].Text + " (" + data[4].IRegistro + ")" : "-");
+                    $("#lblIndi6").text(data[5] !== undefined ? data[5].Text + " (" + data[5].IRegistro + ")" : "-");
+                } else {
+                    $("#lblIndi1").text("-");
+                    $("#lblIndi2").text("-");
+                    $("#lblIndi3").text("-");
+                    $("#lblIndi4").text("-");
+                    $("#lblIndi5").text("-");
+                    $("#lblIndi6").text("-");
+                }
+            },
+            error: function (errorData) { console.log("Request Failed: " + errorData); }
+        });
+    }
+
+    function CargaCuadros(idbd, IdTipo, nombreBD) {
+        var datosCuadross = [];
+        $.ajax({
+            async: false,
+            type: "GET",
+            url: "/Dependecias/ArregloCuadroC",
+            data: { BaseDeDatosID: idbd, Tipo: IdTipo },
+            success: function (data) {
+                datosCuadross.push({ key: parseInt("-" + idbd), text: 'Aplicación: "' + nombreBD + '"' });
+                for (var i = 0; i < data.length; i++) {
+                    datosCuadross.push({ key: parseInt(data[i].Numero), text: data[i].Tabla });
+                }
+            },
+            error: function (errorData) { console.log("Request Failed: " + errorData); }
+        });
+        return datosCuadross;
+    }
+
+    function CargaRelaciones(idbd, IdTipo) {
+        var datosRelacioness = [];
+
+        $.ajax({
+            async: false,
+            type: "GET",
+            url: "/Dependecias/ArregloCuadroC",
+            data: { BaseDeDatosID: idbd, Tipo: IdTipo },
+            success: function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    datosRelacioness.push({ from: parseInt(data[i].Numero), to: parseInt("-" + idbd), text: "" });
+                }
+            },
+            error: function (errorData) { console.log("Request Failed: " + errorData); }
+        });
+        return datosRelacioness;
+    }
+
+    function ActualizaDiagrama(_fil1, _tipo, _nombreBD) {
+        datosCuadrossFinal = CargaCuadros(_fil1, _tipo, _nombreBD)
+        datosRelacionesFinal = CargaRelaciones(_fil1, _tipo)
+        $("#myDiagramDiv").empty;
+        $("#myDiagramDiv").html(onload = initER(datosCuadrossFinal, datosRelacionesFinal));
+    }
+
+    function ActualizaDetalleN2(_AplicacionID, _ObjNombre) {
+
+        $.ajax({
+            type: "POST",
+            url: "/Dependecias/ActualizaTablaUsosN2",
+            data: { AplicacionID: _AplicacionID, ObjNombre: _ObjNombre },
+            success: function (viewHTML) {
+                $("#divdet").empty;
+                $("#divdet").html(viewHTML);
+            },
+            error: function (errorData) { console.log("Request Failed: " + errorData); }
+        });
+    }
+</script>
+
+
+
+

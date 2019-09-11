@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <link href="~/Content/jquery-ui-1.10.4.css" rel="stylesheet" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <script>function openNav() {
+        document.getElementById("sidebar-menu").style.display = 'block'
+        }
+         function closeNav() {
+        document.getElementById("sidebar-menu").style.display = 'none'
+    }
+    </script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+
+
+        <div class="collapse navbar-collapse" id="navbarColor01">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="navbar-brand" href="@Url.Action("Index", "Tableros")">Tablero General</a>
+                </li>
+                <li class="nav-item">
+                    <a class="navbar-brand" href="@Url.Action("Index", "DetalleTecnico")">Detalle Técnico</a>
+                </li>
+                <li class="nav-item">
+                    <a class="navbar-brand" href="@Url.Action("Index", "DiagramaER",new {BaseDeDatosID = 1})">Diagrama E-R</a>
+                </li>
+                <li class="nav-item">
+                    <a class="navbar-brand" href="@Url.Action("Index", "Dependecias")">Dependencias</a>
+                </li>
+                @if (ViewBag.Aplicacion > 0)
+                {
+                    <li class="nav-item dropdown ">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true" onclick="openNav()">Ver  @ViewBag.NombreAplicacion</a>
+                        <div id="sidebar-menu" onmouseleave="closeNav()" class="dropdown-menu show" x-placement="bottom-start" style="display:none; position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 38px, 0px);">
+                            <a class="dropdown-item" href="@Url.Action("Inicial", "Tableros", new { AplicacionID = ViewBag.Aplicacion } )">Tablero Aplicación</a>
+                            <a class="dropdown-item" href="@Url.Action("GrupoBD", "Tableros", new { AplicacionID = ViewBag.Aplicacion })">Objetos BD</a>
+                            <a class="dropdown-item" href="@Url.Action("AnalisisBD", "Tableros", new { AplicacionID = ViewBag.Aplicacion })">Analisis BD</a>
+                            <a class="dropdown-item" href="@Url.Action("GrupoWS", "Tableros", new { AplicacionID = ViewBag.Aplicacion })">Objetos WS</a>
+                            <a class="dropdown-item" href="@Url.Action("GrupoCM", "Tableros", new { AplicacionID = ViewBag.Aplicacion })">Objetos CM</a>
+                        </div>
+                    </li>
+                }
+            </ul>
+        </div>
+
+        <form class="form-inline my-2 my-lg-0">
+            <a class="navbar-brand my-2 my-sm-0" href="@Url.Action("Index", "Login")">Salir</a>
+        </form>
+
+    </nav>
+    <br />
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

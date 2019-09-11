@@ -27,11 +27,7 @@ namespace HerramientaAD.Controllers
         }
 
 
-        public ActionResult Actua(int BaseDeDatosID)
-        {
-            var diagramaERModel = new DiagramaERModel(int.Parse(Session["UsuarioID"].ToString()), BaseDeDatosID);
-            return PartialView("Diagrama", diagramaERModel);
-        }
+       
 
         public JsonResult ActualizarAplicaciones(int AreaID)
         {
@@ -113,38 +109,22 @@ namespace HerramientaAD.Controllers
 
         //MMOB
 
-        public string ArregloCuadroC(int BaseDeDatosID)
-        {
-            var diagramaERModel = new DiagramaERModel(int.Parse(Session["UsuarioID"].ToString()), BaseDeDatosID, 1);
-            diagramaERModel.ResultadoXML = ObtenerDatos(1, int.Parse(Session["UsuarioID"].ToString()), BaseDeDatosID);
-            XmlNode xmlNode = datosDiagramaER.ResultadoXML.DocumentElement.SelectSingleNode("DatosBD");
-            foreach (XmlNode elemento in xmlNode.SelectNodes("row"))
-            {
-                diagramaERModel.Cuadros.Add(new ElementosDiagramaER.Cuadros(
-                    int.Parse(elemento.Attributes["Numero"].Value.ToString()),
-                    elemento.Attributes["Tabla"].Value.ToString())
-                    );
-            }
-            Session["SessiCuadros"] = diagramaERModel.ResultadoXML;
-            return xmlNode.OuterXml.ToString();
-        }
 
-        public string ArregloRelacionesoC(int BaseDeDatosID)
+        public JsonResult ArregloCuadroC(int BaseDeDatosID, int Tipo)
         {
-            var diagramaERModel = new DiagramaERModel(int.Parse(Session["UsuarioID"].ToString()), BaseDeDatosID, 1);
-            diagramaERModel.ResultadoXML = ObtenerDatos(2, int.Parse(Session["UsuarioID"].ToString()),BaseDeDatosID);
-            XmlNode xmlNode = datosDiagramaER.ResultadoXML.DocumentElement.SelectSingleNode("DatosBD");
-            foreach (XmlNode elemento in xmlNode.SelectNodes("row"))
+            var cc= Json("", JsonRequestBehavior.AllowGet);
+            var grupoDepModel = new DiagramaERModel(int.Parse(Session["UsuarioID"].ToString()), BaseDeDatosID, Tipo);
+            if (Tipo ==1)
             {
-                diagramaERModel.Relaciones.Add(new ElementosDiagramaER.Relaciones(
-                     int.Parse(elemento.Attributes["From"].Value.ToString()),
-                     int.Parse(elemento.Attributes["To"].Value.ToString()),
-                     elemento.Attributes["Text"].Value.ToString())
-                     );
+                cc= Json(grupoDepModel.Cuadros, JsonRequestBehavior.AllowGet);
             }
-            return xmlNode.OuterXml.ToString();
+            else
+            {
+                cc= Json(grupoDepModel.Relaciones, JsonRequestBehavior.AllowGet);
+            }
+            
+            return cc;
         }
-
 
     }
 }

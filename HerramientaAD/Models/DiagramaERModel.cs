@@ -102,63 +102,41 @@ namespace HerramientaAD.Models
             }
         }
 
-        public DiagramaERModel(int UsuarioID, int BaseDeDatosID)
+      
+        /// <summary>
+        /// Obtiene valores del diagrama
+        /// </summary>
+        /// <param name="UsuarioID"></param>
+        /// <param name="BaseDeDatosID"></param>
+        /// <param name="tipo">1: son los cuadritos   2: son las relaciones</param>
+        public DiagramaERModel(int UsuarioID, int BaseDeDatosID, int _tipo)
         {
-            //cuadros = null;
-            //relaciones = null;
-
-            if (areas.AreasConsulta(UsuarioID))
-            {
-                XmlNode xmlNode = areas.ResultadoXML.DocumentElement.SelectSingleNode("Areas");
-                foreach (XmlNode elemento in xmlNode.SelectNodes("row"))
-                {
-                    areasLista.Add(new ListasDesplegables(
-                        int.Parse(elemento.Attributes["AreaID"].Value.ToString()),
-                        elemento.Attributes["Descripcion"].Value.ToString()));
-                }
-
-                cuadros.Add(new ElementosDiagramaER.Cuadros(0, ""));
-                relaciones.Add(new ElementosDiagramaER.Relaciones(0, 0, ""));
-            }
-
-            if (datosDiagramaER.DiagramaERConsulta(Tipo1, UsuarioID, BaseDeDatosID))
+            if (datosDiagramaER.DiagramaERConsulta(_tipo, UsuarioID, BaseDeDatosID))
             {
                 XmlNode xmlNode = datosDiagramaER.ResultadoXML.DocumentElement.SelectSingleNode("DatosBD");
-                foreach (XmlNode elemento in xmlNode.SelectNodes("row"))
+                if (_tipo == 1) 
                 {
-                    cuadros.Add(new ElementosDiagramaER.Cuadros(
-                        int.Parse(elemento.Attributes["Numero"].Value.ToString()),
-                        elemento.Attributes["Tabla"].Value.ToString())
-                        );
+                    foreach (XmlNode elemento in xmlNode.SelectNodes("row"))
+                    {
+                        cuadros.Add(new ElementosDiagramaER.Cuadros(
+                            int.Parse(elemento.Attributes["Numero"].Value.ToString()),
+                            elemento.Attributes["Tabla"].Value.ToString())
+                            );
+                    }
                 }
-            }
+                else
+                {
+                    foreach (XmlNode elemento in xmlNode.SelectNodes("row"))
+                    {
+                        relaciones.Add(new ElementosDiagramaER.Relaciones(
+                            int.Parse(elemento.Attributes["From"].Value.ToString()),
+                            int.Parse(elemento.Attributes["To"].Value.ToString()),
+                            elemento.Attributes["Text"].Value.ToString())
+                            );
+                    }
+                }
 
-            if (datosDiagramaER.DiagramaERConsulta(Tipo2, UsuarioID, BaseDeDatosID))
-            {
-                XmlNode xmlNode = datosDiagramaER.ResultadoXML.DocumentElement.SelectSingleNode("DatosBD");
-                foreach (XmlNode elemento in xmlNode.SelectNodes("row"))
-                {
-                    relaciones.Add(new ElementosDiagramaER.Relaciones(
-                        int.Parse(elemento.Attributes["From"].Value.ToString()),
-                        int.Parse(elemento.Attributes["To"].Value.ToString()),
-                        elemento.Attributes["Text"].Value.ToString())
-                        );
-                }
-            }
-        }
-
-        public DiagramaERModel(int UsuarioID, int BaseDeDatosID, int tipo)
-        {
-            if (datosDiagramaER.DiagramaERConsulta(Tipo1, UsuarioID, BaseDeDatosID))
-            {
-                XmlNode xmlNode = datosDiagramaER.ResultadoXML.DocumentElement.SelectSingleNode("DatosBD");
-                foreach (XmlNode elemento in xmlNode.SelectNodes("row"))
-                {
-                    cuadros.Add(new ElementosDiagramaER.Cuadros(
-                        int.Parse(elemento.Attributes["Numero"].Value.ToString()),
-                        elemento.Attributes["Tabla"].Value.ToString())
-                        );
-                }
+                
             }
         }
     }

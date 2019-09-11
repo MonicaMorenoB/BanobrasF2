@@ -12,7 +12,7 @@ namespace HerramientaAD.Models
     {
         Aplicaciones aplicaciones = new Aplicaciones(); //MMOB- NUEVO
         private List<ElementosDeGrupo.Indicadores> indicadores = new List<ElementosDeGrupo.Indicadores>();
-        String Nombreapp = ""; //MMOB - Se agregó variable
+        
         public List<ElementosDeGrupo.Indicadores> Indicadores
         {
             get { return indicadores; }
