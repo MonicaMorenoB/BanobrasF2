@@ -192,6 +192,7 @@
     <Content Include="Content\style.css" />
     <Content Include="Estilos\dependencias.css" />
     <Content Include="Estilos\detalleTecnico.css" />
+    <Content Include="Estilos\Loader.css" />
     <Content Include="Images\archivos.png" />
     <Content Include="Images\clase.png" />
     <Content Include="Images\conexion.png" />
@@ -207,6 +208,7 @@
     <Content Include="Images\metodo.png" />
     <Content Include="Images\middleware.png" />
     <Content Include="Images\objeto.png" />
+    <Content Include="Images\pageLoader.gif" />
     <Content Include="Images\presupuesto.png" />
     <Content Include="Images\procedimiento.png" />
     <Content Include="Images\RiesgoMercado.png" />
@@ -270,6 +272,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\Loader.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">

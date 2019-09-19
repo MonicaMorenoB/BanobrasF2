@@ -9,7 +9,8 @@
 <html>
 <head>
     <script src="~/Scripts/go.js"></script>
-
+    <script src="~/Scripts/Loader.js"></script>
+    <link href="~/Estilos/Loader.css" rel="stylesheet" />
     <script id="code">
         function initER(_datosCuadros, _datosRelaciones) {
             var datosCuadros = _datosCuadros;
@@ -33,7 +34,9 @@
                         doubleClick: function (e, node) {
                             if (node.data.key >= 0) {
                                 var texto = datosCuadros[0].key;
+                                MostrarLoader();
                                 ActualizaDetalleN2(parseInt(-(texto)), node.data.text)
+                                OcultarLoader();
                             }
                         }
                     },
@@ -139,7 +142,7 @@
            
     </form>
     <fieldset>
-      
+        <div class="loader" style="display:none"></div>
         <div id="HGrid">
             <br />
             <br />
@@ -287,6 +290,7 @@
         });
 
         $('#btnBuscar').click(function () {
+            MostrarLoader();
             desabilitarbtn()
             document.getElementById("btnBuscar").disabled = true;
             var idapp = $("#AplicacionesLista Option:Selected").val();
@@ -309,6 +313,7 @@
             myDiagram.div = null;
             ActualizaDiagrama(fil1, tipo, nomBD)
             document.getElementById("btnBuscar").disabled = false;
+            OcultarLoader();
         });
     });
 
@@ -400,7 +405,7 @@
     }
 
     function ActualizaDetalleN2(_AplicacionID, _ObjNombre) {
-
+        
         $.ajax({
             type: "POST",
             url: "/Dependecias/ActualizaTablaUsosN2",
@@ -409,11 +414,24 @@
                 $("#divdet").empty;
                 $("#divdet").html(viewHTML);
             },
-            error: function (errorData) { console.log("Request Failed: " + errorData); }
+            error: function (errorData) {
+                console.log("Request Failed: " + errorData);
+                
+            }
         });
+        
+
     }
 </script>
+<script type="text/javascript">
 
+    function MostrarLoader() {
+        $(".loader").fadeIn();
+    }
+    function OcultarLoader() {
+        $(".loader").fadeOut();
+    }
+</script>
 
 
 

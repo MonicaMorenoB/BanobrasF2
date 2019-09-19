@@ -8,7 +8,8 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-
+    <script src="~/Scripts/Loader.js"></script>
+    <link href="~/Estilos/Loader.css" rel="stylesheet" />
 </head>
 <body>
     <style>
@@ -94,7 +95,7 @@
     </form>
     <br />
     <fieldset>
-        
+        <div class="loader" style="display:none"></div>
         <div id="HGrid">
             <br />
             <br />
@@ -171,6 +172,7 @@
     }
 
     function ActualizaBusqueda(tpfil, idapp, fil1, fil2, fil3, fil4) {
+        MostrarLoader();
         $.ajax({
             type: "POST",
             url: "/DetalleTecnico/ActualizarConsulta",
@@ -179,8 +181,13 @@
                 $("#divdet").empty;
                 $("#divdet").html(viewHTML);
             },
-            error: function (errorData) { console.log("Request Failed: " + errorData); }
+            error: function (errorData) {
+                console.log("Request Failed: " + errorData);
+                OcultarLoader();
+            }
+            
         });
+        OcultarLoader();
     }
 
     $(document).ready(function() {
@@ -333,6 +340,7 @@
         });
 
         $('#btnBuscar').click(function () {
+            
             var idapp = $("#AplicacionesLista Option:Selected").val();
             if (tpfil == "BD") {
                 var fil1 = $("#Filtro1Lista Option:Selected").val();
@@ -355,9 +363,21 @@
                 var fil4 = $("#Filtro4Lista Option:Selected").text();
             }
 
-            ActualizaBusqueda(tpfil,idapp,fil1,fil2,fil3,fil4)
+            ActualizaBusqueda(tpfil, idapp, fil1, fil2, fil3, fil4)
+          
         });
+
     });
 
     
+</script>
+
+<script type="text/javascript">
+
+    function MostrarLoader() {
+        $(".loader").fadeIn();
+    }
+    function OcultarLoader() {
+        $(".loader").fadeOut();
+    }
 </script>
