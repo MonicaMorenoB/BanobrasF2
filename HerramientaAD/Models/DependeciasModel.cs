@@ -78,13 +78,7 @@ namespace HerramientaAD.Models
             }
         }
 
-        public DependeciasModel(int appid, int usuarioid, string nombre)
-        {
-            //Falta el SP
-            //Aplicaciones objapp = new Aplicaciones();
-            //objapp.ObtenObjetosDB3(usuarioid, appid, nombre);
-            //XobjetosDB = objapp.AplicaionXML;
-        }
+
 
         public DependeciasModel(int UsuarioID, int TipoID, int AplicacionID, int ProcesoID)
         {
@@ -126,6 +120,22 @@ namespace HerramientaAD.Models
                         );
                 }
             }
+        }
+
+        public DependeciasModel(int UsuarioID, int Aplicacion, string NombreObj)
+        {
+            if (datosDependencias.DiagramaN2Consulta(UsuarioID, Aplicacion, NombreObj))
+            {
+                XmlNode xmlNode = datosDependencias.ResultadoXML.DocumentElement.SelectSingleNode("Objetos");
+                foreach (XmlNode elemento in xmlNode.SelectNodes("row"))
+                {
+                    cuadros.Add(new ElementosDependencias.Cuadros(
+                        int.Parse(elemento.Attributes["ObjetoID"].Value.ToString()),
+                        elemento.Attributes["nombre"].Value.ToString())
+                        );
+                }
+            }
+
         }
 
     }

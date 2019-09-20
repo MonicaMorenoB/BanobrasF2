@@ -35,17 +35,17 @@
                             if (node.data.key >= 0) {
                                 var texto = datosCuadros[0].key;
                                 MostrarLoader();
-                                ActualizaDetalleN2(parseInt(-(texto)), node.data.text)
+                                ActualizaDetalleN2(parseInt(-(texto)), node.data.text)                                
                                 OcultarLoader();
                             }
                         }
                     },
                     // define the node's outer shape, which will surround the TextBlock
                     $(go.Shape, "Rectangle",
-                        { fill: $(go.Brush, "Linear", { 0: "rgb(39, 128, 227)", 1: "rgb(39, 128, 227)" }), stroke: "black" }),
+                        { fill: $(go.Brush, "Linear", { 0: "rgb(39, 128, 227)", 1: "rgb(39, 128, 227)" }), stroke: "rgb(39, 128, 227)" }),
                     $(go.TextBlock,
                         {
-                            font: "bold 10pt helvetica, bold arial, sans-serif", margin: 4
+                            font: "bold 10pt helvetica, bold arial, sans-serif", margin: 4, stroke: "white"
                         },
                         new go.Binding("text", "text")),
 
@@ -81,9 +81,71 @@
 
             myDiagram.model = new go.GraphLinksModel(nodeDataArray, linkDataArray);
         }
+
+        function initERN2(_datosCuadros, _datosRelaciones) {
+            var datosCuadros = _datosCuadros;
+            var datosRelaciones = _datosRelaciones;
+
+            var $ = go.GraphObject.make;  // for conciseness in defining templates
+            myDiagramN2 =
+                $(go.Diagram, "myDiagramDivN2",  // must name or refer to the DIV HTML element
+                    {
+                        initialAutoScale: go.Diagram.Uniform,  // an initial automatic zoom-to-fit
+                        contentAlignment: go.Spot.Center,  // align document to the center of the viewport
+                        layout:
+                            $(go.ForceDirectedLayout,  // automatically spread nodes apart
+                                { maxIterations: 200, defaultSpringLength: 30, defaultElectricalCharge: 100 })
+                    });
+            // define each Node's appearance
+            myDiagramN2.nodeTemplate =
+                $(go.Node, "Auto",  // the whole node panel
+                    {
+                        locationSpot: go.Spot.Center                      
+                    },
+                    // define the node's outer shape, which will surround the TextBlock
+                    $(go.Shape, "Rectangle",
+                        { fill: $(go.Brush, "Linear", { 0: "rgb(39, 128, 227)", 1: "rgb(39, 128, 227)" }), stroke: "rgb(39, 128, 227)" }),
+                    $(go.TextBlock,
+                        {
+                            font: "bold 10pt helvetica, bold arial, sans-serif", margin: 4, stroke: "white"
+                        },
+                        new go.Binding("text", "text")),
+
+                );
+            // replace the default Link template in the linkTemplateMap
+            myDiagramN2.linkTemplate =
+                $(go.Link,  // the whole link panel
+                    $(go.Shape,  // the link shape
+                        { stroke: "black" }),
+                    $(go.Shape,  // the arrowhead
+                        { toArrow: "line", stroke: null }),
+                    $(go.Panel, "Auto",
+                        $(go.Shape,  // the label background, which becomes transparent around the edges
+                            {
+                                fill: $(go.Brush, "Radial", { 0: "rgb(240, 240, 240)", 0.3: "rgb(240, 240, 240)", 1: "rgba(240, 240, 240, 0)" }),
+                                stroke: null
+                            }),
+                        $(go.TextBlock,  // the label text
+                            {
+                                textAlign: "center",
+                                font: "10pt helvetica, arial, sans-serif",
+                                stroke: "#555555",
+                                margin: 4
+                            },
+                            new go.Binding("text", "text")),
+
+                    )
+                );
+
+
+            var nodeDataArray = datosCuadros;
+            var linkDataArray = datosRelaciones;
+
+            myDiagramN2.model = new go.GraphLinksModel(nodeDataArray, linkDataArray);
+        }
     </script>
 </head>
-<body onload="initER([],[])">
+<body onload="initER([],[]), initERN2([],[])">
 
     <div class="jumbotron">
         <h1 class="display-3">Dependencias</h1>
@@ -143,26 +205,23 @@
     </form>
     <fieldset>
         <div class="loader" style="display:none"></div>
-        <div id="HGrid">
+        <br />
+        <div class="alert alert-dismissible alert-primary">
+            <h6 class="alert-heading">Indicaciones</h6>
+            <h6>Zoom</h6>
+            <h6 class="mb-0">1.- Dar click sobre el diagrama. <br />2.- <strong>ctrl +</strong> para aumentar o <strong>ctrl -</strong> para disminuir. </h6>
             <br />
-            <br />
-            <table cellspacing="0" id="Tabla0" style="width: 100%; border-collapse: collapse; color: #fff; ">
-                <tr class="GridViewScrollHeader">
-                    <th class="CampoMasCorto">USO</th>
-                    <th class="CampoAnalisis">Objeto -> Dependencias</th>
-                    <th class="CampoDescarga">Tipo de objeto</th>
-                </tr>
-            </table>
+            <h6>Cargar diagrama y tabla de Objetos</h6>
+            <h6 class="mb-0">1.- Dar <strong>doble click</strong> sobre uno de los rectangulos del "Diagrama de Indicadores".</h6>
         </div>
-
-
-
+        <br />
         <table>
             <tr>
                 <th>
-                    <div id="divdet">
+                    <h1 style="text-align: center;">DIAGRAMA DE INDICADORES</h1>
+                    <div id="divdet2" style="width:50%;">
                         @{
-                            Html.RenderPartial("Detalle");
+                            Html.RenderPartial("Diagrama");
                         }
                     </div>
                 </th>
@@ -179,13 +238,30 @@
             </tr>
         </table>
         <br />
-        <br />
-        <h1 style="text-align: center;">DIAGRAMA DE INDICADORES</h1>
-        <div id="divdet2" style="width:100%;">
+        <h1 style="text-align: center;">OBJETOS</h1>
+        <div id="HGrid">
+            <table cellspacing="0" id="Tabla0" style="width: 100%; border-collapse: collapse; color: #fff; ">
+                <tr class="GridViewScrollHeader">
+                    <th class="CampoMasCorto">USO</th>
+                    <th class="CampoAnalisis">Objeto -> Dependencias</th>
+                    <th class="CampoDescarga">Tipo de objeto</th>
+                </tr>
+            </table>
+        </div>
+
+        <div id="divdet">
             @{
-                Html.RenderPartial("Diagrama");
+                Html.RenderPartial("Detalle");
             }
         </div>
+        <br />
+        <h1 style="text-align: center;">DIAGRAMA DE OBJETOS</h1>
+        <div id="divdet3" style="width:50%;">
+            @{
+                Html.RenderPartial("DiagramaN2");
+            }
+        </div>
+
 
     </fieldset>
 </body>
@@ -214,6 +290,7 @@
     }
 
     function limpiarfiltros() {
+        
         $("#AreasLista").empty;
         $("#AreasLista")[0].selectedIndex = 0;
         $("#AplicacionesLista").empty;
@@ -226,6 +303,8 @@
         $("#lblIndi5").text("-");
         $("#lblIndi6").text("-");
         myDiagram.div = null;
+        myDiagramN2.div = null;
+        
     }
 
     $(document).ready(function () {
@@ -311,6 +390,7 @@
             CargaIndicadores(tipo, fil1, 0)
             ActualizaDetalle(fil1)
             myDiagram.div = null;
+            myDiagramN2.div = null;
             ActualizaDiagrama(fil1, tipo, nomBD)
             document.getElementById("btnBuscar").disabled = false;
             OcultarLoader();
@@ -329,7 +409,7 @@
                 $("#divdet").empty;
                 $("#divdet").html(viewHTML);
             },
-            error: function (errorData) { console.log("Request Failed: " + errorData); }
+            error: function (errorData) { console.log("Request Failed: " + errorData); OcultarLoader() }
         });
     }
 
@@ -357,7 +437,7 @@
                     $("#lblIndi6").text("-");
                 }
             },
-            error: function (errorData) { console.log("Request Failed: " + errorData); }
+            error: function (errorData) { console.log("Request Failed: " + errorData); OcultarLoader();}
         });
     }
 
@@ -374,7 +454,25 @@
                     datosCuadross.push({ key: parseInt(data[i].Numero), text: data[i].Tabla });
                 }
             },
-            error: function (errorData) { console.log("Request Failed: " + errorData); }
+            error: function (errorData) { console.log("Request Failed: " + errorData); OcultarLoader(); }
+        });
+        return datosCuadross;
+    }
+
+      function CargaCuadrosN2(idApp, NomObj, nombreBD, idbd) {
+        var datosCuadross = [];
+        $.ajax({
+            async: false,
+            type: "GET",
+            url: "/Dependecias/ArregloCuadroCN2",
+            data: { Aplicacion: idApp, NombreObj: NomObj },
+            success: function (data) {
+                datosCuadross.push({ key: parseInt("-" + idbd), text: 'Aplicación: "' + nombreBD + '"' });
+                for (var i = 0; i < data.length; i++) {
+                    datosCuadross.push({ key: parseInt(data[i].Numero), text: data[i].Tabla });
+                }
+            },
+            error: function (errorData) { console.log("Request Failed: " + errorData); OcultarLoader(); }
         });
         return datosCuadross;
     }
@@ -392,7 +490,25 @@
                     datosRelacioness.push({ from: parseInt(data[i].Numero), to: parseInt("-" + idbd), text: "" });
                 }
             },
-            error: function (errorData) { console.log("Request Failed: " + errorData); }
+            error: function (errorData) { console.log("Request Failed: " + errorData); OcultarLoader() }
+        });
+        return datosRelacioness;
+    }
+
+    function CargaRelacionesN2(idbd, idApp, NomObj) {
+        var datosRelacioness = [];
+
+        $.ajax({
+            async: false,
+            type: "GET",
+            url: "/Dependecias/ArregloCuadroCN2",
+            data: { Aplicacion: idApp, NombreObj: NomObj },
+            success: function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    datosRelacioness.push({ from: parseInt(data[i].Numero), to: parseInt("-" + idbd), text: "" });
+                }
+            },
+            error: function (errorData) { console.log("Request Failed: " + errorData); OcultarLoader() }
         });
         return datosRelacioness;
     }
@@ -404,8 +520,16 @@
         $("#myDiagramDiv").html(onload = initER(datosCuadrossFinal, datosRelacionesFinal));
     }
 
+    function ActualizaDiagramaN2(_idApp, _NomObj, _idbd, _nombreBD) {     
+       
+        datosCuadrossFinal = CargaCuadrosN2(_idApp, _NomObj, _nombreBD, _idbd)
+        datosRelacionesFinal = CargaRelacionesN2(_idbd, _idApp, _NomObj)
+        $("#myDiagramDivN2").empty;
+        $("#myDiagramDivN2").html(onload = initERN2(datosCuadrossFinal, datosRelacionesFinal));
+    }
+
     function ActualizaDetalleN2(_AplicacionID, _ObjNombre) {
-        
+        myDiagramN2.div = null;
         $.ajax({
             type: "POST",
             url: "/Dependecias/ActualizaTablaUsosN2",
@@ -413,10 +537,15 @@
             success: function (viewHTML) {
                 $("#divdet").empty;
                 $("#divdet").html(viewHTML);
+                if (_AplicacionID != 0) {
+                      var _idbd = $("#AplicacionesLista Option:Selected").val();
+                var _nombreBD = $("#AplicacionesLista Option:Selected").text();
+                    ActualizaDiagramaN2(_AplicacionID, _ObjNombre, _idbd, _nombreBD)
+                }
             },
             error: function (errorData) {
                 console.log("Request Failed: " + errorData);
-                
+                OcultarLoader();
             }
         });
         

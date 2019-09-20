@@ -63,5 +63,13 @@ namespace HerramientaAD.Controllers
             ViewBag.Aplicacion = AplicacionID;
             return View(diagramaUMLModel);
         }
+
+        public ActionResult AnalisisCM(int AplicacionID)
+        {
+            var analisisCMModel = new AnalisisCMModel(int.Parse(Session["UsuarioID"].ToString()), AplicacionID);
+            ViewBag.NombreAplicacion = analisisCMModel.Aplicacion; //MMOB
+            ViewBag.Aplicacion = AplicacionID;
+            return View(analisisCMModel);
+        }
     }
 }

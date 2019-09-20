@@ -1,0 +1,212 @@
+﻿@model HerramientaAD.Models.AnalisisCMModel
+
+@{
+    ViewBag.Title = "AnalisisCM";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Concept Map</title>
+    <meta name="description" content="A concept map diagram implemented with labeled links and ForceDirectedLayout." />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <script src="~/Scripts/go.js"></script>
+    
+    <script id="code">
+        function init() {
+
+            var Datos = [];
+
+            Datos.push({ key: "0", name: "@Model.Aplicacion", type: "Tipo", color: "Color", description: "Descripcion" });
+
+            @{
+                foreach (HerramientaAD.com.Utilerias.ElementosDiagramaCM.Cuadros diagramaCM in Model.DiagramaCM)
+                {
+                    @:Datos.push({ key: "@diagramaCM.Llave", parent: "@diagramaCM.Padre", name: "@diagramaCM.Nombre", type: "@diagramaCM.Tipo", color: "@diagramaCM.Color", description: "@diagramaCM.Descripcion" });
+                }
+            }
+
+            var $ = go.GraphObject.make;  // for conciseness in defining templates
+
+            myDiagram =
+                $(go.Diagram, "myDiagramDiv",  // must be the ID or reference to div
+                    {
+                        "toolManager.hoverDelay": 100,  // 100 milliseconds instead of the default 850
+                        allowCopy: false,
+                        layout:  // create a TreeLayout for the family tree
+                            $(go.TreeLayout,
+                                { angle: 90, nodeSpacing: 10, layerSpacing: 40, layerStyle: go.TreeLayout.LayerUniform })
+                    });
+
+            var bluegrad = "#90CAF9";
+            var pinkgrad = "#F48FB1";
+
+            //// Set up a Part as a legend, and place it directly on the diagram
+            //myDiagram.add(
+            //    $(go.Part, "Table",
+            //        { position: new go.Point(200, 0), selectable: false },
+            //        $(go.TextBlock, "Tipos",
+            //            { row: 0, font: "700 14px Droid Serif, sans-serif" }),  // end row 0
+            //        $(go.Panel, "Horizontal",
+            //            { row: 1, alignment: go.Spot.Left },
+            //            $(go.Shape, "Rectangle",
+            //                { desiredSize: new go.Size(30, 30), fill: "#E15953", margin: 5 }),
+            //            $(go.TextBlock, "Aplicación",
+            //                { font: "700 13px Droid Serif, sans-serif" })
+            //        ),  // end row 1
+            //        $(go.Panel, "Horizontal",
+            //            { row: 2, alignment: go.Spot.Left },
+            //            $(go.Shape, "Rectangle",
+            //                {
+            //                    desiredSize: new go.Size(30, 30), fill: "#84A7D0", margin: 5 }),
+            //            $(go.TextBlock, "Archivos",
+            //                { font: "700 13px Droid Serif, sans-serif" })
+            //        ),  // end row 1
+            //        $(go.Panel, "Horizontal",
+            //            { row: 3, alignment: go.Spot.Left },
+            //            $(go.Shape, "Rectangle",
+            //                { desiredSize: new go.Size(30, 30), fill: "#A693BD", margin: 5 }),
+            //            $(go.TextBlock, "Clases",
+            //                { font: "700 13px Droid Serif, sans-serif" })
+            //        )  // end row 2
+            //    ));
+
+            // get tooltip text from the object's data
+            function tooltipTextConverter(person) {
+                var str = "";
+                str += "Línea: " + person.description;
+                //if (person.deathYear !== undefined) str += "\nDied: " + person.deathYear;
+                //if (person.reign !== undefined) str += "\nReign: " + person.reign;
+                return str;
+            }
+
+            // define tooltips for nodes
+            var tooltiptemplate =
+                $("ToolTip",
+                    { "Border.fill": "whitesmoke", "Border.stroke": "black" },
+                    $(go.TextBlock,
+                        {
+                            font: "bold 8pt Helvetica, bold Arial, sans-serif",
+                            wrap: go.TextBlock.WrapFit,
+                            margin: 5
+                        },
+                        new go.Binding("text", "", tooltipTextConverter))
+                );
+
+            // define Converters to be used for Bindings
+            function genderBrushConverter(type) {
+                if (type === "ARCHIVO") return "#84A7D0";
+                if (type === "CLASE") return "#A693BD";
+                return "#E15953";
+            }
+
+            // replace the default Node template in the nodeTemplateMap
+            myDiagram.nodeTemplate =
+                $(go.Node, "Auto",
+                    { deletable: false, toolTip: tooltiptemplate },
+                    new go.Binding("text", "name"),
+                    $(go.Shape, "Rectangle",
+                        {
+                            fill: "lightgray",
+                            stroke: null, strokeWidth: 0,
+                            stretch: go.GraphObject.Fill,
+                            alignment: go.Spot.Center
+                        },
+                        new go.Binding("fill", "type", genderBrushConverter)),
+                    $(go.TextBlock,
+                        {
+                            font: "700 12px Droid Serif, sans-serif",
+                            textAlign: "center",
+                            margin: 10, maxSize: new go.Size(80, NaN)
+                        },
+                        new go.Binding("text", "name"))
+                );
+
+            // define the Link template
+            myDiagram.linkTemplate =
+                $(go.Link,  // the whole link panel
+                    { routing: go.Link.Orthogonal, corner: 5, selectable: false },
+                    $(go.Shape, { strokeWidth: 3, stroke: '#424242' }));  // the gray link shape
+
+            // here's the family data
+            var nodeDataArray = Datos;
+
+            // create the model for the family tree
+            myDiagram.model = new go.TreeModel(nodeDataArray);
+
+            document.getElementById('zoomToFit').addEventListener('click', function () {
+                myDiagram.zoomToFit();
+            });
+
+            document.getElementById('centerRoot').addEventListener('click', function () {
+                myDiagram.scale = 1;
+                myDiagram.scrollToRect(myDiagram.findNodeForKey(0).actualBounds);
+            });
+
+        }
+    </script>
+
+</head>
+<body onload="init()">
+    <div class="jumbotron">
+        <h1 class="display-3">@Model.DiagramaCM.ElementAt(0).NombreApp</h1>
+        <p class="lead">Resultados del Análisis de Clases, Funciones y Métodos</p>
+        <hr class="my-4">
+    </div>
+
+    <br />
+    <div class="card border-secondary mb-3" style="max-width: 20rem;">
+        <div class="card-header">Tipos</div>
+        <div class="card-body">            
+            <table>
+                <tr>
+                    <td style="background:#E15953" width="30px"></td>
+                    <td width="5px"></td>
+                    <td style="font-size:17px">Aplicación</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td style="background:#84A7D0"></td>
+                    <td></td>
+                    <td style="font-size:17px">Archivos</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td style="background:#A693BD"></td>
+                    <td></td>
+                    <td style="font-size:17px">Clases</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+ 
+    <div id="sample" data-toggle="tooltip" title="ZOOM, 1.- Da click sobre el diagrama. 2.- ctrl + para aumentar o crtl  - para disminuir.">
+        <div id="myDiagramDiv" style="background-color: white; border: solid 1px black; width: 100%; height: 550px"></div>
+        <br />
+        <p><button class="btn btn-primary" id="zoomToFit">Alejar zoom</button> <button class="btn btn-primary" id="centerRoot">Ir al centro</button></p>
+        <br />
+    </div>
+    <div class="alert alert-dismissible alert-primary">
+        <h6 class="alert-heading">Zoom</h6>
+        <h6 class="mb-0">1.- Dar click sobre el diagrama. <br />2.- <strong>ctrl +</strong> para aumentar o <strong>ctrl -</strong> para disminuir.</h6>
+    </div>
+    <br />
+    <br />
+
+</body>
+</html>
+
+
+

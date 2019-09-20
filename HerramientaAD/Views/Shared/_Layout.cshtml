@@ -48,10 +48,14 @@
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true" onclick="openNav()">Ver  @ViewBag.NombreAplicacion</a>
                         <div id="sidebar-menu" onmouseleave="closeNav()" class="dropdown-menu show" x-placement="bottom-start" style="display:none; position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 38px, 0px);">
                             <a class="dropdown-item" href="@Url.Action("Inicial", "Tableros", new { AplicacionID = ViewBag.Aplicacion } )">Tablero Aplicación</a>
-                            <a class="dropdown-item" href="@Url.Action("GrupoBD", "Tableros", new { AplicacionID = ViewBag.Aplicacion })">Objetos BD</a>
+                            <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="@Url.Action("AnalisisBD", "Tableros", new { AplicacionID = ViewBag.Aplicacion })">Analisis BD</a>
+                            <a class="dropdown-item" href="@Url.Action("AnalisisCM", "Tableros", new { AplicacionID = ViewBag.Aplicacion })">Análisis CM</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="@Url.Action("GrupoBD", "Tableros", new { AplicacionID = ViewBag.Aplicacion })">Objetos BD</a>
                             <a class="dropdown-item" href="@Url.Action("GrupoWS", "Tableros", new { AplicacionID = ViewBag.Aplicacion })">Objetos WS</a>
                             <a class="dropdown-item" href="@Url.Action("GrupoCM", "Tableros", new { AplicacionID = ViewBag.Aplicacion })">Objetos CM</a>
+
                         </div>
                     </li>
                 }

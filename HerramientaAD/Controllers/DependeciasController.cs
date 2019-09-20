@@ -94,7 +94,12 @@ namespace HerramientaAD.Controllers
             return cc;
         }
 
-
+        public JsonResult ArregloCuadroCN2(int Aplicacion, string NombreObj)
+        {
+            var grupoDepModel = new DependeciasModel(int.Parse(Session["UsuarioID"].ToString()), Aplicacion, NombreObj);
+            var cc = Json(grupoDepModel.Cuadros, JsonRequestBehavior.AllowGet);
+            return cc;
+        }
 
         public ActionResult ActualizaTablaUsosN2(int AplicacionID, string ObjNombre)
         {

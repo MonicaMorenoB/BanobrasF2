@@ -133,6 +133,7 @@
     <Compile Include="com.Datos\Areas.cs" />
     <Compile Include="com.Datos\DatosDependencias.cs" />
     <Compile Include="com.Datos\DatosDetalleTecnico.cs" />
+    <Compile Include="com.Datos\DatosDiagramaCM.cs" />
     <Compile Include="com.Datos\DatosDiagramaER.cs" />
     <Compile Include="com.Datos\DatosObjetosBD.cs" />
     <Compile Include="com.Datos\DatosObjetosCM.cs" />
@@ -140,6 +141,7 @@
     <Compile Include="com.Utilerias\ElementosDeGrupo.cs" />
     <Compile Include="com.Datos\Usuarios.cs" />
     <Compile Include="com.Utilerias\ElementosDependencias.cs" />
+    <Compile Include="com.Utilerias\ElementosDiagramaCM.cs" />
     <Compile Include="com.Utilerias\ElementosDiagramaER.cs" />
     <Compile Include="com.Utilerias\GestionBD.cs" />
     <Compile Include="com.Log\Log.cs" />
@@ -155,6 +157,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AnalisisBD.cs" />
+    <Compile Include="Models\AnalisisCMModel.cs" />
     <Compile Include="Models\DependeciasModel.cs" />
     <Compile Include="Models\DetalleTecnicoModel.cs" />
     <Compile Include="Models\DiagramaERModel.cs" />
@@ -300,6 +303,8 @@
     <Content Include="Views\Dependecias\Index.cshtml" />
     <Content Include="Views\Dependecias\Detalle.cshtml" />
     <Content Include="Views\Dependecias\Diagrama.cshtml" />
+    <Content Include="Views\Tableros\AnalisisCM.cshtml" />
+    <Content Include="Views\Dependecias\DiagramaN2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

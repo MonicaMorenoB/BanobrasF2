@@ -157,6 +157,7 @@
     var tipo;
 
     function limpiarfiltros() {
+        MostrarLoader();
         $("#AreasLista").empty;
         $("#AreasLista")[0].selectedIndex = 0;
         $("#AplicacionesLista").empty;
@@ -169,6 +170,7 @@
         $("#Filtro3Lista")[0].selectedIndex = 0;
         $("#Filtro4Lista").empty;
         $("#Filtro4Lista")[0].selectedIndex = 0;
+        OcultarLoader();
     }
 
     function ActualizaBusqueda(tpfil, idapp, fil1, fil2, fil3, fil4) {
