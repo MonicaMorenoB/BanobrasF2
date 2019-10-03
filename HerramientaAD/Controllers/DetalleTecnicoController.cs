@@ -20,8 +20,15 @@ namespace HerramientaAD.Controllers
         // GET: DetalleTecnico
         public ActionResult Index()
         {
-            var detalleTecnicoModel = new DetalleTecnicoModel(int.Parse(Session["UsuarioID"].ToString()));
-            return View(detalleTecnicoModel);
+            if (Session["UsuarioID"] != null)
+            {
+                var detalleTecnicoModel = new DetalleTecnicoModel(int.Parse(Session["UsuarioID"].ToString()));
+                return View(detalleTecnicoModel);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Login");
+            }
         }
 
         public JsonResult ActualizarFiltros(string Filtro, string Tipo, int AplicacionID, string Filtro1, string Filtro2, string Filtro3)

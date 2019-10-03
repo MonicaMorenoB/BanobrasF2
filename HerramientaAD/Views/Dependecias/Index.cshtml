@@ -165,7 +165,7 @@
                                     <button type="button" class="btn btn-primary" style="width:300px" id="btnFiltrosBD">Objetos de Base de Datos</button>
                                 </td>
                                 <td width="370px" align="center">
-                                    <button type="button" class="btn btn-primary" style="width:300px" id="btnFiltrosWS">Objetos de Interfases y Servicios</button>
+                                    <button type="button" class="btn btn-primary" style="width:300px" id="btnFiltrosWS">Objetos de Interfaces y Servicios</button>
                                 </td>
                                 <td width="370px" align="center">
                                     <button type="button" class="btn btn-primary" style="width:300px" id="btnFiltrosCM">Objetos de Clases y Métodos</button>
@@ -212,7 +212,7 @@
             <h6 class="mb-0">1.- Dar click sobre el diagrama. <br />2.- <strong>ctrl +</strong> para aumentar o <strong>ctrl -</strong> para disminuir. </h6>
             <br />
             <h6>Cargar diagrama y tabla de Objetos</h6>
-            <h6 class="mb-0">1.- Dar <strong>doble click</strong> sobre uno de los rectangulos del "Diagrama de Indicadores".</h6>
+            <h6 class="mb-0">1.- Dar <strong>doble click</strong> sobre uno de los rect&aacute;ngulos del "Diagrama de Indicadores".</h6>
         </div>
         <br />
         <table>
@@ -238,30 +238,32 @@
             </tr>
         </table>
         <br />
-        <h1 style="text-align: center;">OBJETOS</h1>
-        <div id="HGrid">
-            <table cellspacing="0" id="Tabla0" style="width: 100%; border-collapse: collapse; color: #fff; ">
-                <tr class="GridViewScrollHeader">
-                    <th class="CampoMasCorto">USO</th>
-                    <th class="CampoAnalisis">Objeto -> Dependencias</th>
-                    <th class="CampoDescarga">Tipo de objeto</th>
-                </tr>
-            </table>
-        </div>
 
-        <div id="divdet">
-            @{
-                Html.RenderPartial("Detalle");
-            }
-        </div>
-        <br />
-        <h1 style="text-align: center;">DIAGRAMA DE OBJETOS</h1>
-        <div id="divdet3" style="width:50%;">
-            @{
-                Html.RenderPartial("DiagramaN2");
-            }
-        </div>
+        <div id="div_Partedos" style="display:none">
+            <h1 style="text-align: center;">OBJETOS</h1>
+            <div id="HGrid">
+                <table cellspacing="0" id="Tabla0" style="width: 100%; border-collapse: collapse; color: #fff; ">
+                    <tr class="GridViewScrollHeader">
+                        <th class="CampoMasCorto">USO</th>
+                        <th class="CampoAnalisis">Objeto -> Dependencias</th>
+                        <th class="CampoDescarga">Tipo de objeto</th>
+                    </tr>
+                </table>
+            </div>
 
+            <div id="divdet">
+                @{
+                    Html.RenderPartial("Detalle");
+                }
+            </div>
+            <br />
+            <h1 style="text-align: center;">DIAGRAMA DE OBJETOS</h1>
+            <div id="divdet3" style="width:50%;">
+                @{
+                    Html.RenderPartial("DiagramaN2");
+                }
+            </div>
+        </div>
 
     </fieldset>
 </body>
@@ -304,6 +306,7 @@
         $("#lblIndi6").text("-");
         myDiagram.div = null;
         myDiagramN2.div = null;
+        document.getElementById("div_Partedos").style.display = 'none'
         
     }
 
@@ -369,8 +372,9 @@
         });
 
         $('#btnBuscar').click(function () {
+
             MostrarLoader();
-            desabilitarbtn()
+            desabilitarbtn();
             document.getElementById("btnBuscar").disabled = true;
             var idapp = $("#AplicacionesLista Option:Selected").val();
             if (tpfil == "BD") {
@@ -386,7 +390,7 @@
             if (tpfil == "CM") {
                 var fil1 = $("#AplicacionesLista Option:Selected").val();
                 nomBD = $("#AplicacionesLista Option:Selected").text();
-            }
+            }            
             CargaIndicadores(tipo, fil1, 0)
             ActualizaDetalle(fil1)
             myDiagram.div = null;
@@ -459,7 +463,7 @@
         return datosCuadross;
     }
 
-      function CargaCuadrosN2(idApp, NomObj, nombreBD, idbd) {
+    function CargaCuadrosN2(idApp, NomObj, nombreBD, idbd) {
         var datosCuadross = [];
         $.ajax({
             async: false,
@@ -467,10 +471,21 @@
             url: "/Dependecias/ArregloCuadroCN2",
             data: { Aplicacion: idApp, NombreObj: NomObj },
             success: function (data) {
-                datosCuadross.push({ key: parseInt("-" + idbd), text: 'Aplicación: "' + nombreBD + '"' });
-                for (var i = 0; i < data.length; i++) {
-                    datosCuadross.push({ key: parseInt(data[i].Numero), text: data[i].Tabla });
+
+                if (NomObj == 'Clase' || NomObj == 'Metodo' || NomObj == 'Evento' || NomObj == 'Funcion' || NomObj == 'Objeto' || NomObj == 'Archivo' || NomObj == 'URL' || NomObj == 'Página Externa' || NomObj == 'Libreria' || NomObj == 'Espacio de Nombres' || NomObj == 'Interface' || NomObj == 'Web Service' || NomObj == 'Middleware') {
+                    datosCuadross.push({ key: parseInt("-" + idbd), text: 'Aplicación: "' + nombreBD + '"' });
+                    for (var i = 0; i < data.length; i++) {
+                        datosCuadross.push({ key: parseInt(data[i].Numero + i), text: data[i].Tabla });
+                    }
                 }
+                else {
+                    datosCuadross.push({ key: parseInt("-" + idbd), text: 'Aplicación: "' + nombreBD + '"' });
+                    for (var i = 0; i < data.length; i++) {
+                        datosCuadross.push({ key: parseInt(data[i].Numero), text: data[i].Tabla });
+                    }
+                }
+
+
             },
             error: function (errorData) { console.log("Request Failed: " + errorData); OcultarLoader(); }
         });
@@ -497,15 +512,21 @@
 
     function CargaRelacionesN2(idbd, idApp, NomObj) {
         var datosRelacioness = [];
-
         $.ajax({
             async: false,
             type: "GET",
             url: "/Dependecias/ArregloCuadroCN2",
             data: { Aplicacion: idApp, NombreObj: NomObj },
             success: function (data) {
-                for (var i = 0; i < data.length; i++) {
-                    datosRelacioness.push({ from: parseInt(data[i].Numero), to: parseInt("-" + idbd), text: "" });
+                 if (NomObj == 'Clase' || NomObj == 'Metodo' || NomObj == 'Evento' || NomObj == 'Funcion' || NomObj == 'Objeto' || NomObj == 'Archivo' || NomObj == 'URL' || NomObj == 'Página Externa' || NomObj == 'Libreria' || NomObj == 'Espacio de Nombres' || NomObj == 'Interface' || NomObj == 'Web Service' || NomObj == 'Middleware') {
+                    for (var i = 0; i < data.length; i++) {
+                        datosRelacioness.push({ from: parseInt(data[i].Numero + i), to: parseInt("-" + idbd), text: "" });
+                    }
+                }
+                else {
+                    for (var i = 0; i < data.length; i++) {
+                        datosRelacioness.push({ from: parseInt(data[i].Numero), to: parseInt("-" + idbd), text: "" });
+                    }
                 }
             },
             error: function (errorData) { console.log("Request Failed: " + errorData); OcultarLoader() }
@@ -538,6 +559,7 @@
                 $("#divdet").empty;
                 $("#divdet").html(viewHTML);
                 if (_AplicacionID != 0) {
+                    document.getElementById("div_Partedos").style.display = 'block'
                       var _idbd = $("#AplicacionesLista Option:Selected").val();
                 var _nombreBD = $("#AplicacionesLista Option:Selected").text();
                     ActualizaDiagramaN2(_AplicacionID, _ObjNombre, _idbd, _nombreBD)

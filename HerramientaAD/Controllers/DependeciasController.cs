@@ -18,9 +18,17 @@ namespace HerramientaAD.Controllers
         DatosDependencias datosDependeciasSQL = new DatosDependencias();
         public ActionResult Index()
         {
-            var detalleDependeciasModel = new DependeciasModel(int.Parse(Session["UsuarioID"].ToString()));
+            if (Session["UsuarioID"] != null)
+            {
+                var detalleDependeciasModel = new DependeciasModel(int.Parse(Session["UsuarioID"].ToString()));
 
-            return View(detalleDependeciasModel);
+                return View(detalleDependeciasModel);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            
         }
         public JsonResult ActualizarAplicaciones(int AreaID)
         {
@@ -49,8 +57,15 @@ namespace HerramientaAD.Controllers
         /// <returns></returns>
         public ActionResult ActualizaDetalle(int appid, string nombre)
         {
-            DependeciasModel objdep = new DependeciasModel(appid, int.Parse(Session["usuid"].ToString()), nombre);
-            return PartialView("Detalle", objdep);
+            if (Session["usuid"] != null)
+            {
+                DependeciasModel objdep = new DependeciasModel(appid, int.Parse(Session["usuid"].ToString()), nombre);
+                return PartialView("Detalle", objdep);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Login");
+            }
         }
 
         public JsonResult GeneraDiagrama(int appid, int maxe, int tipoid, string nomapp)
