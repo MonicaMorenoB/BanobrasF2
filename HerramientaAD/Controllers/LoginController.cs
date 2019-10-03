@@ -18,6 +18,8 @@ namespace HerramientaAD.Controllers
         // GET: Login
         public ActionResult Index()
         {
+            Session["UsuarioID"] = null;
+            Session["usuid"] = null;
             return View();
         }
 

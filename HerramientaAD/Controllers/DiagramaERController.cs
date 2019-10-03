@@ -34,7 +34,7 @@ namespace HerramientaAD.Controllers
         }
 
 
-       
+
 
         public JsonResult ActualizarAplicaciones(int AreaID)
         {
@@ -73,7 +73,7 @@ namespace HerramientaAD.Controllers
                     }
                 }
             }
-            
+
             return Json(new SelectList(baseLista, "Indice", "Texto"), JsonRequestBehavior.AllowGet);
         }
 
@@ -126,19 +126,24 @@ namespace HerramientaAD.Controllers
 
         public JsonResult ArregloCuadroC(int BaseDeDatosID, int Tipo)
         {
-            var cc= Json("", JsonRequestBehavior.AllowGet);
-            var grupoDepModel = new DiagramaERModel(int.Parse(Session["UsuarioID"].ToString()), BaseDeDatosID, Tipo);
-            if (Tipo ==1)
+            var cc = Json("", JsonRequestBehavior.AllowGet);
+            if (Session["UsuarioID"] != null)
             {
-                cc= Json(grupoDepModel.Cuadros, JsonRequestBehavior.AllowGet);
+                var grupoDepModel = new DiagramaERModel(int.Parse(Session["UsuarioID"].ToString()), BaseDeDatosID, Tipo);
+                if (Tipo == 1)
+                {
+                    cc = Json(grupoDepModel.Cuadros, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    cc = Json(grupoDepModel.Relaciones, JsonRequestBehavior.AllowGet);
+                }
             }
             else
             {
-                cc= Json(grupoDepModel.Relaciones, JsonRequestBehavior.AllowGet);
+                RedirectToAction("Index", "Login");
             }
-            
             return cc;
         }
-
     }
 }

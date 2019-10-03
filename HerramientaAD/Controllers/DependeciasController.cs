@@ -21,14 +21,12 @@ namespace HerramientaAD.Controllers
             if (Session["UsuarioID"] != null)
             {
                 var detalleDependeciasModel = new DependeciasModel(int.Parse(Session["UsuarioID"].ToString()));
-
                 return View(detalleDependeciasModel);
             }
             else
             {
                 return RedirectToAction("Index", "Login");
-            }
-            
+            }            
         }
         public JsonResult ActualizarAplicaciones(int AreaID)
         {
@@ -104,16 +102,36 @@ namespace HerramientaAD.Controllers
         //diagrama
         public JsonResult ArregloCuadroC(int BaseDeDatosID, int Tipo)
         {
-            var grupoDepModel = new DependeciasModel(int.Parse(Session["UsuarioID"].ToString()), BaseDeDatosID, Tipo);
-            var cc = Json(grupoDepModel.Cuadros, JsonRequestBehavior.AllowGet);
+            var cc = Json("", JsonRequestBehavior.AllowGet);
+            if (Session["UsuarioID"] != null)
+            {
+                var grupoDepModel = new DependeciasModel(int.Parse(Session["UsuarioID"].ToString()), BaseDeDatosID, Tipo);
+                cc = Json(grupoDepModel.Cuadros, JsonRequestBehavior.AllowGet);
+                return cc;
+            }
+            else
+            {
+                 RedirectToAction("Index", "Login");
+                cc = Json("", JsonRequestBehavior.AllowGet);
+            }
             return cc;
         }
 
         public JsonResult ArregloCuadroCN2(int Aplicacion, string NombreObj)
         {
-            var grupoDepModel = new DependeciasModel(int.Parse(Session["UsuarioID"].ToString()), Aplicacion, NombreObj);
-            var cc = Json(grupoDepModel.Cuadros, JsonRequestBehavior.AllowGet);
-            return cc;
+            var cc = Json("", JsonRequestBehavior.AllowGet);
+            if (Session["UsuarioID"] != null)
+            {
+                var grupoDepModel = new DependeciasModel(int.Parse(Session["UsuarioID"].ToString()), Aplicacion, NombreObj);
+                cc = Json(grupoDepModel.Cuadros, JsonRequestBehavior.AllowGet);
+                return cc;
+            }
+            else
+            {
+                RedirectToAction("Index", "Login");
+                cc = Json("", JsonRequestBehavior.AllowGet);
+            }
+            return cc;            
         }
 
         public ActionResult ActualizaTablaUsosN2(int AplicacionID, string ObjNombre)
