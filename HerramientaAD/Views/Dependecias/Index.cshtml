@@ -26,6 +26,7 @@
                             $(go.ForceDirectedLayout,  // automatically spread nodes apart
                                 { maxIterations: 200, defaultSpringLength: 30, defaultElectricalCharge: 100 })
                     });
+
             // define each Node's appearance
             myDiagram.nodeTemplate =
                 $(go.Node, "Auto",  // the whole node panel
@@ -35,47 +36,28 @@
                             if (node.data.key >= 0) {
                                 var texto = datosCuadros[0].key;
                                 MostrarLoader();
-                                ActualizaDetalleN2(parseInt(-(texto)), node.data.text)                                
+                                ActualizaDetalleN2(parseInt(-(texto)), node.data.text, 25, 1)
                                 OcultarLoader();
                             }
                         }
                     },
                     // define the node's outer shape, which will surround the TextBlock
                     $(go.Shape, "Rectangle",
-                        { fill: $(go.Brush, "Linear", { 0: "rgb(39, 128, 227)", 1: "rgb(39, 128, 227)" }), stroke: "rgb(39, 128, 227)" }),
+                        { stroke: "rgb(39, 128, 227)", height: 30, }, new go.Binding("fill", "color")),
                     $(go.TextBlock,
                         {
-                            font: "bold 10pt helvetica, bold arial, sans-serif", margin: 4, stroke: "white"
-                        },
-                        new go.Binding("text", "text")),
+                            font: "bold 12pt helvetica, bold arial, sans-serif", margin: 4, stroke: "white",
 
-                );
+                        },
+
+                        new go.Binding("text", "text")),
+                );           
+
             // replace the default Link template in the linkTemplateMap
             myDiagram.linkTemplate =
-                $(go.Link,  // the whole link panel
-                    $(go.Shape,  // the link shape
-                        { stroke: "black" }),
-                    $(go.Shape,  // the arrowhead
-                        { toArrow: "line", stroke: null }),
-                    $(go.Panel, "Auto",
-                        $(go.Shape,  // the label background, which becomes transparent around the edges
-                            {
-                                fill: $(go.Brush, "Radial", { 0: "rgb(240, 240, 240)", 0.3: "rgb(240, 240, 240)", 1: "rgba(240, 240, 240, 0)" }),
-                                stroke: null
-                            }),
-                        $(go.TextBlock,  // the label text
-                            {
-                                textAlign: "center",
-                                font: "10pt helvetica, arial, sans-serif",
-                                stroke: "#555555",
-                                margin: 4
-                            },
-                            new go.Binding("text", "text")),
-
-                    )
+                $(go.Link,       // the whole link panel
+                    $(go.Shape)  // the link shape, default black stroke
                 );
-
-
             var nodeDataArray = datosCuadros;
             var linkDataArray = datosRelaciones;
 
@@ -90,157 +72,157 @@
             myDiagramN2 =
                 $(go.Diagram, "myDiagramDivN2",  // must name or refer to the DIV HTML element
                     {
-                        initialAutoScale: go.Diagram.Uniform,  // an initial automatic zoom-to-fit
+                        //initialAutoScale: go.Diagram.Uniform,  // an initial automatic zoom-to-fit
                         contentAlignment: go.Spot.Center,  // align document to the center of the viewport
-                        layout:
-                            $(go.ForceDirectedLayout,  // automatically spread nodes apart
-                                { maxIterations: 200, defaultSpringLength: 30, defaultElectricalCharge: 100 })
+                        initialDocumentSpot: go.Spot.TopLeft,
+      initialViewportSpot: go.Spot.TopCenter
+
                     });
             // define each Node's appearance
             myDiagramN2.nodeTemplate =
                 $(go.Node, "Auto",  // the whole node panel
                     {
-                        locationSpot: go.Spot.Center                      
+                        locationSpot: go.Spot.Center
                     },
                     // define the node's outer shape, which will surround the TextBlock
                     $(go.Shape, "Rectangle",
-                        { fill: $(go.Brush, "Linear", { 0: "rgb(39, 128, 227)", 1: "rgb(39, 128, 227)" }), stroke: "rgb(39, 128, 227)" }),
+                        { stroke: "rgb(39, 128, 227)",  height: 30, }, new go.Binding("fill", "color")),
                     $(go.TextBlock,
                         {
-                            font: "bold 10pt helvetica, bold arial, sans-serif", margin: 4, stroke: "white"
+                            font: "bold 12pt helvetica, bold arial, sans-serif", margin: 4, stroke: "white"
                         },
                         new go.Binding("text", "text")),
+                );        
 
-                );
+
             // replace the default Link template in the linkTemplateMap
             myDiagramN2.linkTemplate =
-                $(go.Link,  // the whole link panel
-                    $(go.Shape,  // the link shape
-                        { stroke: "black" }),
-                    $(go.Shape,  // the arrowhead
-                        { toArrow: "line", stroke: null }),
-                    $(go.Panel, "Auto",
-                        $(go.Shape,  // the label background, which becomes transparent around the edges
-                            {
-                                fill: $(go.Brush, "Radial", { 0: "rgb(240, 240, 240)", 0.3: "rgb(240, 240, 240)", 1: "rgba(240, 240, 240, 0)" }),
-                                stroke: null
-                            }),
-                        $(go.TextBlock,  // the label text
-                            {
-                                textAlign: "center",
-                                font: "10pt helvetica, arial, sans-serif",
-                                stroke: "#555555",
-                                margin: 4
-                            },
-                            new go.Binding("text", "text")),
-
-                    )
+                $(go.Link,
+                    { routing: go.Link.AvoidsNodes },  // link route should avoid nodes
+                    $(go.Shape),
+                    $(go.Shape, { toArrow: "Standard" })
                 );
 
 
             var nodeDataArray = datosCuadros;
             var linkDataArray = datosRelaciones;
 
+
+            // enable Ctrl-Z to undo and Ctrl-Y to redo
+            myDiagramN2.undoManager.isEnabled = true;
             myDiagramN2.model = new go.GraphLinksModel(nodeDataArray, linkDataArray);
         }
     </script>
 </head>
+
 <body onload="initER([],[]), initERN2([],[])">
 
     <div class="jumbotron">
         <h1 class="display-3">Dependencias</h1>
         <p class="lead">Resultados de Dependencias</p>
-        <hr class="my-4">        
+        <hr class="my-4">
     </div>
 
     <form>
-            <div class="card border-secondary mb-3" style="max-width: 200rem;">
-                <div class="card-header">Filtros</div>
-                <div class="card-body">
-                    <fieldset>
-                        <table align="center">
-                            <tr style="height: 50px">
-                                <td width="370px" align="center">
+        <div class="card border-secondary mb-3" style="max-width: 200rem;">
+            <div class="card-header">Filtros</div>
+            <div class="card-body">
+                <fieldset>
+                    <table align="center">
+                        <tr style="height: 50px">
+                            <td width="370px" align="center">
 
-                                    <button type="button" class="btn btn-primary" style="width:300px" id="btnFiltrosBD">Objetos de Base de Datos</button>
-                                </td>
-                                <td width="370px" align="center">
-                                    <button type="button" class="btn btn-primary" style="width:300px" id="btnFiltrosWS">Objetos de Interfaces y Servicios</button>
-                                </td>
-                                <td width="370px" align="center">
-                                    <button type="button" class="btn btn-primary" style="width:300px" id="btnFiltrosCM">Objetos de Clases y Métodos</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="form-group">
-                                        @Html.LabelFor(m => m.AreaID, "Area:")
-                                        @Html.DropDownListFor(m => m.AreasLista, new SelectList(Model.AreasLista, "Indice", "Texto"), "Selecciona", new { @class = "form-control" })
-                                    </div>
-                                </td>
-                                <td>
-                                    <div class="form-group">
-                                        @Html.LabelFor(m => m.AplicacionID, "Aplicación:")
-                                        @Html.DropDownListFor(m => m.AplicacionesLista, new SelectList(Model.AplicacionesLista, "Indice", "Texto"), "Selecciona", new { @class = "form-control" })
-                                    </div>
-                                </td>
+                                <button type="button" class="btn btn-primary" style="width:300px" id="btnFiltrosBD">Objetos de Base de Datos</button>
+                            </td>
+                            <td width="370px" align="center">
+                                <button type="button" class="btn btn-primary" style="width:300px" id="btnFiltrosWS">Objetos de Interfaces y Servicios</button>
+                            </td>
+                            <td width="370px" align="center">
+                                <button type="button" class="btn btn-primary" style="width:300px" id="btnFiltrosCM">Objetos de Clases y Métodos</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.AreaID, "Area:")
+                                    @Html.DropDownListFor(m => m.AreasLista, new SelectList(Model.AreasLista, "Indice", "Texto"), "Selecciona", new { @class = "form-control" })
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.AplicacionID, "Aplicación:")
+                                    @Html.DropDownListFor(m => m.AplicacionesLista, new SelectList(Model.AplicacionesLista, "Indice", "Texto"), "Selecciona", new { @class = "form-control" })
+                                </div>
+                            </td>
 
-                            </tr>
-                            <tr style="height: 50px">
-                                <td width="370px" align="center">
-                                    <button type="button" class="btn btn-primary" style="width:300px" id="btnBuscar">Buscar</button>
-                                </td>
-                            </tr>
+                        </tr>
+                        <tr style="height: 50px">
+                            <td width="370px" align="center">
+                                <button type="button" class="btn btn-primary" style="width:300px" id="btnBuscar">Buscar</button>
+                            </td>
+                        </tr>
 
 
-                            <tr style="height: 50px">
-                            </tr>
-                        </table>
-                    </fieldset>
-                </div>
+                        <tr style="height: 50px">
+                        </tr>
+                    </table>
+                </fieldset>
             </div>
-
-            
-           
-    </form>
-    <fieldset>
-        <div class="loader" style="display:none"></div>
-        <br />
-        <div class="alert alert-dismissible alert-primary">
-            <h6 class="alert-heading">Indicaciones</h6>
-            <h6>Zoom</h6>
-            <h6 class="mb-0">1.- Dar click sobre el diagrama. <br />2.- <strong>ctrl +</strong> para aumentar o <strong>ctrl -</strong> para disminuir. </h6>
-            <br />
-            <h6>Cargar diagrama y tabla de Objetos</h6>
-            <h6 class="mb-0">1.- Dar <strong>doble click</strong> sobre uno de los rect&aacute;ngulos del "Diagrama de Indicadores".</h6>
         </div>
+    </form>
+
+    <div class="loader" style="display:none"></div>
+    <br />
+    <div class="alert alert-dismissible alert-primary">
+        <h6 class="alert-heading">Indicaciones</h6>
+        <h6>Zoom</h6>
+        <h6 class="mb-0">1.- Dar click sobre el diagrama. <br />2.- <strong>ctrl +</strong> para aumentar o <strong>ctrl -</strong> para disminuir. </h6>
         <br />
-        <table>
-            <tr>
-                <th>
-                    <h1 style="text-align: center;">DIAGRAMA DE INDICADORES</h1>
-                    <div id="divdet2" style="width:50%;">
-                        @{
-                            Html.RenderPartial("Diagrama");
-                        }
-                    </div>
-                </th>
-                <th style="width: 50px;"></th>
-                <th style="text-align: center;">
-                    <h1>INDICADORES</h1>
-                    <label for="checking" , id="lblIndi1" class="lblDetalle">-</label><br />
-                    <label for="checking" , id="lblIndi2" class="lblDetalle">-</label><br />
-                    <label for="checking" , id="lblIndi3" class="lblDetalle">-</label><br />
-                    <label for="checking" , id="lblIndi4" class="lblDetalle">-</label><br />
-                    <label for="checking" , id="lblIndi5" class="lblDetalle">-</label><br />
-                    <label for="checking" , id="lblIndi6" class="lblDetalle">-</label>
-                </th>
-            </tr>
-        </table>
-        <br />
+        <h6>Cargar diagrama y tabla de Objetos</h6>
+        <h6 class="mb-0">1.- Dar <strong>doble click</strong> sobre uno de los rect&aacute;ngulos del "Diagrama de Indicadores".</h6>
+    </div>
+
+    @*}Inicio Tabla diseño*@
+    <table width="100%" class="table-simple">
+        <tr class="table-primary">
+            <td colspan="2" align="center">
+                <p style="font-size:20px; font-weight:bold">Indicadores</p>
+            </td>
+        </tr>
+        <tr>
+            <td style="padding:8px">
+                <table>
+                    <tr>
+                        <th>
+                            <div id="divdet2" style="width:50%;">
+                                @{
+                                    Html.RenderPartial("Diagrama");
+                                }
+                            </div>
+                        </th>
+                        <th style="width: 50px;"></th>
+                        <th style="text-align: center;">
+                            <label for="checking" , id="lblIndi1" class="lblDetalle">-</label><br />
+                            <label for="checking" , id="lblIndi2" class="lblDetalle">-</label><br />
+                            <label for="checking" , id="lblIndi3" class="lblDetalle">-</label><br />
+                            <label for="checking" , id="lblIndi4" class="lblDetalle">-</label><br />
+                            <label for="checking" , id="lblIndi5" class="lblDetalle">-</label><br />
+                            <label for="checking" , id="lblIndi6" class="lblDetalle">-</label>
+                        </th>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr class="table-primary" id="div_PartedosObj" style="display:none">
+            <td colspan="2" align="center">
+                <p style="font-size:20px; font-weight:bold">Objetos</p>
+            </td>
+        </tr>
+
+    </table> @*fin Tabla diseño*@
+    <fieldset style="padding:8px">
 
         <div id="div_Partedos" style="display:none">
-            <h1 style="text-align: center;">OBJETOS</h1>
             <div id="HGrid">
                 <table cellspacing="0" id="Tabla0" style="width: 100%; border-collapse: collapse; color: #fff; ">
                     <tr class="GridViewScrollHeader">
@@ -257,7 +239,45 @@
                 }
             </div>
             <br />
-            <h1 style="text-align: center;">DIAGRAMA DE OBJETOS</h1>
+            <div class="alert alert-dismissible alert-primary">
+                <table id="tblconfig">
+                    <tr>
+                        <td>
+                            <label>Máximo de elementos:</label>
+                        </td>
+                        <td>
+                            <select id="maxe" onChange="cambio(this.value)" class="form-control" style="width: 100px; text-align:center">
+                                <option value="25" selected>25</option>
+                                <option value="50">50</option>
+                                <option value="75">75</option>
+                                <option value="100">100</option>
+                                <option value="125">125</option>
+                                <option value="150">150</option>
+                            </select>
+                        </td>
+                        <td style="width: 20px;">
+                        </td>
+
+                        <td>
+                            <button id="mine" onclick="Restar()" class="btn btn-primary"><<</button>
+                        </td>
+                        <td>
+                            <input type="text" readonly id="actual" value="1" class="form-control" style="width: 100px;  text-align:center" />
+                        </td>
+                        <td>
+                            <button id="aume" onclick="Sumar()" class="btn btn-primary">>></button>
+                        </td>
+                        <td style="width: 20px;">
+                        </td>
+                        <td>
+                            <label id="NombreObjeto" style="text-align:center"></label>
+                        </td>
+                        <td>
+                            <input id="totale" readonly type="text" class="form-control" style="width: 100px; text-align:center" />
+                        </td>
+                    </tr>
+                </table>
+            </div>
             <div id="divdet3" style="width:50%;">
                 @{
                     Html.RenderPartial("DiagramaN2");
@@ -267,14 +287,16 @@
 
     </fieldset>
 </body>
-</html>
 
+</html>
 
 <script src="~/Scripts/jquery-3.3.1.js"></script>
 <script>
     var tpfil = "BD";
     var nomBD = ""
-    var tipo =0;
+    var tipo = 0;
+    var AppID = 0;
+    var ObjNom = "";
 
     function HabilitarDDL() {
         document.getElementById("AreasLista").disabled = false;
@@ -297,7 +319,7 @@
         $("#AreasLista")[0].selectedIndex = 0;
         $("#AplicacionesLista").empty;
         $("#AplicacionesLista")[0].selectedIndex = 0;
-        ActualizaDetalleN2(0, "");
+        ActualizaDetalleN2(0, "",0,0);
         $("#lblIndi1").text("-");
         $("#lblIndi2").text("-");
         $("#lblIndi3").text("-");
@@ -307,15 +329,15 @@
         myDiagram.div = null;
         myDiagramN2.div = null;
         document.getElementById("div_Partedos").style.display = 'none'
+        document.getElementById("div_PartedosObj").style.display = 'none'
+        
         
     }
 
     $(document).ready(function () {
         desabilitarbtn()
         desabilitarDDL()
-
         $("#AreasLista").change(function () {
-
             var a = $("#AreasLista Option:Selected").val();
             var url = '@Url.Content("~/")' + "Dependecias/ActualizarAplicaciones";
             var ddlsource = "#AreasLista Option:Selected";
@@ -372,10 +394,15 @@
         });
 
         $('#btnBuscar').click(function () {
-
             MostrarLoader();
             desabilitarbtn();
             document.getElementById("btnBuscar").disabled = true;
+            document.getElementById("div_Partedos").style.display = 'none';
+            document.getElementById("div_PartedosObj").style.display = 'none'
+            $("#maxe").val('25');
+            $("#actual").val(1);
+            AppID = 0;
+            ObjNom = "";
             var idapp = $("#AplicacionesLista Option:Selected").val();
             if (tpfil == "BD") {
                 var fil1 = $("#AplicacionesLista Option:Selected").val();
@@ -390,7 +417,7 @@
             if (tpfil == "CM") {
                 var fil1 = $("#AplicacionesLista Option:Selected").val();
                 nomBD = $("#AplicacionesLista Option:Selected").text();
-            }            
+            }
             CargaIndicadores(tipo, fil1, 0)
             ActualizaDetalle(fil1)
             myDiagram.div = null;
@@ -400,9 +427,6 @@
             OcultarLoader();
         });
     });
-
-
-
 
     function ActualizaDetalle(_AplicacionID) {
         $.ajax({
@@ -453,9 +477,9 @@
             url: "/Dependecias/ArregloCuadroC",
             data: { BaseDeDatosID: idbd, Tipo: IdTipo },
             success: function (data) {
-                datosCuadross.push({ key: parseInt("-" + idbd), text: 'Aplicación: "' + nombreBD + '"' });
+                datosCuadross.push({ key: parseInt("-" + idbd), text: 'Aplicación: "' + nombreBD + '"',color: "#339414" });
                 for (var i = 0; i < data.length; i++) {
-                    datosCuadross.push({ key: parseInt(data[i].Numero), text: data[i].Tabla });
+                    datosCuadross.push({ key: parseInt(data[i].Numero), text: data[i].Tabla, color: "rgb(39, 128, 227)"});
                 }
             },
             error: function (errorData) { console.log("Request Failed: " + errorData); OcultarLoader(); }
@@ -463,25 +487,25 @@
         return datosCuadross;
     }
 
-    function CargaCuadrosN2(idApp, NomObj, nombreBD, idbd) {
+    function CargaCuadrosN2(idApp, NomObj, nombreBD, idbd, top, hoja) {
         var datosCuadross = [];
         $.ajax({
             async: false,
             type: "GET",
             url: "/Dependecias/ArregloCuadroCN2",
-            data: { Aplicacion: idApp, NombreObj: NomObj },
-            success: function (data) {
-
+            data: { Aplicacion: idApp, NombreObj: NomObj , Top:top , Hoja: hoja },
+            success: function (data) {                
+                $("#NombreObjeto").text('Total de objetos "' + NomObj + '" :'); 
                 if (NomObj == 'Clase' || NomObj == 'Metodo' || NomObj == 'Evento' || NomObj == 'Funcion' || NomObj == 'Objeto' || NomObj == 'Archivo' || NomObj == 'URL' || NomObj == 'Página Externa' || NomObj == 'Libreria' || NomObj == 'Espacio de Nombres' || NomObj == 'Interface' || NomObj == 'Web Service' || NomObj == 'Middleware') {
-                    datosCuadross.push({ key: parseInt("-" + idbd), text: 'Aplicación: "' + nombreBD + '"' });
+                    datosCuadross.push({ key: parseInt("-" + idbd), text: 'Aplicación: "' + nombreBD + '"', color: "#339414",  loc: "100 0"});
                     for (var i = 0; i < data.length; i++) {
-                        datosCuadross.push({ key: parseInt(data[i].Numero + i), text: data[i].Tabla });
+                        datosCuadross.push({ key: parseInt(data[i].Numero + i), text: data[i].Tabla, color: "rgb(39, 128, 227)" });
                     }
                 }
                 else {
-                    datosCuadross.push({ key: parseInt("-" + idbd), text: 'Aplicación: "' + nombreBD + '"' });
+                    datosCuadross.push({ key: parseInt("-" + idbd), text: 'Aplicación: "' + nombreBD + '"', color: "#339414",  pos: "0 0" });
                     for (var i = 0; i < data.length; i++) {
-                        datosCuadross.push({ key: parseInt(data[i].Numero), text: data[i].Tabla });
+                        datosCuadross.push({ key: parseInt(data[i].Numero), text: data[i].Tabla, color: "rgb(39, 128, 227)" });
                     }
                 }
 
@@ -502,7 +526,7 @@
             data: { BaseDeDatosID: idbd, Tipo: IdTipo },
             success: function (data) {
                 for (var i = 0; i < data.length; i++) {
-                    datosRelacioness.push({ from: parseInt(data[i].Numero), to: parseInt("-" + idbd), text: "" });
+                    datosRelacioness.push({ from: parseInt(data[i].Numero), to: parseInt("-" + idbd)});
                 }
             },
             error: function (errorData) { console.log("Request Failed: " + errorData); OcultarLoader() }
@@ -510,22 +534,22 @@
         return datosRelacioness;
     }
 
-    function CargaRelacionesN2(idbd, idApp, NomObj) {
+    function CargaRelacionesN2(idbd, idApp, NomObj, _Top, _Hoja) {
         var datosRelacioness = [];
         $.ajax({
             async: false,
             type: "GET",
             url: "/Dependecias/ArregloCuadroCN2",
-            data: { Aplicacion: idApp, NombreObj: NomObj },
+            data: { Aplicacion: idApp, NombreObj: NomObj, Top: _Top, Hoja:_Hoja },
             success: function (data) {
                  if (NomObj == 'Clase' || NomObj == 'Metodo' || NomObj == 'Evento' || NomObj == 'Funcion' || NomObj == 'Objeto' || NomObj == 'Archivo' || NomObj == 'URL' || NomObj == 'Página Externa' || NomObj == 'Libreria' || NomObj == 'Espacio de Nombres' || NomObj == 'Interface' || NomObj == 'Web Service' || NomObj == 'Middleware') {
                     for (var i = 0; i < data.length; i++) {
-                        datosRelacioness.push({ from: parseInt(data[i].Numero + i), to: parseInt("-" + idbd), text: "" });
+                        datosRelacioness.push({ from: parseInt(data[i].Numero + i), to: parseInt("-" + idbd)});
                     }
                 }
                 else {
                     for (var i = 0; i < data.length; i++) {
-                        datosRelacioness.push({ from: parseInt(data[i].Numero), to: parseInt("-" + idbd), text: "" });
+                        datosRelacioness.push({ from: parseInt(data[i].Numero), to: parseInt("-" + idbd)});
                     }
                 }
             },
@@ -541,34 +565,90 @@
         $("#myDiagramDiv").html(onload = initER(datosCuadrossFinal, datosRelacionesFinal));
     }
 
-    function ActualizaDiagramaN2(_idApp, _NomObj, _idbd, _nombreBD) {     
+    function ActualizaDiagramaN2(_idApp, _NomObj, _idbd, _nombreBD, _Top, _Hoja) {     
        
-        datosCuadrossFinal = CargaCuadrosN2(_idApp, _NomObj, _nombreBD, _idbd)
-        datosRelacionesFinal = CargaRelacionesN2(_idbd, _idApp, _NomObj)
+        datosCuadrossFinal = CargaCuadrosN2(_idApp, _NomObj, _nombreBD, _idbd,_Top, _Hoja)
+        datosRelacionesFinal = CargaRelacionesN2(_idbd, _idApp, _NomObj, _Top, _Hoja)
         $("#myDiagramDivN2").empty;
         $("#myDiagramDivN2").html(onload = initERN2(datosCuadrossFinal, datosRelacionesFinal));
     }
+    function Contadorbase() {
+        $("#totale").val(Tabla1.rows.length);
+    }
+    function Sumar() {
+        var val1 = $("#totale").val(); 
+        var select = document.getElementById("maxe");
+        select = select.options[select.selectedIndex].innerText;
+        var divi = val1 / select;
+        var hojita = $("#actual").val(); //
+        if (hojita==Math.ceil(divi)) {
+            hojita = parseInt(hojita);
+        }
+        else {
+            hojita = parseInt(hojita) + 1;
+            myDiagramN2.div = null;
+        ActualizaElDiagramaN2( AppID, ObjNom, select, hojita);
+        }
+        $("#actual").val(hojita);
+        
+    }
 
-    function ActualizaDetalleN2(_AplicacionID, _ObjNombre) {
+    function Restar() {
+        var hojita = $("#actual").val();
+        var select = document.getElementById("maxe");
+        select = select.options[select.selectedIndex].innerText;
+        if (hojita == 1) {
+            hojita = parseInt(hojita);
+        }
+        else {
+            hojita = parseInt(hojita) - 1;
+            myDiagramN2.div = null;
+        ActualizaElDiagramaN2( AppID, ObjNom, select, hojita);
+        }
+        $("#actual").val(hojita);
+        
+    }
+
+    var valorAnterior="";
+    var valorActual="1"; 
+    function cambio(valor) {
+        valorAnterior = valorActual;
+        valorActual = valor;
+        $("#actual").val(1);
+         myDiagramN2.div = null;
+        ActualizaElDiagramaN2( AppID, ObjNom, valorActual, 1);
+
+    }
+
+    function ActualizaElDiagramaN2(_AplicacionID, _ObjNombre, _top, _hoja) {
+        var _idbd = $("#AplicacionesLista Option:Selected").val();
+                var _nombreBD = $("#AplicacionesLista Option:Selected").text();
+                    ActualizaDiagramaN2(_AplicacionID, _ObjNombre, _idbd, _nombreBD, _top, _hoja)
+    }
+
+    function ActualizaDetalleN2(_AplicacionID, _ObjNombre, _top, _hoja) {
         myDiagramN2.div = null;
         $.ajax({
             type: "POST",
             url: "/Dependecias/ActualizaTablaUsosN2",
-            data: { AplicacionID: _AplicacionID, ObjNombre: _ObjNombre },
+            data: { AplicacionID: _AplicacionID, ObjNombre: _ObjNombre},
             success: function (viewHTML) {
                 $("#divdet").empty;
                 $("#divdet").html(viewHTML);
+                Contadorbase();
                 if (_AplicacionID != 0) {
                     document.getElementById("div_Partedos").style.display = 'block'
-                      var _idbd = $("#AplicacionesLista Option:Selected").val();
-                var _nombreBD = $("#AplicacionesLista Option:Selected").text();
-                    ActualizaDiagramaN2(_AplicacionID, _ObjNombre, _idbd, _nombreBD)
+                    document.getElementById("div_PartedosObj").style.removeProperty("display");
+                    AppID = _AplicacionID;
+                    ObjNom = _ObjNombre;
+                      ActualizaElDiagramaN2(_AplicacionID, _ObjNombre, _top, _hoja)
                 }
             },
             error: function (errorData) {
                 console.log("Request Failed: " + errorData);
                 OcultarLoader();
                 document.getElementById("div_Partedos").style.display = 'none'
+                document.getElementById("div_PartedosObj").style.display = 'none'
             }
         });
         

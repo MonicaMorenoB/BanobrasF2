@@ -14,7 +14,8 @@ namespace HerramientaAD.com.Datos
         const string obtenIndicadores = "Sp_ObtenIndicadores";
         const string obtenTablaUsos = "Sp_ObtenTablaUsos";
         const string obtenDiagramaNivel1 = "Sp_ObtenDiagramaNivel1"; 
-            const string obtenDiagramaNivel2 = "Sp_ObtenDiagramaNivel2";
+        const string obtenDiagramaNivel2 = "Sp_ObtenDiagramaNivel2";
+        const string ObtenDetalleNivel2 = "Sp_ObtenDetalleNivel2";
 
         private XmlDocument resultadoXML;
         public XmlDocument ResultadoXML
@@ -116,12 +117,46 @@ namespace HerramientaAD.com.Datos
             return respuesta;
         }
 
-        public bool DiagramaN2Consulta(int UsuarioID, int AplicacionID, string ObjetoNombre)
+        public bool DiagramaN2Consulta(int UsuarioID, int AplicacionID, string ObjetoNombre, int Top, int hoja)
         {
             bool respuesta = false;
             try
             {
                 PreparaStoredProcedure(obtenDiagramaNivel2);
+                CargaParametro("@UsuarioID", SqlDbType.Int, 8, ParameterDirection.Input, UsuarioID);
+                CargaParametro("@AplicacionID", SqlDbType.Int, 8, ParameterDirection.Input, AplicacionID);
+                CargaParametro("@ObjNombre", SqlDbType.VarChar, 20, ParameterDirection.Input, ObjetoNombre);
+                CargaParametro("@Top", SqlDbType.Int, 8, ParameterDirection.Input, Top);
+                CargaParametro("@hoja", SqlDbType.Int, 8, ParameterDirection.Input, hoja);
+
+                SqlDataReader Lector = AlmacenarStoredProcedureDataReader();
+                if (Lector.Read())
+                {
+                    resultadoXML = new XmlDocument();
+                    string Document = "<xml>" + Lector[0].ToString() + "</xml>";
+                    resultadoXML.LoadXml(Document);
+                    XmlNode xmlNode = resultadoXML.DocumentElement.SelectSingleNode("Objetos");
+                    respuesta = xmlNode.HasChildNodes;
+                }
+                CerrarConexion();
+                if (respuesta)
+                    EscribeLog("Correcto: Usuario: " + UsuarioID + " Consulto Objetos de Base de Datos N2");
+                else
+                    EscribeLog("Error: Usuario: " + UsuarioID + " No Consulto Objetos de Base de Datos N2");
+            }
+            catch (Exception Err)
+            {
+                EscribeLog("Excepcion: DatosDependecias.DiagramaN2Consulta " + Err.Message.ToString());
+            }
+            return respuesta;
+        }
+
+        public bool TablaN2Consulta(int UsuarioID, int AplicacionID, string ObjetoNombre)
+        {
+            bool respuesta = false;
+            try
+            {
+                PreparaStoredProcedure(ObtenDetalleNivel2);
                 CargaParametro("@UsuarioID", SqlDbType.Int, 8, ParameterDirection.Input, UsuarioID);
                 CargaParametro("@AplicacionID", SqlDbType.Int, 8, ParameterDirection.Input, AplicacionID);
                 CargaParametro("@ObjNombre", SqlDbType.VarChar, 20, ParameterDirection.Input, ObjetoNombre);

@@ -122,9 +122,9 @@ namespace HerramientaAD.Models
             }
         }
 
-        public DependeciasModel(int UsuarioID, int Aplicacion, string NombreObj)
+        public DependeciasModel(int UsuarioID, int Aplicacion, string NombreObj, int Top, int Hoja)
         {
-            if (datosDependencias.DiagramaN2Consulta(UsuarioID, Aplicacion, NombreObj))
+            if (datosDependencias.DiagramaN2Consulta(UsuarioID, Aplicacion, NombreObj, Top, Hoja))
             {
                 XmlNode xmlNode = datosDependencias.ResultadoXML.DocumentElement.SelectSingleNode("Objetos");
                 foreach (XmlNode elemento in xmlNode.SelectNodes("row"))

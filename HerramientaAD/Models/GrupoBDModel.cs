@@ -19,7 +19,8 @@ namespace HerramientaAD.Models
         const bool primerElemento = true;
 
         private List<ElementosDeGrupo.Indicadores> indicadores = new List<ElementosDeGrupo.Indicadores>();
-        private List<ElementosDeGrupo.GraficaPie> archivos = new List<ElementosDeGrupo.GraficaPie>();
+        private List<ElementosDeGrupo.GraficaPie> archivosPie = new List<ElementosDeGrupo.GraficaPie>();
+        private List<ElementosDeGrupo.GraficaColumnas> archivosColumn = new List<ElementosDeGrupo.GraficaColumnas>();
         private List<ElementosDeGrupo.GraficaBarra> masUsados = new List<ElementosDeGrupo.GraficaBarra>();
         private XmlDocument resultadoXML;
 
@@ -29,10 +30,16 @@ namespace HerramientaAD.Models
             set { indicadores = value; }
         }
 
-        public List<ElementosDeGrupo.GraficaPie> Archivos
+        public List<ElementosDeGrupo.GraficaPie> ArchivosPie
         {
-            get { return archivos; }
-            set { archivos = value; }
+            get { return archivosPie; }
+            set { archivosPie = value; }
+        }
+
+        public List<ElementosDeGrupo.GraficaColumnas> ArchivosColumn
+        {
+            get { return archivosColumn; }
+            set { archivosColumn = value; }
         }
 
         public List<ElementosDeGrupo.GraficaBarra> MasUsados
@@ -84,9 +91,15 @@ namespace HerramientaAD.Models
                 XmlNode xmlNode = datosObjetosBD.ResultadoXML.DocumentElement.SelectSingleNode("DatosBD");
                 foreach (XmlNode elemento in xmlNode.SelectNodes("row"))
                 {
-                    archivos.Add(new ElementosDeGrupo.GraficaPie (
+                    archivosPie.Add(new ElementosDeGrupo.GraficaPie (
                         int.Parse(elemento.Attributes["Porcentaje"].Value.ToString()),
-                        elemento.Attributes["LenguajeApp"].Value.ToString())
+                        elemento.Attributes["Descripcion"].Value.ToString())
+                        );
+
+                    archivosColumn.Add(new ElementosDeGrupo.GraficaColumnas(
+                        int.Parse(elemento.Attributes["Registros"].Value.ToString()),
+                        elemento.Attributes["Descripcion"].Value.ToString(),
+                        "")
                         );
                 }
             }

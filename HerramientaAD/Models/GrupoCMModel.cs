@@ -19,9 +19,11 @@ namespace HerramientaAD.Models
         const int TipoConsulta4 = 4;
 
         private List<ElementosDeGrupo.Indicadores> indicadores = new List<ElementosDeGrupo.Indicadores>();
-        private List<ElementosDeGrupo.GraficaPie> archivos = new List<ElementosDeGrupo.GraficaPie>();
+        private List<ElementosDeGrupo.GraficaPie> archivosPie = new List<ElementosDeGrupo.GraficaPie>();
+        private List<ElementosDeGrupo.GraficaColumnas> archivosColumnas = new List<ElementosDeGrupo.GraficaColumnas>();
         private List<ElementosDeGrupo.GraficaBarra> masUsados = new List<ElementosDeGrupo.GraficaBarra>();
-        private List<ElementosDeGrupo.GraficaPie> componentes = new List<ElementosDeGrupo.GraficaPie>();
+        private List<ElementosDeGrupo.GraficaPie> componentesPie = new List<ElementosDeGrupo.GraficaPie>();
+        private List<ElementosDeGrupo.GraficaColumnas> componentesColumnas = new List<ElementosDeGrupo.GraficaColumnas>();
         private XmlDocument resultadoXML;
 
         public List<ElementosDeGrupo.Indicadores> Indicadores
@@ -30,10 +32,16 @@ namespace HerramientaAD.Models
             set { indicadores = value; }
         }
 
-        public List<ElementosDeGrupo.GraficaPie> Archivos
+        public List<ElementosDeGrupo.GraficaPie> ArchivosPie
         {
-            get { return archivos; }
-            set { archivos = value; }
+            get { return archivosPie; }
+            set { archivosPie = value; }
+        }
+
+        public List<ElementosDeGrupo.GraficaColumnas> ArchivosColumnas
+        {
+            get { return archivosColumnas; }
+            set { archivosColumnas = value; }
         }
 
         public List<ElementosDeGrupo.GraficaBarra> MasUsados
@@ -42,10 +50,16 @@ namespace HerramientaAD.Models
             set { masUsados = value; }
         }
 
-        public List<ElementosDeGrupo.GraficaPie> Componentes
+        public List<ElementosDeGrupo.GraficaPie> ComponentesPie
         {
-            get { return componentes; }
-            set { componentes = value; }
+            get { return componentesPie; }
+            set { componentesPie = value; }
+        }
+
+        public List<ElementosDeGrupo.GraficaColumnas> ComponentesColumnas
+        {
+            get { return componentesColumnas; }
+            set { componentesColumnas = value; }
         }
 
         public XmlDocument ResultadoXML
@@ -85,9 +99,15 @@ namespace HerramientaAD.Models
                 XmlNode xmlNode = datosObjetosCM.ResultadoXML.DocumentElement.SelectSingleNode("DatosCM");
                 foreach (XmlNode elemento in xmlNode.SelectNodes("row"))
                 {
-                    archivos.Add(new ElementosDeGrupo.GraficaPie(
+                    archivosPie.Add(new ElementosDeGrupo.GraficaPie(
                         int.Parse(elemento.Attributes["Porcentaje"].Value.ToString()),
-                        elemento.Attributes["LenguajeApp"].Value.ToString())
+                        elemento.Attributes["Descripcion"].Value.ToString())
+                        );
+
+                    archivosColumnas.Add(new ElementosDeGrupo.GraficaColumnas(
+                        int.Parse(elemento.Attributes["Registros"].Value.ToString()),
+                        elemento.Attributes["Descripcion"].Value.ToString(),
+                        "")
                         );
                 }
             }
@@ -109,9 +129,15 @@ namespace HerramientaAD.Models
                 XmlNode xmlNode = datosObjetosCM.ResultadoXML.DocumentElement.SelectSingleNode("DatosCM");
                 foreach (XmlNode elemento in xmlNode.SelectNodes("row"))
                 {
-                    componentes.Add(new ElementosDeGrupo.GraficaPie(
+                    componentesPie.Add(new ElementosDeGrupo.GraficaPie(
                         int.Parse(elemento.Attributes["Porcentaje"].Value.ToString()),
                         elemento.Attributes["TipoHijo"].Value.ToString())
+                        );
+
+                    componentesColumnas.Add(new ElementosDeGrupo.GraficaColumnas(
+                        int.Parse(elemento.Attributes["Registros"].Value.ToString()),
+                        elemento.Attributes["TipoHijo"].Value.ToString(),
+                        "")
                         );
                 }
             }

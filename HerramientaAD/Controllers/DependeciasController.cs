@@ -53,11 +53,11 @@ namespace HerramientaAD.Controllers
         /// <param name="appid"></param>
         /// <param name="nombre"></param>
         /// <returns></returns>
-        public ActionResult ActualizaDetalle(int appid, string nombre)
+        public ActionResult ActualizaDetalle(int appid, string nombre, int Top, int Hoja)
         {
             if (Session["usuid"] != null)
             {
-                DependeciasModel objdep = new DependeciasModel(appid, int.Parse(Session["usuid"].ToString()), nombre);
+                DependeciasModel objdep = new DependeciasModel(appid, int.Parse(Session["usuid"].ToString()), nombre, Top, Hoja);
                 return PartialView("Detalle", objdep);
             }
             else
@@ -117,12 +117,12 @@ namespace HerramientaAD.Controllers
             return cc;
         }
 
-        public JsonResult ArregloCuadroCN2(int Aplicacion, string NombreObj)
+        public JsonResult ArregloCuadroCN2(int Aplicacion, string NombreObj, int Top, int Hoja)
         {
             var cc = Json("", JsonRequestBehavior.AllowGet);
             if (Session["UsuarioID"] != null)
             {
-                var grupoDepModel = new DependeciasModel(int.Parse(Session["UsuarioID"].ToString()), Aplicacion, NombreObj);
+                var grupoDepModel = new DependeciasModel(int.Parse(Session["UsuarioID"].ToString()), Aplicacion, NombreObj, Top, Hoja);
                 cc = Json(grupoDepModel.Cuadros, JsonRequestBehavior.AllowGet);
                 return cc;
             }
@@ -143,7 +143,7 @@ namespace HerramientaAD.Controllers
         public XmlDocument TabUsodelN2(int UsuarioID, int AplicacionID, string ObjNombre)
         {
             XmlDocument detalleXML = new XmlDocument();
-            if (datosDependeciasSQL.DiagramaN2Consulta(UsuarioID, AplicacionID, ObjNombre))
+            if (datosDependeciasSQL.TablaN2Consulta(UsuarioID, AplicacionID, ObjNombre))
             {
                 detalleXML = datosDependeciasSQL.ResultadoXML;
             }
