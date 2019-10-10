@@ -14,7 +14,9 @@
             <p class="lead">@xmlNode.Attributes["AplicacionDescripcion"].Value.ToString()</p>
             <hr class="my-4">
         </div>
-        <br />
+        <div class="alert alert-dismissible alert-primary">
+            <h6 class="mb-0">Información general de la aplicación de acuerdo al cuestionario de aplicaciones.</h6>
+        </div>
         <table class="table table-borderless">
             <thead>
             </thead>
@@ -99,6 +101,7 @@
     <thead>
     </thead>
     <tbody>
+
         @{
             foreach (System.Xml.XmlNode xmlNode in Model.ResultadoXML.DocumentElement.SelectSingleNode("Aplicaciones").SelectNodes("row"))
             {

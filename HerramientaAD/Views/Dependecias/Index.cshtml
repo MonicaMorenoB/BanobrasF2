@@ -122,7 +122,10 @@
         <p class="lead">Resultados de Dependencias</p>
         <hr class="my-4">
     </div>
-
+   
+    <div class="alert alert-dismissible alert-primary">        
+        <h6>Información de los elementos que conforman cada uno de los tres grupos: Objetos de Base de Datos, Objetos de Servicio e Interfaces y Objetos de Clases y Métodos, selecciona un grupo y una aplicación para comenzar.</h6>       
+    </div>
     <form>
         <div class="card border-secondary mb-3" style="max-width: 200rem;">
             <div class="card-header">Filtros</div>
@@ -172,8 +175,8 @@
     </form>
 
     <div class="loader" style="display:none"></div>
-    <br />
-    <div class="alert alert-dismissible alert-primary">
+  
+    <div class="alert alert-dismissible alert-primary">        
         <h6 class="alert-heading">Indicaciones</h6>
         <h6>Zoom</h6>
         <h6 class="mb-0">1.- Dar click sobre el diagrama. <br />2.- <strong>ctrl +</strong> para aumentar o <strong>ctrl -</strong> para disminuir. </h6>
@@ -190,11 +193,11 @@
             </td>
         </tr>
         <tr>
-            <td style="padding:8px">
+            <td style="padding:10px">
                 <table>
                     <tr>
                         <th>
-                            <div id="divdet2" style="width:50%;">
+                            <div id="divdet2" style="width:40%;">
                                 @{
                                     Html.RenderPartial("Diagrama");
                                 }
@@ -220,7 +223,7 @@
         </tr>
 
     </table> @*fin Tabla diseño*@
-    <fieldset style="padding:8px">
+    <fieldset style="padding:10px">
 
         <div id="div_Partedos" style="display:none">
             <div id="HGrid">
