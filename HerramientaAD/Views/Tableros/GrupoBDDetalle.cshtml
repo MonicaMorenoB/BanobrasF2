@@ -1,0 +1,112 @@
+﻿@model HerramientaAD.Models.GrupoBDModel
+
+<table width="100%" class="table-simple">
+    <tr class="table-primary">
+        <td colspan="2" align="center">
+            <p style="font-size:20px; font-weight:bold">Estadísticas de objetos encontrados por Tipo de Archivo</p>
+        </td>
+    <tr>
+        <td style="padding:20px">
+            <div id="graficaArchivosColumnas" style="height: 370px;" />
+        </td>
+        <td style="padding:20px">
+            <div id="graficaArchivosPie" style="height: 370px;" />
+        </td>
+    </tr>
+    <tr class="table-primary">
+        <td colspan="2" align="center">
+            <p style="font-size:20px; font-weight:bold">Lista de los 10 objetos más utilizados dentro del Código</p>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" style="padding:20px">
+            <div id="graficaMasUsados" style="height: 370px; width: 100%;" />
+        </td>
+    </tr>
+</table>
+
+<script src="~/Scripts/canvasjs.min.js"></script>
+<script>
+    function initBD(graficaArchivosPie, graficaArchivosColumnas, graficaMasUsados) {
+
+        var Datos = graficaArchivosPie;
+
+        var chart = new CanvasJS.Chart("graficaArchivosPie", {
+            exportEnabled: true,
+            animationEnabled: true,
+            title: {
+                text: "Tipos de Archivos Analizados",
+                fontFamily: "Segoe UI"
+            },
+            legend: {
+                cursor: "pointer",
+                itemclick: explodePie
+            },
+            data: [{
+                type: "pie",
+                showInLegend: false,
+                toolTipContent: "{name}: <strong>{y}%</strong>",
+                indexLabel: "{name} - {y}%",
+                dataPoints: Datos
+            }]
+        });
+        chart.render();
+        Datos = graficaArchivosColumnas;
+
+        var chart = new CanvasJS.Chart("graficaArchivosColumnas", {
+            animationEnabled: true,
+            theme: "light2",
+            title: {
+                text: "Objetos Encontrados",
+                fontFamily: "Segoe UI",
+                fontWeight: "normal"
+            },
+            axisY: {
+                title: "Número de Objetos"
+            },
+            data: [{
+                type: "column",
+                showInLegend: false,
+                legendMarkerColor: "grey",
+                dataPoints: Datos
+            }]
+        });
+        chart.render();
+        Datos = graficaMasUsados;
+
+        var chart = new CanvasJS.Chart("graficaMasUsados", {
+	        animationEnabled: true,
+            exportEnabled: true,
+	        title:{
+                text: "Elementos sobresalientes",
+                fontFamily: "Segoe UI"
+	        },
+	        axisX:{
+		        interval: 1
+	        },
+	        axisY2:{
+		        interlacedColor: "rgba(1,77,101,.2)",
+		        gridColor: "rgba(1,77,101,.1)",
+		        title: "Objetos de Base de Datos"
+	        },
+	        data: [{
+                type: "bar",
+		        name: "objetos",
+		        axisYType: "secondary",
+		        color: "#014D65",
+		        dataPoints: Datos
+	        }]
+        });
+        chart.render();
+        Datos = [];
+    }
+
+    function explodePie(e) {
+        if (typeof (e.dataSeries.dataPoints[e.dataPointIndex].exploded) === "undefined" || !e.dataSeries.dataPoints[e.dataPointIndex].exploded) {
+            e.dataSeries.dataPoints[e.dataPointIndex].exploded = true;
+        } else {
+            e.dataSeries.dataPoints[e.dataPointIndex].exploded = false;
+        }
+        e.chart.render();
+    }
+</script>

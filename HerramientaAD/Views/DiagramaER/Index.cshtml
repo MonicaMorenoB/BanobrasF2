@@ -130,7 +130,7 @@
 
 
     </form>  
-    <div class="loader" style="display:none"></div>
+    <div class="loader" ></div>
    
     <div class="alert alert-dismissible alert-primary">
         <h6 class="alert-heading">Zoom</h6>
@@ -209,7 +209,7 @@
     }
 
     $(document).ready(function() {
-
+         $(".loader").fadeOut();
         $("#AreasLista").change(function() {
             var a = $("#AreasLista Option:Selected").val();
             var url = '@Url.Content("~/")' + "DiagramaER/ActualizarAplicaciones";

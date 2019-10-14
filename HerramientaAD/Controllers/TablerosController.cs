@@ -22,7 +22,6 @@ namespace HerramientaAD.Controllers
             {
                 return RedirectToAction("Index", "Login");
             }
-            
         }
 
         public ActionResult Inicial(int AplicacionID)
@@ -55,6 +54,47 @@ namespace HerramientaAD.Controllers
             }
         }
 
+        public ActionResult GrupoBDDetalle(int AplicacionID)
+        {
+            if (Session["UsuarioID"] != null)
+            {
+                var grupoBDModel = new GrupoBDModel(int.Parse(Session["UsuarioID"].ToString()), AplicacionID);
+                ViewBag.Aplicacion = AplicacionID;
+                ViewBag.NombreAplicacion = grupoBDModel.Indicadores.ElementAt(0).NombreApp; //MMOB
+                return PartialView("GrupoBDIndicadores", grupoBDModel);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Login");
+            }
+        }
+
+        public JsonResult CargaDatosGrupoBD(int BaseDeDatosID, int Tipo)
+        {
+            var datosGrafica = Json("", JsonRequestBehavior.AllowGet);
+            if (Session["UsuarioID"] != null)
+            {
+                var grupoBDModel = new GrupoBDModel(int.Parse(Session["UsuarioID"].ToString()), BaseDeDatosID);
+                switch(Tipo)
+                {
+                    case 1:
+                        datosGrafica = Json(grupoBDModel.ArchivosPie, JsonRequestBehavior.AllowGet);
+                        break;
+                    case 2:
+                        datosGrafica = Json(grupoBDModel.ArchivosColumn, JsonRequestBehavior.AllowGet);
+                        break;
+                    case 3:
+                        datosGrafica = Json(grupoBDModel.MasUsados, JsonRequestBehavior.AllowGet);
+                        break;
+                };
+            }
+            else
+            {
+                RedirectToAction("Index", "Login");
+            }
+            return datosGrafica;
+        }
+
         public ActionResult AnalisisBD(int AplicacionID)
         {
             if (Session["UsuarioID"] != null)
@@ -68,6 +108,83 @@ namespace HerramientaAD.Controllers
             {
                 return RedirectToAction("Index", "Login");
             }           
+        }
+
+        public ActionResult AnalisisBDDetalle(int AplicacionID)
+        {
+            if (Session["UsuarioID"] != null)
+            {
+                var analisisBDModel = new AnalisisBD(int.Parse(Session["UsuarioID"].ToString()), AplicacionID);
+                ViewBag.Aplicacion = AplicacionID;
+                ViewBag.NombreAplicacion = analisisBDModel.Indicadores.ElementAt(0).NombreApp; //MMOB
+                return PartialView("AnalisisBDDetalle", analisisBDModel);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Login");
+            }
+        }
+
+        public JsonResult CargaDatosAnalisisBD(int BaseDeDatosID, int Tipo)
+        {
+            var datosGrafica = Json("", JsonRequestBehavior.AllowGet);
+            if (Session["UsuarioID"] != null)
+            {
+                var analisisBDModel = new AnalisisBD(int.Parse(Session["UsuarioID"].ToString()), BaseDeDatosID);
+                switch (Tipo)
+                {
+                    case 1:
+                        datosGrafica = Json(analisisBDModel.LlavePrimaria, JsonRequestBehavior.AllowGet);
+                        break;
+                    case 2:
+                        datosGrafica = Json(analisisBDModel.LlaveForanea, JsonRequestBehavior.AllowGet);
+                        break;
+                    case 3:
+                        datosGrafica = Json(analisisBDModel.Indexes, JsonRequestBehavior.AllowGet);
+                        break;
+                    case 4:
+                        datosGrafica = Json(analisisBDModel.TipoObjeto, JsonRequestBehavior.AllowGet);
+                        break;
+                    case 5:
+                        datosGrafica = Json(analisisBDModel.TamanoTabla, JsonRequestBehavior.AllowGet);
+                        break;
+                    case 6:
+                        datosGrafica = Json(analisisBDModel.LineasEfectivas, JsonRequestBehavior.AllowGet);
+                        break;
+                    case 7:
+                        datosGrafica = Json(analisisBDModel.LineasComentadas, JsonRequestBehavior.AllowGet);
+                        break;
+                    case 8:
+                        datosGrafica = Json(analisisBDModel.Select, JsonRequestBehavior.AllowGet);
+                        break;
+                    case 9:
+                        datosGrafica = Json(analisisBDModel.Insert, JsonRequestBehavior.AllowGet);
+                        break;
+                    case 10:
+                        datosGrafica = Json(analisisBDModel.Update, JsonRequestBehavior.AllowGet);
+                        break;
+                    case 11:
+                        datosGrafica = Json(analisisBDModel.Delete, JsonRequestBehavior.AllowGet);
+                        break;
+                    case 12:
+                        datosGrafica = Json(analisisBDModel.Siif, JsonRequestBehavior.AllowGet);
+                        break;
+                    case 13:
+                        datosGrafica = Json(analisisBDModel.Loop, JsonRequestBehavior.AllowGet);
+                        break;
+                    case 14:
+                        datosGrafica = Json(analisisBDModel.Select2, JsonRequestBehavior.AllowGet);
+                        break;
+                    case 15:
+                        datosGrafica = Json(analisisBDModel.Excepcion, JsonRequestBehavior.AllowGet);
+                        break;
+                };
+            }
+            else
+            {
+                RedirectToAction("Index", "Login");
+            }
+            return datosGrafica;
         }
 
         public ActionResult GrupoWS(int AplicacionID)

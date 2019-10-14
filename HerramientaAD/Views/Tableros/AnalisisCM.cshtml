@@ -26,7 +26,11 @@
             @{
                 foreach (HerramientaAD.com.Utilerias.ElementosDiagramaCM.Cuadros diagramaCM in Model.DiagramaCM)
                 {
-                    @:Datos.push({ key: "@diagramaCM.Llave", parent: "@diagramaCM.Padre", name: "@diagramaCM.Nombre", type: "@diagramaCM.Tipo", color: "@diagramaCM.Color", description: "@diagramaCM.Descripcion" });
+                    if (@diagramaCM.Llave != "")
+                    {
+ @:Datos.push({ key: "@diagramaCM.Llave", parent: "@diagramaCM.Padre", name: "@diagramaCM.Nombre", type: "@diagramaCM.Tipo", color: "@diagramaCM.Color", description: "@diagramaCM.Descripcion" });
+                    }
+                    
                 }
             }
 

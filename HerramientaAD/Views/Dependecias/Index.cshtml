@@ -116,15 +116,15 @@
 </head>
 
 <body onload="initER([],[]), initERN2([],[])">
-
+    <div class="loader"  ></div>
     <div class="jumbotron">
         <h1 class="display-3">Dependencias</h1>
         <p class="lead">Resultados de Dependencias</p>
         <hr class="my-4">
     </div>
-   
-    <div class="alert alert-dismissible alert-primary">        
-        <h6>Información de los elementos que conforman cada uno de los tres grupos: Objetos de Base de Datos, Objetos de Servicio e Interfaces y Objetos de Clases y Métodos, selecciona un grupo y una aplicación para comenzar.</h6>       
+
+    <div class="alert alert-dismissible alert-primary">
+        <h6>Información de los elementos que conforman cada uno de los tres grupos: Objetos de Base de Datos, Objetos de Servicio e Interfaces y Objetos de Clases y Métodos, selecciona un grupo y una aplicación para comenzar.</h6>
     </div>
     <form>
         <div class="card border-secondary mb-3" style="max-width: 200rem;">
@@ -174,9 +174,9 @@
         </div>
     </form>
 
-    <div class="loader" style="display:none"></div>
-  
-    <div class="alert alert-dismissible alert-primary">        
+
+
+    <div class="alert alert-dismissible alert-primary">
         <h6 class="alert-heading">Indicaciones</h6>
         <h6>Zoom</h6>
         <h6 class="mb-0">1.- Dar click sobre el diagrama. <br />2.- <strong>ctrl +</strong> para aumentar o <strong>ctrl -</strong> para disminuir. </h6>
@@ -289,6 +289,7 @@
         </div>
 
     </fieldset>
+
 </body>
 
 </html>
@@ -338,6 +339,7 @@
     }
 
     $(document).ready(function () {
+         $(".loader").fadeOut();
         desabilitarbtn()
         desabilitarDDL()
         $("#AreasLista").change(function () {

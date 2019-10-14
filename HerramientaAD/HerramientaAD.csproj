@@ -305,6 +305,9 @@
     <Content Include="Views\Dependecias\Diagrama.cshtml" />
     <Content Include="Views\Tableros\AnalisisCM.cshtml" />
     <Content Include="Views\Dependecias\DiagramaN2.cshtml" />
+    <Content Include="Views\Tableros\AnalisisBDDetalle.cshtml" />
+    <Content Include="Views\Tableros\GrupoBDDetalle.cshtml" />
+    <Content Include="Views\Tableros\GrupoBDIndicadores.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -5,7 +5,6 @@
 }
 <!DOCTYPE HTML>
 <html>
-
 <head>
     <script>
         window.onload = function () {
@@ -515,7 +514,11 @@
 
     </script>
 
+    <script src="~/Scripts/Loader.js"></script>
+    <link href="~/Estilos/Loader.css" rel="stylesheet" />
+
     <style>
+
         .nota {
             color: #ff0000;
             font-weight: bold;
@@ -537,563 +540,177 @@
         }
     </style>
 </head>
-
 <body>
-
     <div class="jumbotron">
         <h1 class="display-3">@Model.Indicadores.ElementAt(0).NombreApp</h1>
         <p class="lead">Resultados del Análisis de la Base de Datos</p>
         <hr class="my-4">
     </div>
+
     <div class="alert alert-dismissible alert-primary">
         <h6 class="mb-0">Información del estatus de los objetos que componen la Bases Datos de acuerdo a los criterios de evaluación establecidos.</h6>
     </div>
-    <table width="100%" class="table-simple">
-        <tr class="table-primary">
-            <td colspan="2" align="center">
-                <p style="font-size:20px; font-weight:bold">Llaves Primarias</p>
-            </td>
-        </tr>
 
-        <tr>
-            @if (Model.LlavePrimaria.Count > 0)
-            {
-                <td style="padding:20px">
-                    <div id="graficaLlavePrimaria" style="height: 370px;" />
-                </td>
-                <td style="padding:20px">
-                    <div id="graficaLlavePrimaria2" style="height: 370px;" />
-                </td>
-            }
-            else
-            {
-                <td colspan="2" align="center" height="100px">
-                    <p style="font-size:30px; font-weight:bold">No se encontraron Llaves Primarias en la Base de Datos</p>
-                </td>
-            }
-        </tr>
+    <div class="loader" ></div>
 
-        <tr class="table-primary">
-            <td colspan="2" align="center">
-                <p style="font-size:20px; font-weight:bold">Llaves Foráneas</p>
-            </td>
-        </tr>
+    @if (Model.BasesLista.Count > 1)
+    {
+        <form>
+            <div class="card border-secondary mb-3" style="max-width: 200rem;">
+                <div class="card-header">Filtros</div>
+                <div class="card-body">
+                    <fieldset>
+                        <table align="left" border="0">
+                            <tr>
+                                <td>
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.BaseID, "Base de Datos:")
+                                        @Html.DropDownListFor(m => m.BasesLista, new SelectList(Model.BasesLista, "Indice", "Texto"), "Selecciona", new { @class = "form-control" })
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr style="height: 50px">
+                                <td width="370px" align="center">
+                                    <button type="button" class="btn btn-primary" style="width:300px" id="btnBuscar">Buscar</button>
+                                </td>
+                            </tr>
+                        </table>
+                    </fieldset>
+                </div>
+            </div>
+        </form>
+    }
 
-        <tr>
-            @if (Model.LlaveForanea.Count > 0)
-            {
-                <td style="padding:20px">
-                    <div id="graficaLlaveForanea" style="height: 370px;" />
-                </td>
-                <td style="padding:20px">
-                    <div id="graficaLlaveForanea2" style="height: 370px;" />
-                </td>
-            }
-            else
-            {
-                <td colspan="2" align="center" height="100px">
-                    <p style="font-size:30px; font-weight:bold">No se encontraron Llaves Foráneas en la Base de Datos</p>
-                </td>
-            }
-        </tr>
-
-        <tr class="table-primary">
-            <td colspan="2" align="center">
-                <p style="font-size:20px; font-weight:bold">Índices</p>
-            </td>
-        </tr>
-
-        <tr>
-            @if (Model.Indexes.Count > 0)
-            {
-                <td style="padding:20px">
-                    <div id="graficaIndexes" style="height: 370px;" />
-                </td>
-                <td style="padding:20px">
-                    <div id="graficaIndexes2" style="height: 370px;" />
-                </td>
-            }
-            else
-            {
-                <td colspan="2" align="center" height="100px">
-                    <p style="font-size:30px; font-weight:bold">No se encontraron Índices en la Base de Datos</p>
-                </td>
-            }
-        </tr>
-
-        <tr class="table-primary">
-            <td colspan="2" align="center">
-                <p style="font-size:20px; font-weight:bold">Tipos de Objeto</p>
-            </td>
-        </tr>
-
-        @if (Model.Indexes.Count > 0)
-        {
-            <tr>
-                <td colspan="2" align="center" class="nota">
-                    <p class="nota">Objetos correspondientes a la aplicación: @Model.Indicadores.ElementAt(0).NombreApp</p>
-                </td>
-            </tr>
-
-            <tr>
-                <td colspan="2" style="padding:20px">
-                    <div id="graficaTipoOBjeto" style="height: 370px;" />
-                </td>
-            </tr>
+    <div id="Detalle">
+        @{
+            Html.RenderPartial("AnalisisBDDetalle");
         }
-        else
-        {
-            <tr>
-                <td colspan="2" align="center" height="100px">
-                    <p style="font-size:30px; font-weight:bold">No se encontraron Objetos en la Base de Datos</p>
-                </td>
-            </tr>
-        }
-
-        <tr class="table-primary">
-            <td colspan="2" align="center">
-                <p style="font-size:20px; font-weight:bold">Tamaño de las Tablas</p>
-            </td>
-        </tr>
-
-        @if (Model.TamanoTabla.Count > 0)
-        {
-            <tr class="table-dark">
-                <td colspan="2" align="left">
-                    <p class="" style="font-size:16px; font-weight:bold">&nbsp;&nbsp;&nbsp;&nbsp;Criterios de Evaluación</p>
-                </td>
-            </tr>
-
-            <tr class="table-dark">
-                <td colspan="2" align="center">
-                    <table width="80%" align="center">
-                        <tr align="center">
-                            <td><span class="nota">Rojo</span> > 50,000,000</td>
-                            <td><span class="naranja">Naranja</span> 30,000,000 - 49,999,999</td>
-                            <td><span class="amarillo">Amarillo</span> 10,000,000 - 29,999,999</td>
-                            <td><span class="verde">Verde </span> 1 - 9,999,999</td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-
-            <tr>
-                <td colspan="2" style="padding:20px">
-                    <div id="graficaTamanoTabla" style="height: 520px;" />
-                </td>
-            </tr>
-        }
-        else
-        {
-            <tr>
-                <td colspan="2" align="center" height="100px">
-                    <p style="font-size:30px; font-weight:bold">No se encontraron Objetos en la Base de Datos</p>
-                </td>
-            </tr>
-        }
-
-        <tr class="table-primary">
-            <td colspan="2" align="center">
-                <p style="font-size:20px; font-weight:bold">Líneas Efectivas de Código</p>
-            </td>
-        </tr>
-
-        @if (Model.LineasEfectivas.Count > 0)
-        {
-            <tr class="table-dark">
-                <td colspan="2" align="left">
-                    <p class="" style="font-size:16px; font-weight:bold">&nbsp;&nbsp;&nbsp;&nbsp;Criterios de Evaluación</p>
-                </td>
-            </tr>
-
-            <tr class="table-dark">
-                <td colspan="2" align="center">
-                    <table width="80%" align="center">
-                        <tr align="center">
-                            <td><span class="nota">Rojo</span> > 1000</td>
-                            <td><span class="naranja">Naranja</span> 501 - 1000</td>
-                            <td><span class="amarillo">Amarillo</span> 251 - 500</td>
-                            <td><span class="verde">Verde </span> 1 - 250</td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-
-            <tr>
-                <td colspan="2" style="padding:20px">
-                    <div id="graficaLE" style="height: 520px;" />
-                </td>
-            </tr>
-        }
-        else
-        {
-            <tr>
-                <td colspan="2" align="center" height="100px">
-                    <p style="font-size:30px; font-weight:bold">No se encontraron Líneas de Código en la Base de Datos</p>
-                </td>
-            </tr>
-        }
-
-        <tr class="table-primary">
-            <td colspan="2" align="center">
-                <p style="font-size:20px; font-weight:bold">% de Líneas Comentadas</p>
-            </td>
-        </tr>
-
-        @if (Model.LineasComentadas.Count > 0)
-        {
-            <tr class="table-dark">
-                <td colspan="2" align="left">
-                    <p class="" style="font-size:16px; font-weight:bold">&nbsp;&nbsp;&nbsp;&nbsp;Criterios de Evaluación</p>
-                </td>
-            </tr>
-
-            <tr class="table-dark">
-                <td colspan="2" align="center">
-                    <table width="80%" align="center">
-                        <tr align="center">
-                            <td><span class="nota">Rojo</span> > 61%</td>
-                            <td><span class="naranja">Naranja</span> 41% - 60%</td>
-                            <td><span class="amarillo">Amarillo</span> 21% - 40%</td>
-                            <td><span class="verde">Verde </span> 1% - 20%</td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-
-            <tr>
-                <td colspan="2" style="padding:20px">
-                    <div id="graficaLineasComentadas" style="height: 520px;" />
-                </td>
-            </tr>
-        }
-        else
-        {
-            <tr>
-                <td colspan="2" align="center" height="100px">
-                    <p style="font-size:30px; font-weight:bold">No se encontraron Líneas Comentadas en la Base de Datos</p>
-                </td>
-            </tr>
-        }
-
-        <tr class="table-primary">
-            <td colspan="2" align="center">
-                <p style="font-size:20px; font-weight:bold">Sentencias SELECT</p>
-            </td>
-        </tr>
-
-        @if (Model.Select.Count > 0)
-        {
-            <tr class="table-dark">
-                <td colspan="2" align="left">
-                    <p class="" style="font-size:16px; font-weight:bold">&nbsp;&nbsp;&nbsp;&nbsp;Criterios de Evaluación</p>
-                </td>
-            </tr>
-
-            <tr class="table-dark">
-                <td colspan="2" align="center">
-                    <table width="80%" align="center">
-                        <tr align="center">
-                            <td><span class="nota">Rojo</span> > 501</td>
-                            <td><span class="naranja">Naranja</span> 251 - 500</td>
-                            <td><span class="amarillo">Amarillo</span> 51 - 250</td>
-                            <td><span class="verde">Verde </span> 1 - 50</td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-
-            <tr>
-                <td colspan="2" style="padding:20px">
-                    <div id="graficaSelect" style="height: 520px;" />
-                </td>
-            </tr>
-        }
-        else
-        {
-            <tr>
-                <td colspan="2" align="center" height="100px">
-                    <p style="font-size:30px; font-weight:bold">No se encontraron sentencias SELECT en la Base de Datos</p>
-                </td>
-            </tr>
-        }
-
-        <tr class="table-primary">
-            <td colspan="2" align="center">
-                <p style="font-size:20px; font-weight:bold">Sentencias INSERT</p>
-            </td>
-        </tr>
-
-        @if (Model.Insert.Count > 0)
-        {
-            <tr class="table-dark">
-                <td colspan="2" align="left">
-                    <p class="" style="font-size:16px; font-weight:bold">&nbsp;&nbsp;&nbsp;&nbsp;Criterios de Evaluación</p>
-                </td>
-            </tr>
-
-            <tr class="table-dark">
-                <td colspan="2" align="center">
-                    <table width="80%" align="center">
-                        <tr align="center">
-                            <td><span class="nota">Rojo</span> > 101</td>
-                            <td><span class="naranja">Naranja</span> 51 - 100</td>
-                            <td><span class="amarillo">Amarillo</span> 26 - 50</td>
-                            <td><span class="verde">Verde </span> 1 - 25</td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-
-            <tr>
-                <td colspan="2" style="padding:20px">
-                    <div id="graficaInsert" style="height: 520px;" />
-                </td>
-            </tr>
-        }
-        else
-        {
-            <tr>
-                <td colspan="2" align="center" height="100px">
-                    <p style="font-size:30px; font-weight:bold">No se encontraron sentencias INSERT en la Base de Datos</p>
-                </td>
-            </tr>
-        }
-
-        <tr class="table-primary">
-            <td colspan="2" align="center">
-                <p style="font-size:20px; font-weight:bold">Sentencias UPDATE</p>
-            </td>
-        </tr>
-
-        @if (Model.Update.Count > 0)
-        {
-            <tr class="table-dark">
-                <td colspan="2" align="left">
-                    <p class="" style="font-size:16px; font-weight:bold">&nbsp;&nbsp;&nbsp;&nbsp;Criterios de Evaluación</p>
-                </td>
-            </tr>
-
-            <tr class="table-dark">
-                <td colspan="2" align="center">
-                    <table width="80%" align="center">
-                        <tr align="center">
-                            <td><span class="nota">Rojo</span> > 151</td>
-                            <td><span class="naranja">Naranja</span> 81 - 150</td>
-                            <td><span class="amarillo">Amarillo</span> 21 - 80</td>
-                            <td><span class="verde">Verde </span> 1 - 20</td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-
-            <tr>
-                <td colspan="2" style="padding:20px">
-                    <div id="graficaUpdate" style="height: 520px;" />
-                </td>
-            </tr>
-        }
-        else
-        {
-            <tr>
-                <td colspan="2" align="center" height="100px">
-                    <p style="font-size:30px; font-weight:bold">No se encontraron sentencias UPDATE en la Base de Datos</p>
-                </td>
-            </tr>
-        }
-
-        <tr class="table-primary">
-            <td colspan="2" align="center">
-                <p style="font-size:20px; font-weight:bold">Sentencias DELETE</p>
-            </td>
-        </tr>
-
-        @if (Model.Delete.Count > 0)
-        {
-            <tr class="table-dark">
-                <td colspan="2" align="left">
-                    <p class="" style="font-size:16px; font-weight:bold">&nbsp;&nbsp;&nbsp;&nbsp;Criterios de Evaluación</p>
-                </td>
-            </tr>
-
-            <tr class="table-dark">
-                <td colspan="2" align="center">
-                    <table width="80%" align="center">
-                        <tr align="center">
-                            <td><span class="nota">Rojo</span> > 91</td>
-                            <td><span class="naranja">Naranja</span> 51 - 90</td>
-                            <td><span class="amarillo">Amarillo</span> 16 - 50</td>
-                            <td><span class="verde">Verde </span> 1 - 15</td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-
-            <tr>
-                <td colspan="2" style="padding:20px">
-                    <div id="graficaDelete" style="height: 520px;" />
-                </td>
-            </tr>
-        }
-        else
-        {
-            <tr>
-                <td colspan="2" align="center" height="100px">
-                    <p style="font-size:30px; font-weight:bold">No se encontraron sentencias DELETE en la Base de Datos</p>
-                </td>
-            </tr>
-        }
-
-        <tr class="table-primary">
-            <td colspan="2" align="center">
-                <p style="font-size:20px; font-weight:bold">IF (Condición)</p>
-            </td>
-        </tr>
-
-        @if (Model.Siif.Count > 0)
-        {
-            <tr class="table-dark">
-                <td colspan="2" align="left">
-                    <p class="" style="font-size:16px; font-weight:bold">&nbsp;&nbsp;&nbsp;&nbsp;Criterios de Evaluación</p>
-                </td>
-            </tr>
-
-            <tr class="table-dark">
-                <td colspan="2" align="center">
-                    <table width="80%" align="center">
-                        <tr align="center">
-                            <td><span class="nota">Rojo</span> > 16</td>
-                            <td><span class="naranja">Naranja</span> 11 - 15</td>
-                            <td><span class="amarillo">Amarillo</span> 6 - 10</td>
-                            <td><span class="verde">Verde </span> 1 - 5</td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-
-            <tr>
-                <td colspan="2" style="padding:20px">
-                    <div id="graficaSi" style="height: 520px;" />
-                </td>
-            </tr>
-        }
-        else
-        {
-            <tr>
-                <td colspan="2" align="center" height="100px">
-                    <p style="font-size:30px; font-weight:bold">No se encontraron condiciones IF en la Base de Datos</p>
-                </td>
-            </tr>
-        }
-
-        <tr class="table-primary">
-            <td colspan="2" align="center">
-                <p style="font-size:20px; font-weight:bold">LOOP (Ciclo)</p>
-            </td>
-        </tr>
-
-        @if (Model.Loop.Count > 0)
-        {
-            <tr class="table-dark">
-                <td colspan="2" align="left">
-                    <p class="" style="font-size:16px; font-weight:bold">&nbsp;&nbsp;&nbsp;&nbsp;Criterios de Evaluación</p>
-                </td>
-            </tr>
-
-            <tr class="table-dark">
-                <td colspan="2" align="center">
-                    <table width="80%" align="center">
-                        <tr align="center">
-                            <td><span class="nota">Rojo</span> > 16</td>
-                            <td><span class="naranja">Naranja</span> 11 - 15</td>
-                            <td><span class="amarillo">Amarillo</span> 6 - 10</td>
-                            <td><span class="verde">Verde </span> 1 - 5</td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-
-            <tr>
-                <td colspan="2" style="padding:20px">
-                    <div id="graficaLoop" style="height: 520px;" />
-                </td>
-            </tr>
-        }
-        else
-        {
-            <tr>
-                <td colspan="2" align="center" height="100px">
-                    <p style="font-size:30px; font-weight:bold">No se encontraron ciclos LOOP en la Base de Datos</p>
-                </td>
-            </tr>
-        }
-
-        <tr class="table-primary">
-            <td colspan="2" align="center">
-                <p style="font-size:20px; font-weight:bold">Sentencias SELECT *</p>
-            </td>
-        </tr>
-
-        @if (Model.Select2.Count > 0)
-        {
-            <tr class="table-dark">
-                <td colspan="2" align="left">
-                    <p class="" style="font-size:16px; font-weight:bold">&nbsp;&nbsp;&nbsp;&nbsp;Criterios de Evaluación</p>
-                </td>
-            </tr>
-
-            <tr class="table-dark">
-                <td colspan="2" align="center">
-                    <table width="80%" align="center">
-                        <tr align="center">
-                            <td><span class="nota">Rojo</span> > 7</td>
-                            <td><span class="naranja">Naranja</span> 4 - 6</td>
-                            <td><span class="amarillo">Amarillo</span> 2 - 3</td>
-                            <td><span class="verde">Verde </span> 0 - 1</td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-
-            <tr>
-                <td colspan="2" style="padding:20px">
-                    <div id="graficaSelect2" style="height: 520px;" />
-                </td>
-            </tr>
-        }
-        else
-        {
-            <tr>
-                <td colspan="2" align="center" height="100px">
-                    <p style="font-size:30px; font-weight:bold">No se encontraron sentencias SELECT * en la Base de Datos</p>
-                </td>
-            </tr>
-        }
-
-        <tr class="table-primary">
-            <td colspan="2" align="center">
-                <p style="font-size:20px; font-weight:bold">Excepciones</p>
-            </td>
-        </tr>
-
-        @if (Model.Excepcion.Count > 0)
-        {
-            <tr>
-                <td colspan="2" style="padding:20px">
-                    <div id="graficaExcepcion" style="height: 520px;" />
-                </td>
-            </tr>
-        }
-        else
-        {
-            <tr>
-                <td colspan="2" align="center" height="100px">
-                    <p style="font-size:30px; font-weight:bold">No se encontraron Excepciones en la Base de Datos</p>
-                </td>
-            </tr>
-        }
-    </table>
-
+    </div>
     <script src="~/Scripts/canvasjs.min.js"></script>
 </body>
 </html>
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<script>
+
+    //function RecargarModel(idbd) {
+    //    $.ajax({
+    //        type: "POST",
+    //        url: "/Tableros/AnalisisBDDetalle",
+    //        data: { AplicacionID: idbd },
+    //        success: function (viewHTML) {
+    //            $("#Detalle").empty;
+    //            $("#Detalle").html(viewHTML);
+    //        },
+    //        error: function (errorData) {
+    //            console.log("Request Failed: " + errorData);
+    //        }
+    //    });
+    //}
+
+    function CrearLista(idbd) {
+        var graficaPrimariasPie = CargaDatosPie(idbd, 1);
+        var graficaPrimariaColumnas = CargaDatosColumnas3V(idbd, 1);
+        var graficaForaneasPie = CargaDatosPie(idbd, 2);
+        var graficaForaneasColumnas = CargaDatosColumnas3V(idbd, 2);
+        var graficaIndicesPie = CargaDatosPie(idbd, 3);
+        var graficaIndicesColumnas = CargaDatosColumnas3V(idbd, 3);
+        var graficaTiposObjeto = CargaDatosColumnas(idbd, 4);
+        var graficaTamanoTablas = CargaDatosColumnas(idbd, 5);
+        var graficaLineasEfectivas = CargaDatosColumnas(idbd, 6);
+        var graficaLineasComentadas = CargaDatosColumnas(idbd, 7);
+        var graficaSelect = CargaDatosColumnas(idbd, 8);
+        var graficaInsert = CargaDatosColumnas(idbd, 9);
+        var graficaUpdate = CargaDatosColumnas(idbd, 10);
+        var graficaDelete = CargaDatosColumnas(idbd, 11);
+        var graficaIf = CargaDatosColumnas(idbd, 12);
+        var graficaLoop = CargaDatosColumnas(idbd, 13);
+        var graficaSelectA = CargaDatosColumnas(idbd, 14);
+        var graficaExcepcion = CargaDatosColumnas(idbd, 15);
+
+        $("#Detalle").empty;
+        $("#Detalle").html(onload = initBD(graficaPrimariasPie, graficaPrimariaColumnas, graficaForaneasPie, graficaForaneasColumnas,
+            graficaIndicesPie, graficaIndicesColumnas, graficaTiposObjeto, graficaTamanoTablas, graficaLineasEfectivas,
+            graficaLineasComentadas, graficaSelect, graficaInsert, graficaUpdate, graficaDelete, graficaIf, graficaLoop,
+            graficaSelectA, graficaExcepcion
+        ));
+    }
+
+    function CargaDatosPie(idbd, tipo) {
+        var dataList = [];
+        $.ajax({
+            async: false,
+            type: "GET",
+            url: "/Tableros/CargaDatosAnalisisBD",
+            data: { BaseDeDatosID: idbd, Tipo: tipo },
+            success: function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    dataList.push({ y: parseInt(data[i].Porcentaje), name: data[i].Nombre, exploded: true });
+                }
+            },
+            error: function (errorData) {
+                console.log("Request Failed: " + errorData);
+            }
+        });
+        return dataList;
+    }
+
+    function CargaDatosColumnas3V(idbd, tipo) {
+        var dataList = [];
+        $.ajax({
+            async: false,
+            type: "GET",
+            url: "/Tableros/CargaDatosAnalisisBD",
+            data: { BaseDeDatosID: idbd, Tipo: tipo },
+            success: function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    dataList.push({ y: parseInt(data[i].Valor), label: data[i].Nombre });
+                }
+            },
+            error: function (errorData) {
+                console.log("Request Failed: " + errorData);
+            }
+        });
+        return dataList;
+    }
+
+    function CargaDatosColumnas(idbd, tipo) {
+        var dataList = [];
+        var Nombre;
+        $.ajax({
+            async: false,
+            type: "GET",
+            url: "/Tableros/CargaDatosAnalisisBD",
+            data: { BaseDeDatosID: idbd, Tipo: tipo },
+            success: function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    dataList.push({ y: parseInt(data[i].EjeY), label: data[i].Etiqueta, color: data[i].Color });
+                }
+            },
+            error: function (errorData) {
+                console.log("Request Failed: " + errorData);
+            }
+        });
+        return dataList;
+    }
+
+    $(document).ready(function () {
+         $(".loader").fadeOut();
+        $('#btnBuscar').click(function () {
+            MostrarLoader();
+            var idbd = $("#BasesLista Option:Selected").val();
+            CrearLista(idbd);
+            //RecargarModel(idbd);
+            OcultarLoader();
+        });
+    });
+</script>
+
+<script type="text/javascript">
+
+    function MostrarLoader() {
+        $(".loader").fadeIn();
+    }
+    function OcultarLoader() {
+        $(".loader").fadeOut();
+    }
+</script>

@@ -27,7 +27,8 @@ namespace HerramientaAD.Models
         const int sp_siif               = 12;
         const int sp_loop               = 13;
         const int sp_select2            = 14;
-        const int sp_excepcion          = 15;       
+        const int sp_excepcion          = 15;
+        const int sp_bases              = 17;
 
         private List<ElementosDeGrupo.GraficaPie3V> llavePrimaria = new List<ElementosDeGrupo.GraficaPie3V>();
         private List<ElementosDeGrupo.GraficaPie3V> llaveForanea = new List<ElementosDeGrupo.GraficaPie3V>();
@@ -46,6 +47,20 @@ namespace HerramientaAD.Models
         private List<ElementosDeGrupo.GraficaColumnas> excepcion = new List<ElementosDeGrupo.GraficaColumnas>();
         private List<ElementosDeGrupo.Indicadores> indicadores = new List<ElementosDeGrupo.Indicadores>(); //MMOB- NUEVO
         private XmlDocument resultadoXML;
+
+        private string baseID;
+        public string BaseID
+        {
+            get { return baseID; }
+            set { baseID = value; }
+        }
+
+        private List<ListasDesplegables> basesLista = new List<ListasDesplegables>();
+        public List<ListasDesplegables> BasesLista
+        {
+            get => basesLista;
+            set => basesLista = value;
+        }
 
         public List<ElementosDeGrupo.Indicadores> Indicadores //MMOB- NUEVO
         {
@@ -367,6 +382,17 @@ namespace HerramientaAD.Models
                 }
             }
 
+            if (datosObjetosBD.AnalisisBDConsulta(sp_bases, Usuario, BDId))
+            {
+                XmlNode xmlNode = datosObjetosBD.ResultadoXML.DocumentElement.SelectSingleNode("DatosBD");
+                foreach (XmlNode elemento in xmlNode.SelectNodes("row"))
+                {
+                    basesLista.Add(new ListasDesplegables(
+                        int.Parse(elemento.Attributes["BaseDatosID"].Value.ToString()),
+                        elemento.Attributes["BaseDatos"].Value.ToString())
+                        );
+                }
+            }
         }
     }
 }

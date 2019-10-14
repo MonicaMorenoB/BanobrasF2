@@ -66,6 +66,28 @@ namespace HerramientaAD.Models
                         ));
                 }
             }
+            else
+            {
+                if (aplicaciones.AplicacionesConsulta(UsuarioID, 0, AplicacionID))
+                {
+                    XmlNode xmlApp = aplicaciones.ResultadoXML.DocumentElement.SelectSingleNode("Aplicaciones");
+                    foreach (XmlNode elementoapp in xmlApp.SelectNodes("row"))
+                    {
+                        Nombreapp = elementoapp.Attributes["Aplicacion"].Value.ToString();
+                        Aplicacion = elementoapp.Attributes["Aplicacion"].Value.ToString();
+                    }
+                }
+                diagramaCM.Add(new ElementosDiagramaCM.Cuadros(
+                      "",
+                      "",
+                      "",
+                      "",
+                      "",
+                      "",
+                       Nombreapp
+                      ));
+
+            }
         }
     }
 }

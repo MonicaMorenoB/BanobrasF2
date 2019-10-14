@@ -16,7 +16,22 @@ namespace HerramientaAD.Models
         const int TipoConsulta1 = 1;
         const int TipoConsulta2 = 2;
         const int TipoConsulta3 = 3;
+        const int TipoConsulta4 = 4;
         const bool primerElemento = true;
+
+        private string baseID;
+        public string BaseID
+        {
+            get { return baseID; }
+            set { baseID = value; }
+        }
+
+        private List<ListasDesplegables> basesLista = new List<ListasDesplegables>();
+        public List<ListasDesplegables> BasesLista
+        {
+            get => basesLista;
+            set => basesLista = value;
+        }
 
         private List<ElementosDeGrupo.Indicadores> indicadores = new List<ElementosDeGrupo.Indicadores>();
         private List<ElementosDeGrupo.GraficaPie> archivosPie = new List<ElementosDeGrupo.GraficaPie>();
@@ -115,9 +130,18 @@ namespace HerramientaAD.Models
                         );
                 }
             }
+
+            if (datosObjetosBD.ObjetosBDConsulta(TipoConsulta4, UsuarioID, AplicacionID))
+            {
+                XmlNode xmlNode = datosObjetosBD.ResultadoXML.DocumentElement.SelectSingleNode("DatosBD");
+                foreach (XmlNode elemento in xmlNode.SelectNodes("row"))
+                {
+                    basesLista.Add(new ListasDesplegables(
+                        int.Parse(elemento.Attributes["BaseDatosID"].Value.ToString()),
+                        elemento.Attributes["BaseDatos"].Value.ToString())
+                        );
+                }
+            }
         }
-
-
-       
     }
 }
