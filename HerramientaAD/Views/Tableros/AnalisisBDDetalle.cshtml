@@ -522,7 +522,7 @@
     function initBD(graficaPrimariasPie, graficaPrimariaColumnas, graficaForaneasPie, graficaForaneasColumnas, graficaIndicesPie,
         graficaIndicesColumnas, graficaTiposObjeto, graficaTamanoTablas, graficaLineasEfectivas, graficaLineasComentadas,
         graficaSelect, graficaInsert, graficaUpdate, graficaDelete, graficaIf, graficaLoop, graficaSelectA, graficaExcepcion) {
-
+         $(".loader").fadeIn();
         var Datos = graficaPrimariasPie;
 
         var chart = new CanvasJS.Chart("graficaLlavePrimaria", {

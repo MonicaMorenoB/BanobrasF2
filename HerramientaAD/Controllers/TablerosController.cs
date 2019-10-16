@@ -99,7 +99,7 @@ namespace HerramientaAD.Controllers
         {
             if (Session["UsuarioID"] != null)
             {
-                var analisisBD = new AnalisisBD(int.Parse(Session["UsuarioID"].ToString()), AplicacionID);
+                var analisisBD = new AnalisisBD(int.Parse(Session["UsuarioID"].ToString()), AplicacionID, 0);
                 ViewBag.Aplicacion = AplicacionID;
                 ViewBag.NombreAplicacion = analisisBD.Indicadores.ElementAt(0).NombreApp; //MMOB
                 return View(analisisBD);
@@ -114,7 +114,7 @@ namespace HerramientaAD.Controllers
         {
             if (Session["UsuarioID"] != null)
             {
-                var analisisBDModel = new AnalisisBD(int.Parse(Session["UsuarioID"].ToString()), AplicacionID);
+                var analisisBDModel = new AnalisisBD(int.Parse(Session["UsuarioID"].ToString()), AplicacionID,1);
                 ViewBag.Aplicacion = AplicacionID;
                 ViewBag.NombreAplicacion = analisisBDModel.Indicadores.ElementAt(0).NombreApp; //MMOB
                 return PartialView("AnalisisBDDetalle", analisisBDModel);
@@ -127,10 +127,11 @@ namespace HerramientaAD.Controllers
 
         public JsonResult CargaDatosAnalisisBD(int BaseDeDatosID, int Tipo)
         {
+            
             var datosGrafica = Json("", JsonRequestBehavior.AllowGet);
             if (Session["UsuarioID"] != null)
             {
-                var analisisBDModel = new AnalisisBD(int.Parse(Session["UsuarioID"].ToString()), BaseDeDatosID);
+                var analisisBDModel = new AnalisisBD(int.Parse(Session["UsuarioID"].ToString()), BaseDeDatosID,2);
                 switch (Tipo)
                 {
                     case 1:

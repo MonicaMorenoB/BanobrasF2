@@ -167,7 +167,7 @@ namespace HerramientaAD.Models
             set { resultadoXML = value; }
         }
 
-        public AnalisisBD (int Usuario, int BDId)
+        public AnalisisBD (int Usuario, int BDId, int vez)
         {
             //MMOB - Nombre de aplicación
             String Nombreapp = "";   
@@ -193,7 +193,7 @@ namespace HerramientaAD.Models
                 foreach (XmlNode elemento in xmlNode.SelectNodes("row"))
                 {
                     llavePrimaria.Add(new ElementosDeGrupo.GraficaPie3V(
-                        elemento.Attributes["Descripcion"].Value.ToString(),
+                        elemento.Attributes["Descripcion"].Value.ToString().Replace('\u00E1', 'á').Replace('\u00CD', 'Í'),
                         int.Parse(elemento.Attributes["Valor"].Value.ToString()),
                         float.Parse(elemento.Attributes["Porc"].Value.ToString())
                         ));
@@ -205,8 +205,19 @@ namespace HerramientaAD.Models
                 XmlNode xmlNode = datosObjetosBD.ResultadoXML.DocumentElement.SelectSingleNode("DatosBD");
                 foreach (XmlNode elemento in xmlNode.SelectNodes("row"))
                 {
+                    var descr = elemento.Attributes["Descripcion"].Value.ToString();
+                    if (vez == 0)
+                    {
+                        descr = descr.Replace("\u00E1", "á");
+                    }
+                    else
+                    {
+                        descr = descr.Replace("\\u00E1", "á");
+                    }
+
+
                     llaveForanea.Add(new ElementosDeGrupo.GraficaPie3V(
-                        elemento.Attributes["Descripcion"].Value.ToString(),
+                        descr,
                         int.Parse(elemento.Attributes["Valor"].Value.ToString()),
                         float.Parse(elemento.Attributes["Porc"].Value.ToString())
                         ));
@@ -218,8 +229,18 @@ namespace HerramientaAD.Models
                 XmlNode xmlNode = datosObjetosBD.ResultadoXML.DocumentElement.SelectSingleNode("DatosBD");
                 foreach (XmlNode elemento in xmlNode.SelectNodes("row"))
                 {
+                    var descr = elemento.Attributes["Descripcion"].Value.ToString();
+                    if (vez == 0)
+                    {
+                        descr = descr.Replace("\u00CD", "Í");
+                    }
+                    else
+                    {
+                        descr = descr.Replace("\\u00CD", "Í");
+                    }
+
                     indexes.Add(new ElementosDeGrupo.GraficaPie3V(
-                        elemento.Attributes["Descripcion"].Value.ToString(),
+                        descr,
                         int.Parse(elemento.Attributes["Valor"].Value.ToString()),
                         float.Parse(elemento.Attributes["Porc"].Value.ToString())
                         ));

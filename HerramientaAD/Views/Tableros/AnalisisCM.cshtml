@@ -12,10 +12,20 @@
     <title>Concept Map</title>
     <meta name="description" content="A concept map diagram implemented with labeled links and ForceDirectedLayout." />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <link href="~/Estilos/Loader.css" rel="stylesheet" />
+    <script src="~/Scripts/Loader.js"></script>
 
     <script src="~/Scripts/go.js"></script>
-    
+    <script type="text/javascript">
+
+        function MostrarLoader() {
+            $(".loader").fadeIn();
+        }
+
+        function OcultarLoader() {
+            $(".loader").fadeOut();
+        }
+    </script>
     <script id="code">
         function init() {
 
@@ -30,7 +40,7 @@
                     {
  @:Datos.push({ key: "@diagramaCM.Llave", parent: "@diagramaCM.Padre", name: "@diagramaCM.Nombre", type: "@diagramaCM.Tipo", color: "@diagramaCM.Color", description: "@diagramaCM.Descripcion" });
                     }
-                    
+
                 }
             }
 
@@ -125,13 +135,13 @@
     </script>
 
 </head>
-<body onload="init()">
+<body onload="init(), OcultarLoader()">
     <div class="jumbotron">
         <h1 class="display-3">@Model.DiagramaCM.ElementAt(0).NombreApp</h1>
         <p class="lead">Resultados del Análisis de Clases, Funciones y Métodos</p>
         <hr class="my-4">
     </div>
-
+    <div id="divLoader" class="loader"></div>
     <div class="alert alert-dismissible alert-primary">
         <h6 class="mb-0">Diagrama de los elementos que componen la aplicación y las relaciones que comparten cada uno de estos elementos con otros.</h6>
     </div>

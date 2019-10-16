@@ -115,7 +115,7 @@
                             </td>
                         </tr>
                         <tr style="height: 50px">
-                            <td width="370px" align="center">
+                            <td width="370px" align="center" >
                                 <button type="button" class="btn btn-primary" style="width:300px" id="btnBuscar">Buscar</button>
                             </td>
                             <td width="370px" align="center">
@@ -203,9 +203,16 @@
 
     function ActualizaDiagrama(idbd) {
         datosCuadrossFinal = CargaCuadros(idbd, 1);
-        datosRelacionesFinal = CargaRelaciones(idbd,2)
-        $("#myDiagramDiv").empty;
-        $("#myDiagramDiv").html(onload = initER(datosCuadrossFinal, datosRelacionesFinal));
+        datosRelacionesFinal = CargaRelaciones(idbd, 2)
+        if (datosCuadrossFinal.length != 0) {
+            $("#myDiagramDiv").empty;
+            $("#myDiagramDiv").html(onload = initER(datosCuadrossFinal, datosRelacionesFinal));
+        }
+        else {
+            $("#myDiagramDiv").empty;
+            $("#myDiagramDiv").html('<br/><br/><p style="text-align:center;font-size:30px; font-weight:bold">No se encontró información en la Base de Datos</p>');
+        }
+      
     }
 
     $(document).ready(function() {

@@ -212,6 +212,7 @@
     <Content Include="Images\middleware.png" />
     <Content Include="Images\objeto.png" />
     <Content Include="Images\pageLoader.gif" />
+    <Content Include="Images\perl.png" />
     <Content Include="Images\presupuesto.png" />
     <Content Include="Images\procedimiento.png" />
     <Content Include="Images\RiesgoMercado.png" />

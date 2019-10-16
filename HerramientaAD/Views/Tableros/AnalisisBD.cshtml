@@ -61,6 +61,7 @@
             @{
                 foreach (HerramientaAD.com.Utilerias.ElementosDeGrupo.GraficaPie3V grafica3 in Model.LlaveForanea)
                 {
+                    
                     @:Datos.push({ y: @grafica3.Porcentaje, name: "@grafica3.Nombre", exploded:true });
                 }
             }
@@ -551,10 +552,11 @@
         <h6 class="mb-0">Información del estatus de los objetos que componen la Bases Datos de acuerdo a los criterios de evaluación establecidos.</h6>
     </div>
 
-    <div class="loader" ></div>
-
+    
+    <div id="divLoader" class="loader"></div>
     @if (Model.BasesLista.Count > 1)
     {
+        
         <form>
             <div class="card border-secondary mb-3" style="max-width: 200rem;">
                 <div class="card-header">Filtros</div>
@@ -571,7 +573,7 @@
                             </tr>
                             <tr style="height: 50px">
                                 <td width="370px" align="center">
-                                    <button type="button" class="btn btn-primary" style="width:300px" id="btnBuscar">Buscar</button>
+                                    <button type="button" class="btn btn-primary" style="width:300px" id="btnBuscar" >Buscar</button>
                                 </td>
                             </tr>
                         </table>
@@ -694,12 +696,11 @@
     }
 
     $(document).ready(function () {
-         $(".loader").fadeOut();
+        $(".loader").fadeOut();        
         $('#btnBuscar').click(function () {
-            MostrarLoader();
+            MostrarLoader();            
             var idbd = $("#BasesLista Option:Selected").val();
             CrearLista(idbd);
-            //RecargarModel(idbd);
             OcultarLoader();
         });
     });
@@ -710,7 +711,8 @@
     function MostrarLoader() {
         $(".loader").fadeIn();
     }
+
     function OcultarLoader() {
-        $(".loader").fadeOut();
+        $(".loader").fadeOut();         
     }
 </script>
