@@ -646,7 +646,7 @@
             data: { BaseDeDatosID: idbd, Tipo: tipo },
             success: function (data) {
                 for (var i = 0; i < data.length; i++) {
-                    dataList.push({ y: parseInt(data[i].Porcentaje), name: data[i].Nombre, exploded: true });
+                    dataList.push({ y: data[i].Porcentaje, name: data[i].Nombre, exploded: true });
                 }
             },
             error: function (errorData) {
@@ -665,7 +665,7 @@
             data: { BaseDeDatosID: idbd, Tipo: tipo },
             success: function (data) {
                 for (var i = 0; i < data.length; i++) {
-                    dataList.push({ y: parseInt(data[i].Valor), label: data[i].Nombre });
+                    dataList.push({ y: data[i].Valor, label: data[i].Nombre });
                 }
             },
             error: function (errorData) {
@@ -685,7 +685,7 @@
             data: { BaseDeDatosID: idbd, Tipo: tipo },
             success: function (data) {
                 for (var i = 0; i < data.length; i++) {
-                    dataList.push({ y: parseInt(data[i].EjeY), label: data[i].Etiqueta, color: data[i].Color });
+                    dataList.push({ y: data[i].EjeY, label: data[i].Etiqueta, color: data[i].Color });
                 }
             },
             error: function (errorData) {

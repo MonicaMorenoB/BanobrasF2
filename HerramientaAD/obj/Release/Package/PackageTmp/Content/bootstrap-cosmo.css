@@ -1671,6 +1671,10 @@ pre code {
   color: #373a3c;
 }
 
+/*.table-simple{
+    border:1px solid #2780E3;
+}*/
+
 .table th,
 .table td {
   padding: 0.75rem;
@@ -1879,7 +1883,7 @@ pre code {
 .table-dark,
 .table-dark > th,
 .table-dark > td {
-  background-color: #c7c8c8;
+  background-color: #373A3C;
 }
 
 .table-dark th,

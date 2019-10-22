@@ -8,7 +8,8 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-
+    <script src="~/Scripts/Loader.js"></script>
+    <link href="~/Estilos/Loader.css" rel="stylesheet" />
 </head>
 <body>
     <style>
@@ -23,7 +24,9 @@
         <p class="lead">Ficha de resultados del Análisis</p>
         <hr class="my-4">
     </div>
-
+    <div class="alert alert-dismissible alert-primary">
+        <h6 class="mb-0">Información técnica sobre el código analizado de los tres grupos: Objetos de Base de Datos, Objetos de Servicio e Interfaces y Objetos de Clases y Métodos, selecciona un grupo y un filtro para comenzar.</h6>
+    </div>
     <form>
         <div class="card border-secondary mb-3" style="max-width: 200rem;">
             <div class="card-header">Filtros</div>
@@ -35,7 +38,7 @@
                                 <button type="button" class="btn btn-primary" style="width:300px" id="btnFiltrosBD">Objetos de Base de Datos</button>
                             </td>
                             <td width="370px" align="center">
-                                <button type="button" class="btn btn-primary" style="width:300px" id="btnFiltrosWS">Objetos de Interfases y Servicios</button>
+                                <button type="button" class="btn btn-primary" style="width:300px" id="btnFiltrosWS">Objetos de Interfaces y Servicios</button>
                             </td>
                             <td width="370px" align="center">
                                 <button type="button" class="btn btn-primary" style="width:300px" id="btnFiltrosCM">Objetos de Clases y Métodos</button>
@@ -90,14 +93,13 @@
                 </fieldset>
             </div>
         </div>
-        
+
     </form>
-    <br />
+
     <fieldset>
-        
+        <div class="loader" style="display:none"></div>
         <div id="HGrid">
-            <br />
-            <br />
+
             <table cellspacing="0" id="Tabla0" style="width: 100%; border-collapse: collapse; color: #fff; ">
                 <tr class="GridViewScrollHeader">
                     <th class="CampoMasCorto"># Línea</th>
@@ -127,7 +129,7 @@
             </table>
 
         </div>
-        </fieldset>
+    </fieldset>
 
 </body>
 </html>
@@ -156,6 +158,7 @@
     var tipo;
 
     function limpiarfiltros() {
+        MostrarLoader();
         $("#AreasLista").empty;
         $("#AreasLista")[0].selectedIndex = 0;
         $("#AplicacionesLista").empty;
@@ -168,9 +171,11 @@
         $("#Filtro3Lista")[0].selectedIndex = 0;
         $("#Filtro4Lista").empty;
         $("#Filtro4Lista")[0].selectedIndex = 0;
+        OcultarLoader();
     }
 
     function ActualizaBusqueda(tpfil, idapp, fil1, fil2, fil3, fil4) {
+        MostrarLoader();
         $.ajax({
             type: "POST",
             url: "/DetalleTecnico/ActualizarConsulta",
@@ -179,8 +184,13 @@
                 $("#divdet").empty;
                 $("#divdet").html(viewHTML);
             },
-            error: function (errorData) { console.log("Request Failed: " + errorData); }
+            error: function (errorData) {
+                console.log("Request Failed: " + errorData);
+                OcultarLoader();
+            }
+            
         });
+        OcultarLoader();
     }
 
     $(document).ready(function() {
@@ -333,6 +343,7 @@
         });
 
         $('#btnBuscar').click(function () {
+            
             var idapp = $("#AplicacionesLista Option:Selected").val();
             if (tpfil == "BD") {
                 var fil1 = $("#Filtro1Lista Option:Selected").val();
@@ -355,9 +366,21 @@
                 var fil4 = $("#Filtro4Lista Option:Selected").text();
             }
 
-            ActualizaBusqueda(tpfil,idapp,fil1,fil2,fil3,fil4)
+            ActualizaBusqueda(tpfil, idapp, fil1, fil2, fil3, fil4)
+          
         });
+
     });
 
     
+</script>
+
+<script type="text/javascript">
+
+    function MostrarLoader() {
+        $(".loader").fadeIn();
+    }
+    function OcultarLoader() {
+        $(".loader").fadeOut();
+    }
 </script>

@@ -1,96 +1,91 @@
 ﻿@model HerramientaAD.Models.AnalisisBD
-    @{
-        ViewBag.Title = "AnalisisBD";
-        Layout = "~/Views/Shared/_Layout.cshtml";
-    }
-    <!DOCTYPE HTML>
-    <html>
+@{
+    ViewBag.Title = "Estadísticas de la Base de Datos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!DOCTYPE HTML>
+<html>
+<head>
+    <script>
+        window.onload = function () {
 
-    <head>
-        <script>
-            window.onload = function () {
+            var Datos = [];
 
-                var Datos = [];
-
-                      @{
+            @{
                 foreach (HerramientaAD.com.Utilerias.ElementosDeGrupo.GraficaPie3V grafica1 in Model.LlavePrimaria)
                 {
-                    @:Datos.push({ y: @grafica1.Porcentaje, name: "@grafica1.Nombre" });
+                    @:Datos.push({ y: @grafica1.Porcentaje, name: "@grafica1.Nombre", exploded: true });
                 }
             }
 
+            var chart = new CanvasJS.Chart("graficaLlavePrimaria", {
+                exportEnabled: true,
+                animationEnabled: true,
+                legend: {
+                    cursor: "pointer",
+                    itemclick: explodePie
+                },
+                data: [{
+                    type: "pie",
+                    showInLegend: true,
+                    toolTipContent: "{name}: <strong>{y}%</strong>",
+                    indexLabel: "{name} - {y}%",
+                    dataPoints: Datos
+                }]
+            });
 
-                var chart = new CanvasJS.Chart("graficaLlavePrimaria", {
-                    exportEnabled: true,
-                    animationEnabled: true,
-                    legend: {
-                        cursor: "pointer",
-                        itemclick: explodePie
-                    },
-                    data: [{
-                        type: "pie",
-                        showInLegend: true,
-                        toolTipContent: "{name}: <strong>{y}%</strong>",
-                        indexLabel: "{name} - {y}%",
-                        dataPoints: Datos
-                    }]
-                });
+            chart.render();
+            Datos = [];
 
-
-                chart.render();
-                Datos = [];
-
-                @{
+            @{
                 foreach (HerramientaAD.com.Utilerias.ElementosDeGrupo.GraficaPie3V grafica2 in Model.LlavePrimaria)
                 {
                     @:Datos.push({ y: @grafica2.Valor, label: "@grafica2.Nombre" });
                 }
             }
 
+            var chart = new CanvasJS.Chart("graficaLlavePrimaria2", {
+                exportEnabled: true,
+                animationEnabled: true,
+                data: [{
+                    type: "column",
+                    indexLabel: "{ y }",
+                    showInLegend: false,
+                    dataPoints: Datos
+                }]
+            });
 
-                var chart = new CanvasJS.Chart("graficaLlavePrimaria2", {
-                    exportEnabled: true,
-                    animationEnabled: true,
-                    data: [{
-                        type: "column",
-                        indexLabel: "{ y }",
-                        showInLegend: false,
-                        dataPoints: Datos
-                    }]
-                });
-                chart.render();
+            chart.render();
+            Datos = [];
 
-                var Datos = [];
-
-                      @{
+            @{
                 foreach (HerramientaAD.com.Utilerias.ElementosDeGrupo.GraficaPie3V grafica3 in Model.LlaveForanea)
                 {
-                    @:Datos.push({ y: @grafica3.Porcentaje, name: "@grafica3.Nombre" });
+                    
+                    @:Datos.push({ y: @grafica3.Porcentaje, name: "@grafica3.Nombre", exploded:true });
                 }
             }
 
+            var chart = new CanvasJS.Chart("graficaLlaveForanea", {
+                exportEnabled: true,
+                animationEnabled: true,
+                legend: {
+                    cursor: "pointer",
+                    itemclick: explodePie
+                },
+                data: [{
+                    type: "pie",
+                    showInLegend: true,
+                    toolTipContent: "{name}: <strong>{y}%</strong>",
+                    indexLabel: "{name} - {y}%",
+                    dataPoints: Datos
+                }]
+            });
 
-                var chart = new CanvasJS.Chart("graficaLlaveForanea", {
-                    exportEnabled: true,
-                    animationEnabled: true,
-                    legend: {
-                        cursor: "pointer",
-                        itemclick: explodePie
-                    },
-                    data: [{
-                        type: "pie",
-                        showInLegend: true,
-                        toolTipContent: "{name}: <strong>{y}%</strong>",
-                        indexLabel: "{name} - {y}%",
-                        dataPoints: Datos
-                    }]
-                });
+            chart.render();
+            Datos = [];
 
-
-                chart.render();
-                Datos = [];
-
-                @{
+            @{
                 foreach (HerramientaAD.com.Utilerias.ElementosDeGrupo.GraficaPie3V grafica4 in Model.LlaveForanea)
                 {
                     @:Datos.push({ y: @grafica4.Valor, label: "@grafica4.Nombre" });
@@ -98,427 +93,626 @@
             }
 
 
-                var chart = new CanvasJS.Chart("graficaLlaveForanea2", {
-                    exportEnabled: true,
-                    animationEnabled: true,
-                    data: [{
-                        type: "column",
-                        indexLabel: "{ y }",
-                        showInLegend: false,
-                        dataPoints: Datos
-                    }]
-                });
-                chart.render();
+            var chart = new CanvasJS.Chart("graficaLlaveForanea2", {
+                exportEnabled: true,
+                animationEnabled: true,
+                data: [{
+                    type: "column",
+                    indexLabel: "{ y }",
+                    showInLegend: false,
+                    dataPoints: Datos
+                }]
+            });
 
-                var Datos = [];
+            chart.render();
+            Datos = [];
 
-                      @{
+            @{
                 foreach (HerramientaAD.com.Utilerias.ElementosDeGrupo.GraficaPie3V grafica5 in Model.Indexes)
                 {
-                    @:Datos.push({ y: @grafica5.Porcentaje, name: "@grafica5.Nombre" });
+                    @:Datos.push({ y: @grafica5.Porcentaje, name: "@grafica5.Nombre", exploded: true });
                 }
             }
 
+            var chart = new CanvasJS.Chart("graficaIndexes", {
+                exportEnabled: true,
+                animationEnabled: true,
+                legend: {
+                    cursor: "pointer",
+                    itemclick: explodePie
+                },
+                data: [{
+                    type: "pie",
+                    showInLegend: true,
+                    toolTipContent: "{name}: <strong>{y}%</strong>",
+                    indexLabel: "{name} - {y}%",
+                    dataPoints: Datos
+                }]
+            });
 
-                var chart = new CanvasJS.Chart("graficaIndexes", {
-                    exportEnabled: true,
-                    animationEnabled: true,
-                    legend: {
-                        cursor: "pointer",
-                        itemclick: explodePie
-                    },
-                    data: [{
-                        type: "pie",
-                        showInLegend: true,
-                        toolTipContent: "{name}: <strong>{y}%</strong>",
-                        indexLabel: "{name} - {y}%",
-                        dataPoints: Datos
-                    }]
-                });
+            chart.render();
+            Datos = [];
 
-
-                chart.render();
-                Datos = [];
-
-                @{
+            @{
                 foreach (HerramientaAD.com.Utilerias.ElementosDeGrupo.GraficaPie3V grafica6 in Model.Indexes)
                 {
                     @:Datos.push({ y: @grafica6.Valor, label: "@grafica6.Nombre" });
                 }
             }
 
+            var chart = new CanvasJS.Chart("graficaIndexes2", {
+                exportEnabled: true,
+                animationEnabled: true,
+                data: [{
+                    type: "column",
+                    indexLabel: "{ y }",
+                    showInLegend: false,
+                    dataPoints: Datos
+                }]
+            });
 
-                var chart = new CanvasJS.Chart("graficaIndexes2", {
-                    exportEnabled: true,
-                    animationEnabled: true,
-                    data: [{
-                        type: "column",
-                        indexLabel: "{ y }",
-                        showInLegend: false,
-                        dataPoints: Datos
-                    }]
-                });
-                chart.render();
+            chart.render();
+            Datos = [];
 
-                Datos = [];
-
-                @{
+            @{
                 foreach (HerramientaAD.com.Utilerias.ElementosDeGrupo.GraficaColumnas grafica7 in Model.TipoObjeto)
                 {
-                     @:Datos.push({ y: @grafica7.EjeY, label: "@grafica7.Etiqueta" });
+                    @:Datos.push({ y: @grafica7.EjeY, label: "@grafica7.Etiqueta" });
                 }
             }
 
+            var chart = new CanvasJS.Chart("graficaTipoOBjeto", {
+                exportEnabled: true,
+                animationEnabled: true,
+                data: [{
+                    type: "column",
+                    indexLabel: "{ y }",
+                    showInLegend: false,
+                    dataPoints: Datos
+                }]
+            });
 
-                var chart = new CanvasJS.Chart("graficaTipoOBjeto", {
-                    exportEnabled: true,
-                    animationEnabled: true,
-                    data: [{
-                        type: "column",
-                        indexLabel: "{ y }",
-                        showInLegend: false,
-                        dataPoints: Datos
-                    }]
-                });
-                chart.render();
+            chart.render();
+            Datos = [];
 
-                Datos = [];
-
-                @{
+            @{
                 foreach (HerramientaAD.com.Utilerias.ElementosDeGrupo.GraficaColumnas grafica8 in Model.TamanoTabla)
                 {
                     @:Datos.push({ y: @grafica8.EjeY, label: "@grafica8.Etiqueta", color: "@grafica8.Color" });
                 }
             }
 
+            var chart = new CanvasJS.Chart("graficaTamanoTabla", {
+                exportEnabled: true,
+                animationEnabled: true,
+                axisY: {
+                    title: "Registros x 1000",
+                    titleFontSize: 16,
+                    labelFontSize: 12
+                },
+                axisX: {
+                    labelAngle: -90,
+                    labelFontSize: 12
+                },
+                data: [{
+                    type: "column",
+                    indexLabel: "{ y }",
+                    indexLabelFontSize: 12,
+                    showInLegend: false,
+                    dataPoints: Datos
+                }]
+            });
 
-                var chart = new CanvasJS.Chart("graficaTamanoTabla", {
-                    exportEnabled: true,
-                    animationEnabled: true,
-                    axisY: {
-                        title: "Registros x 1000"
-                    },
-                    data: [{
-                        type: "column",
-                        indexLabel: "{ y }",
-                        showInLegend: false,
-                        dataPoints: Datos
-                    }]
-                });
-                chart.render();
+            chart.render();
+            Datos = [];
 
-
-
-                Datos = [];
-
-                @{
+            @{
                 foreach (HerramientaAD.com.Utilerias.ElementosDeGrupo.GraficaColumnas grafica9 in Model.LineasEfectivas)
                 {
                     @:Datos.push({ y: @grafica9.EjeY, label: "@grafica9.Etiqueta", color: "@grafica9.Color" });
                 }
             }
 
+            var chart = new CanvasJS.Chart("graficaLE", {
+                exportEnabled: true,
+                animationEnabled: true,
+                axisY: {
+                    labelFontSize: 12
+                },
+                axisX: {
+                    labelAngle: -90,
+                    labelFontSize: 12
+                },
+                data: [{
+                    type: "column",
+                    indexLabel: "{ y }",
+                    indexLabelFontSize: 12,
+                    showInLegend: false,
+                    dataPoints: Datos
+                }]
+            });
 
-                var chart = new CanvasJS.Chart("graficaLE", {
-                    exportEnabled: true,
-                    animationEnabled: true,
-                    data: [{
-                        type: "column",
-                        indexLabel: "{ y }",
-                        showInLegend: false,
-                        dataPoints: Datos
-                    }]
-                });
-                chart.render();
+            chart.render();
+            Datos = [];
 
-                Datos = [];
-
-                @{
+            @{
                 foreach (HerramientaAD.com.Utilerias.ElementosDeGrupo.GraficaColumnas grafica10 in Model.LineasComentadas)
                 {
                     @:Datos.push({ y: @grafica10.EjeY, label: "@grafica10.Etiqueta", color: "@grafica10.Color" });
                 }
             }
 
+            var chart = new CanvasJS.Chart("graficaLineasComentadas", {
+                exportEnabled: true,
+                animationEnabled: true,
+                axisY: {
+                    labelFontSize: 12
+                },
+                axisX: {
+                    labelAngle: -90,
+                    labelFontSize: 12
+                },
+                data: [{
+                    type: "column",
+                    indexLabel: "{ y }" + "%",
+                    indexLabelFontSize: 12,
+                    showInLegend: false,
+                    dataPoints: Datos
+                }]
+            });
 
-                var chart = new CanvasJS.Chart("graficaLineasComentadas", {
-                    exportEnabled: true,
-                    animationEnabled: true,
-                    data: [{
-                        type: "column",
-                        indexLabel: "{ y }",
-                        showInLegend: false,
-                        dataPoints: Datos
-                    }]
-                });
-                chart.render();
+            chart.render();
+            Datos = [];
 
-                Datos = [];
-
-                @{
+            @{
                 foreach (HerramientaAD.com.Utilerias.ElementosDeGrupo.GraficaColumnas grafica11 in Model.Select)
                 {
                     @:Datos.push({ y: @grafica11.EjeY, label: "@grafica11.Etiqueta", color: "@grafica11.Color" });
                 }
             }
 
+            var chart = new CanvasJS.Chart("graficaSelect", {
+                exportEnabled: true,
+                animationEnabled: true,
+                axisY: {
+                    labelFontSize: 12
+                },
+                axisX: {
+                    labelAngle: -90,
+                    labelFontSize: 12
+                },
+                data: [{
+                    type: "column",
+                    indexLabel: "{ y }",
+                    indexLabelFontSize: 12,
+                    showInLegend: false,
+                    dataPoints: Datos
+                }]
+            });
 
-                var chart = new CanvasJS.Chart("graficaSelect", {
-                    exportEnabled: true,
-                    animationEnabled: true,
-                    data: [{
-                        type: "column",
-                        indexLabel: "{ y }",
-                        showInLegend: false,
-                        dataPoints: Datos
-                    }]
-                });
-                chart.render();
+            chart.render();
+            Datos = [];
 
-                Datos = [];
-
-                @{
+            @{
                 foreach (HerramientaAD.com.Utilerias.ElementosDeGrupo.GraficaColumnas grafica12 in Model.Insert)
                 {
                     @:Datos.push({ y: @grafica12.EjeY, label: "@grafica12.Etiqueta", color: "@grafica12.Color" });
                 }
             }
 
+            var chart = new CanvasJS.Chart("graficaInsert", {
+                exportEnabled: true,
+                animationEnabled: true,
+                axisY: {
+                    labelFontSize: 12
+                },
+                axisX: {
+                    labelAngle: -90,
+                    labelFontSize: 12
+                },
+                data: [{
+                    type: "column",
+                    indexLabel: "{ y }",
+                    indexLabelFontSize: 12,
+                    showInLegend: false,
+                    dataPoints: Datos
+                }]
+            });
 
-                var chart = new CanvasJS.Chart("graficaInsert", {
-                    exportEnabled: true,
-                    animationEnabled: true,
-                    data: [{
-                        type: "column",
-                        indexLabel: "{ y }",
-                        showInLegend: false,
-                        dataPoints: Datos
-                    }]
-                });
-                chart.render();
+            chart.render();
+            Datos = [];
 
-                Datos = [];
-
-                @{
+            @{
                 foreach (HerramientaAD.com.Utilerias.ElementosDeGrupo.GraficaColumnas grafica13 in Model.Update)
                 {
                     @:Datos.push({ y: @grafica13.EjeY, label: "@grafica13.Etiqueta", color: "@grafica13.Color" });
                 }
             }
 
+            var chart = new CanvasJS.Chart("graficaUpdate", {
+                exportEnabled: true,
+                animationEnabled: true,
+                axisY: {
+                    labelFontSize: 12
+                },
+                axisX: {
+                    labelAngle: -90,
+                    labelFontSize: 12
+                },
+                data: [{
+                    type: "column",
+                    indexLabel: "{ y }",
+                    indexLabelFontSize: 12,
+                    showInLegend: false,
+                    dataPoints: Datos
+                }]
+            });
 
-                var chart = new CanvasJS.Chart("graficaUpdate", {
-                    exportEnabled: true,
-                    animationEnabled: true,
-                    data: [{
-                        type: "column",
-                        indexLabel: "{ y }",
-                        showInLegend: false,
-                        dataPoints: Datos
-                    }]
-                });
-                chart.render();
+            chart.render();
+            Datos = [];
 
-                Datos = [];
-
-                @{
+            @{
                 foreach (HerramientaAD.com.Utilerias.ElementosDeGrupo.GraficaColumnas grafica14 in Model.Delete)
                 {
                     @:Datos.push({ y: @grafica14.EjeY, label: "@grafica14.Etiqueta", color: "@grafica14.Color" });
                 }
             }
 
+            var chart = new CanvasJS.Chart("graficaDelete", {
+                exportEnabled: true,
+                animationEnabled: true,
+                axisY: {
+                    labelFontSize: 12
+                },
+                axisX: {
+                    labelAngle: -90,
+                    labelFontSize: 12
+                },
+                data: [{
+                    type: "column",
+                    indexLabel: "{ y }",
+                    indexLabelFontSize: 12,
+                    showInLegend: false,
+                    dataPoints: Datos
+                }]
+            });
 
-                var chart = new CanvasJS.Chart("graficaDelete", {
-                    exportEnabled: true,
-                    animationEnabled: true,
-                    data: [{
-                        type: "column",
-                        indexLabel: "{ y }",
-                        showInLegend: false,
-                        dataPoints: Datos
-                    }]
-                });
-                chart.render();
+            chart.render();
+            Datos = [];
 
-                Datos = [];
-
-                @{
+            @{
                 foreach (HerramientaAD.com.Utilerias.ElementosDeGrupo.GraficaColumnas grafica15 in Model.Siif)
                 {
                     @:Datos.push({ y: @grafica15.EjeY, label: "@grafica15.Etiqueta", color: "@grafica15.Color" });
                 }
             }
 
+            var chart = new CanvasJS.Chart("graficaSi", {
+                exportEnabled: true,
+                animationEnabled: true,
+                axisY: {
+                    labelFontSize: 12
+                },
+                axisX: {
+                    labelAngle: -90,
+                    labelFontSize: 12
+                },
+                data: [{
+                    type: "column",
+                    indexLabel: "{ y }",
+                    indexLabelFontSize: 12,
+                    showInLegend: false,
+                    dataPoints: Datos
+                }]
+            });
 
-                var chart = new CanvasJS.Chart("graficaSi", {
-                    exportEnabled: true,
-                    animationEnabled: true,
-                    data: [{
-                        type: "column",
-                        indexLabel: "{ y }",
-                        showInLegend: false,
-                        dataPoints: Datos
-                    }]
-                });
-                chart.render();
+            chart.render();
+            Datos = [];
 
-                Datos = [];
-
-                @{
+            @{
                 foreach (HerramientaAD.com.Utilerias.ElementosDeGrupo.GraficaColumnas grafica16 in Model.Loop)
                 {
                     @:Datos.push({ y: @grafica16.EjeY, label: "@grafica16.Etiqueta", color: "@grafica16.Color" });
                 }
             }
 
+            var chart = new CanvasJS.Chart("graficaLoop", {
+                exportEnabled: true,
+                animationEnabled: true,
+                axisY: {
+                    labelFontSize: 12
+                },
+                axisX: {
+                    labelAngle: -90,
+                    labelFontSize: 12
+                },
+                data: [{
+                    type: "column",
+                    indexLabel: "{ y }",
+                    indexLabelFontSize: 12,
+                    showInLegend: false,
+                    dataPoints: Datos
+                }]
+            });
 
-                var chart = new CanvasJS.Chart("graficaLoop", {
-                    exportEnabled: true,
-                    animationEnabled: true,
-                    data: [{
-                        type: "column",
-                        indexLabel: "{ y }",
-                        showInLegend: false,
-                        dataPoints: Datos
-                    }]
-                });
-                chart.render();
+            @if (Model.Loop.Count > 0)
+            {
+                @:chart.render();
+            }
 
-                Datos = [];
+            Datos = [];
 
-                @{
+            @{
                 foreach (HerramientaAD.com.Utilerias.ElementosDeGrupo.GraficaColumnas grafica17 in Model.Select2)
                 {
-                 @:Datos.push({ y: @grafica17.EjeY, label: "@grafica17.Etiqueta", color: "@grafica17.Color" });
+                    @:Datos.push({ y: @grafica17.EjeY, label: "@grafica17.Etiqueta", color: "@grafica17.Color" });
                 }
             }
 
+            var chart = new CanvasJS.Chart("graficaSelect2", {
+                exportEnabled: true,
+                animationEnabled: true,
+                axisY: {
+                    labelFontSize: 12
+                },
+                axisX: {
+                    labelAngle: -90,
+                    labelFontSize: 12
+                },
+                data: [{
+                    type: "column",
+                    indexLabel: "{ y }",
+                    indexLabelFontSize: 12,
+                    showInLegend: false,
+                    dataPoints: Datos
+                }]
+            });
 
-                var chart = new CanvasJS.Chart("graficaSelect2", {
-                    exportEnabled: true,
-                    animationEnabled: true,
-                    data: [{
-                        type: "column",
-                        indexLabel: "{ y }",
-                        showInLegend: false,
-                        dataPoints: Datos
-                    }]
-                });
-                chart.render();
+            chart.render();
+            Datos = [];
 
-
-                Datos = [];
-
-                @{
+            @{
                 foreach (HerramientaAD.com.Utilerias.ElementosDeGrupo.GraficaColumnas grafica18 in Model.Excepcion)
                 {
                     @:Datos.push({ y: @grafica18.EjeY, label: "@grafica18.Etiqueta", color: "@grafica18.Color" });
                 }
             }
 
+            var chart = new CanvasJS.Chart("graficaExcepcion", {
+                exportEnabled: true,
+                animationEnabled: true,
+                axisY: {
+                    labelFontSize: 12
+                },
+                axisX: {
+                    labelAngle: -90,
+                    labelFontSize: 12
+                },
+                data: [{
+                    type: "column",
+                    indexLabel: "{ y }",
+                    indexLabelFontSize: 12,
+                    showInLegend: false,
+                    dataPoints: Datos
+                }]
+            });
 
-                var chart = new CanvasJS.Chart("graficaExcepcion", {
-                    exportEnabled: true,
-                    animationEnabled: true,
-                    data: [{
-                        type: "column",
-                        indexLabel: "{ y }",
-                        showInLegend: false,
-                        dataPoints: Datos
-                    }]
-                });
-                chart.render();
-
+            @if (Model.Excepcion.Count > 0)
+            {
+                @:chart.render();
             }
 
+        }
 
-            function explodePie(e) {
-                if (typeof (e.dataSeries.dataPoints[e.dataPointIndex].exploded) === "undefined" || !e.dataSeries.dataPoints[e.dataPointIndex].exploded) {
-                    e.dataSeries.dataPoints[e.dataPointIndex].exploded = true;
-                } else {
-                    e.dataSeries.dataPoints[e.dataPointIndex].exploded = false;
-                }
-                e.chart.render();
-
+        function explodePie(e) {
+            if (typeof (e.dataSeries.dataPoints[e.dataPointIndex].exploded) === "undefined" || !e.dataSeries.dataPoints[e.dataPointIndex].exploded) {
+                e.dataSeries.dataPoints[e.dataPointIndex].exploded = true;
+            } else {
+                e.dataSeries.dataPoints[e.dataPointIndex].exploded = false;
             }
-        </script>
-    </head>
+            e.chart.render();
+        }
 
-    <body>
+    </script>
 
-        <div class="jumbotron">
-            <h1 class="display-3">@Model.Indicadores.ElementAt(0).NombreApp</h1>
-            <p class="lead">Resultados del Análisis de la Base de Datos</p>
-            <hr class="my-4">
-        </div>
+    <script src="~/Scripts/Loader.js"></script>
+    <link href="~/Estilos/Loader.css" rel="stylesheet" />
 
-        <table border="1" width="100%">
-            <tr class="table-primary"><td colspan="2" align="center">LLAVE PRIMARIA</td></tr>
-            <tr>
-                <td><div id="graficaLlavePrimaria" style="height: 370px;"></div></td>
-                <td><div id="graficaLlavePrimaria2" style="height: 370px;"></div></td>
-            </tr>
-            <tr class="table-primary"><td colspan="2" align="center">LLAVE FORANEA</td></tr>
-            <tr>
-                <td><div id="graficaLlaveForanea" style="height: 370px;"></div></td>
-                <td><div id="graficaLlaveForanea2" style="height: 370px;"></div></td>
-            </tr>
-            <tr class="table-primary"><td colspan="2" align="center">INDICES</td></tr>
-            <tr>
-                <td><div id="graficaIndexes" style="height: 370px;"></div></td>
-                <td><div id="graficaIndexes2" style="height: 370px;"></div></td>
-            </tr>
-            <tr class="table-primary"><td colspan="2" align="center">TIPOS DE OBJETO</td></tr>
-            <tr>
-                <td colspan="2"><div id="graficaTipoOBjeto" style="height: 370px;"></div></td>
-            </tr>
-            <tr class="table-primary"><td colspan="2" align="center">TAMAÑO DE LAS TABLAS</td></tr>
-            <tr>
-                <td colspan="2"><div id="graficaTamanoTabla" style="height: 370px;"></div></td>
-            </tr>
-            <tr class="table-primary"><td colspan="2" align="center">LINEAS EFECTIVAS</td></tr>
-            <tr>
-                <td colspan="2"><div id="graficaLE" style="height: 370px;"></div></td>
-            </tr>
-            <tr class="table-primary"><td colspan="2" align="center">LINEAS COMENTADAS</td></tr>
-            <tr>
-                <td colspan="2"><div id="graficaLineasComentadas" style="height: 370px;"></div></td>
-            </tr>
-            <tr class="table-primary"><td colspan="2" align="center">SELECT</td></tr>
-            <tr>
-                <td colspan="2"><div id="graficaSelect" style="height: 370px;"></div></td>
-            </tr>
-            <tr class="table-primary"><td colspan="2" align="center">INSERT</td></tr>
-            <tr>
-                <td colspan="2"><div id="graficaInsert" style="height: 370px;"></div></td>
-            </tr>
-            <tr class="table-primary"><td colspan="2" align="center">UPDATE</td></tr>
-            <tr>
-                <td colspan="2"><div id="graficaUpdate" style="height: 370px;"></div></td>
-            </tr>
-            <tr class="table-primary"><td colspan="2" align="center">DELETE</td></tr>
-            <tr>
-                <td colspan="2"><div id="graficaDelete" style="height: 370px;"></div></td>
-            </tr>
-            <tr class="table-primary"><td colspan="2" align="center">IF</td></tr>
-            <tr>
-                <td colspan="2"><div id="graficaSi" style="height: 370px;"></div></td>
-            </tr>
-            <tr class="table-primary"><td colspan="2" align="center">LOOP</td></tr>
-            <tr>
-                <td colspan="2"><div id="graficaLoop" style="height: 370px;"></div></td>
-            </tr>
-            <tr class="table-primary"><td colspan="2" align="center">SELECT *</td></tr>
-            <tr>
-                <td colspan="2"><div id="graficaSelect2" style="height: 370px;"></div></td>
-            </tr>
-            <tr class="table-primary"><td colspan="2" align="center">EXCEPTION</td></tr>
-            <tr>
-                <td colspan="2"><div id="graficaExcepcion" style="height: 370px;"></div></td>
-            </tr>
-        </table>
+    <style>
 
-        <script src="~/Scripts/canvasjs.min.js"></script>
-    </body>
+        .nota {
+            color: #ff0000;
+            font-weight: bold;
+        }
+
+        .naranja {
+            color: #ffa500;
+            font-weight: bold;
+        }
+
+        .amarillo {
+            color: #ffd700;
+            font-weight: bold;
+        }
+
+        .verde {
+            color: #02a229;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="jumbotron">
+        <h1 class="display-3">@Model.Indicadores.ElementAt(0).NombreApp</h1>
+        <p class="lead">Resultados del Análisis de la Base de Datos</p>
+        <hr class="my-4">
+    </div>
+
+    <div class="alert alert-dismissible alert-primary">
+        <h6 class="mb-0">Información del estatus de los objetos que componen la Bases Datos de acuerdo a los criterios de evaluación establecidos.</h6>
+    </div>
+
+    
+    <div id="divLoader" class="loader"></div>
+    @if (Model.BasesLista.Count > 1)
+    {
+        
+        <form>
+            <div class="card border-secondary mb-3" style="max-width: 200rem;">
+                <div class="card-header">Filtros</div>
+                <div class="card-body">
+                    <fieldset>
+                        <table align="left" border="0">
+                            <tr>
+                                <td>
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.BaseID, "Base de Datos:")
+                                        @Html.DropDownListFor(m => m.BasesLista, new SelectList(Model.BasesLista, "Indice", "Texto"), "Selecciona", new { @class = "form-control" })
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr style="height: 50px">
+                                <td width="370px" align="center">
+                                    <button type="button" class="btn btn-primary" style="width:300px" id="btnBuscar" >Buscar</button>
+                                </td>
+                            </tr>
+                        </table>
+                    </fieldset>
+                </div>
+            </div>
+        </form>
+    }
+
+    <div id="Detalle">
+        @{
+            Html.RenderPartial("AnalisisBDDetalle");
+        }
+    </div>
+    <script src="~/Scripts/canvasjs.min.js"></script>
+</body>
 </html>
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<script>
+
+    //function RecargarModel(idbd) {
+    //    $.ajax({
+    //        type: "POST",
+    //        url: "/Tableros/AnalisisBDDetalle",
+    //        data: { AplicacionID: idbd },
+    //        success: function (viewHTML) {
+    //            $("#Detalle").empty;
+    //            $("#Detalle").html(viewHTML);
+    //        },
+    //        error: function (errorData) {
+    //            console.log("Request Failed: " + errorData);
+    //        }
+    //    });
+    //}
+
+    function CrearLista(idbd) {
+        var graficaPrimariasPie = CargaDatosPie(idbd, 1);
+        var graficaPrimariaColumnas = CargaDatosColumnas3V(idbd, 1);
+        var graficaForaneasPie = CargaDatosPie(idbd, 2);
+        var graficaForaneasColumnas = CargaDatosColumnas3V(idbd, 2);
+        var graficaIndicesPie = CargaDatosPie(idbd, 3);
+        var graficaIndicesColumnas = CargaDatosColumnas3V(idbd, 3);
+        var graficaTiposObjeto = CargaDatosColumnas(idbd, 4);
+        var graficaTamanoTablas = CargaDatosColumnas(idbd, 5);
+        var graficaLineasEfectivas = CargaDatosColumnas(idbd, 6);
+        var graficaLineasComentadas = CargaDatosColumnas(idbd, 7);
+        var graficaSelect = CargaDatosColumnas(idbd, 8);
+        var graficaInsert = CargaDatosColumnas(idbd, 9);
+        var graficaUpdate = CargaDatosColumnas(idbd, 10);
+        var graficaDelete = CargaDatosColumnas(idbd, 11);
+        var graficaIf = CargaDatosColumnas(idbd, 12);
+        var graficaLoop = CargaDatosColumnas(idbd, 13);
+        var graficaSelectA = CargaDatosColumnas(idbd, 14);
+        var graficaExcepcion = CargaDatosColumnas(idbd, 15);
+
+        $("#Detalle").empty;
+        $("#Detalle").html(onload = initBD(graficaPrimariasPie, graficaPrimariaColumnas, graficaForaneasPie, graficaForaneasColumnas,
+            graficaIndicesPie, graficaIndicesColumnas, graficaTiposObjeto, graficaTamanoTablas, graficaLineasEfectivas,
+            graficaLineasComentadas, graficaSelect, graficaInsert, graficaUpdate, graficaDelete, graficaIf, graficaLoop,
+            graficaSelectA, graficaExcepcion
+        ));
+    }
+
+    function CargaDatosPie(idbd, tipo) {
+        var dataList = [];
+        $.ajax({
+            async: false,
+            type: "GET",
+            url: "/Tableros/CargaDatosAnalisisBD",
+            data: { BaseDeDatosID: idbd, Tipo: tipo },
+            success: function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    dataList.push({ y: data[i].Porcentaje, name: data[i].Nombre, exploded: true });
+                }
+            },
+            error: function (errorData) {
+                console.log("Request Failed: " + errorData);
+            }
+        });
+        return dataList;
+    }
+
+    function CargaDatosColumnas3V(idbd, tipo) {
+        var dataList = [];
+        $.ajax({
+            async: false,
+            type: "GET",
+            url: "/Tableros/CargaDatosAnalisisBD",
+            data: { BaseDeDatosID: idbd, Tipo: tipo },
+            success: function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    dataList.push({ y: data[i].Valor, label: data[i].Nombre });
+                }
+            },
+            error: function (errorData) {
+                console.log("Request Failed: " + errorData);
+            }
+        });
+        return dataList;
+    }
+
+    function CargaDatosColumnas(idbd, tipo) {
+        var dataList = [];
+        var Nombre;
+        $.ajax({
+            async: false,
+            type: "GET",
+            url: "/Tableros/CargaDatosAnalisisBD",
+            data: { BaseDeDatosID: idbd, Tipo: tipo },
+            success: function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    dataList.push({ y: data[i].EjeY, label: data[i].Etiqueta, color: data[i].Color });
+                }
+            },
+            error: function (errorData) {
+                console.log("Request Failed: " + errorData);
+            }
+        });
+        return dataList;
+    }
+
+    $(document).ready(function () {
+        $(".loader").fadeOut();        
+        $('#btnBuscar').click(function () {
+            MostrarLoader();            
+            var idbd = $("#BasesLista Option:Selected").val();
+            CrearLista(idbd);
+            OcultarLoader();
+        });
+    });
+</script>
+
+<script type="text/javascript">
+
+    function MostrarLoader() {
+        $(".loader").fadeIn();
+    }
+
+    function OcultarLoader() {
+        $(".loader").fadeOut();         
+    }
+</script>

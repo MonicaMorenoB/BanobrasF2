@@ -1,7 +1,7 @@
 ﻿@model HerramientaAD.Models.DiagramaERModel
 
 @{
-    ViewBag.Title = "DiagramaUML";
+    ViewBag.Title = "Diagrama E-R";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -12,75 +12,81 @@
     <meta charset="UTF-8">
     <title>Concept Map</title>
     <meta name="description" content="A concept map diagram implemented with labeled links and ForceDirectedLayout." />
+    <link href="~/Estilos/Loader.css" rel="stylesheet" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="~/Scripts/go.js"></script>
-
-        <script id="code">
+    <script src="~/Scripts/go.js"></script>    
+    <script src="~/Scripts/Loader.js"></script>
+    <script id="code">
         function initER(_datosCuadros, _datosRelaciones) {
             var datosCuadros = _datosCuadros;
             var datosRelaciones = _datosRelaciones;
 
-          var $ = go.GraphObject.make;  // for conciseness in defining templates
-          myDiagram =
-            $(go.Diagram, "myDiagramDiv",  // must name or refer to the DIV HTML element
-              {
-                initialAutoScale: go.Diagram.Uniform,  // an initial automatic zoom-to-fit
-                contentAlignment: go.Spot.Center,  // align document to the center of the viewport
-                layout:
-                  $(go.ForceDirectedLayout,  // automatically spread nodes apart
-                    { maxIterations: 200, defaultSpringLength: 30, defaultElectricalCharge: 100 })
-              });
-          // define each Node's appearance
-          myDiagram.nodeTemplate =
-            $(go.Node, "Auto",  // the whole node panel
-              { locationSpot: go.Spot.Center },
-              // define the node's outer shape, which will surround the TextBlock
-              $(go.Shape, "Rectangle",
-                { fill: $(go.Brush, "Linear", { 0: "rgb(254, 201, 0)", 1: "rgb(254, 162, 0)" }), stroke: "black" }),
-              $(go.TextBlock,
-                { font: "bold 10pt helvetica, bold arial, sans-serif", margin: 4 },
-                new go.Binding("text", "text"))
-            );
-          // replace the default Link template in the linkTemplateMap
-          myDiagram.linkTemplate =
-            $(go.Link,  // the whole link panel
-              $(go.Shape,  // the link shape
-                { stroke: "black" }),
-              $(go.Shape,  // the arrowhead
-                { toArrow: "standard", stroke: null }),
-              $(go.Panel, "Auto",
-                $(go.Shape,  // the label background, which becomes transparent around the edges
-                  {
-                    fill: $(go.Brush, "Radial", { 0: "rgb(240, 240, 240)", 0.3: "rgb(240, 240, 240)", 1: "rgba(240, 240, 240, 0)" }),
-                    stroke: null
-                  }),
-                $(go.TextBlock,  // the label text
-                  {
-                    textAlign: "center",
-                    font: "10pt helvetica, arial, sans-serif",
-                    stroke: "#555555",
-                    margin: 4
-                  },
-                  new go.Binding("text", "text"))
-              )
-            );
+            var $ = go.GraphObject.make;  // for conciseness in defining templates
+            myDiagram =
+                $(go.Diagram, "myDiagramDiv",  // must name or refer to the DIV HTML element
+                    {
+                        initialAutoScale: go.Diagram.Uniform,  // an initial automatic zoom-to-fit
+                        contentAlignment: go.Spot.Center,  // align document to the center of the viewport
+                        layout:
+                            $(go.ForceDirectedLayout,  // automatically spread nodes apart
+                                { maxIterations: 200, defaultSpringLength: 30, defaultElectricalCharge: 100 })
+                    });
+            // define each Node's appearance
+            myDiagram.nodeTemplate =
+                $(go.Node, "Auto",  // the whole node panel
+                    { locationSpot: go.Spot.Center },
+                    // define the node's outer shape, which will surround the TextBlock
+                    $(go.Shape, "Rectangle",
+                        { fill: $(go.Brush, "Linear", { 0: "rgb(254, 201, 0)", 1: "rgb(254, 162, 0)" }), stroke: "black" }),
+                    $(go.TextBlock,
+                        { font: "bold 10pt helvetica, bold arial, sans-serif", margin: 4 },
+                        new go.Binding("text", "text"))
+                );
+            // replace the default Link template in the linkTemplateMap
+            myDiagram.linkTemplate =
+                $(go.Link,  // the whole link panel
+                    $(go.Shape,  // the link shape
+                        { stroke: "black" }),
+                    $(go.Shape,  // the arrowhead
+                        { toArrow: "standard", stroke: null }),
+                    $(go.Panel, "Auto",
+                        $(go.Shape,  // the label background, which becomes transparent around the edges
+                            {
+                                fill: $(go.Brush, "Radial", { 0: "rgb(240, 240, 240)", 0.3: "rgb(240, 240, 240)", 1: "rgba(240, 240, 240, 0)" }),
+                                stroke: null
+                            }),
+                        $(go.TextBlock,  // the label text
+                            {
+                                textAlign: "center",
+                                font: "10pt helvetica, arial, sans-serif",
+                                stroke: "#555555",
+                                margin: 4
+                            },
+                            new go.Binding("text", "text"))
+                    )
+                );
 
-        
-          var nodeDataArray = datosCuadros;
-          var linkDataArray = datosRelaciones;
-            
-          myDiagram.model = new go.GraphLinksModel(nodeDataArray, linkDataArray);
+
+            var nodeDataArray = datosCuadros;
+            var linkDataArray = datosRelaciones;
+
+            myDiagram.model = new go.GraphLinksModel(nodeDataArray, linkDataArray);
         }
-        </script>
+    </script>
 </head>
 <body onload="initER([],[])">
+    @*<span class="spinner-border"></span>*@
+
+
 
     <div class="jumbotron">
         <h1 class="display-3">Diagrama de Entidad - Relación</h1>
         <p class="lead">Resultados del Análisis de Entidad - Relación</p>
         <hr class="my-4">
     </div>
-
+    <div class="alert alert-dismissible alert-primary">
+        <h6 class="mb-0">Diagrama Entidad-Relación de las base de datos analizadas, selecciona una base de datos para comenzar. </h6>
+    </div>
     <form>
 
         <div class="card border-secondary mb-3" style="max-width: 200rem;">
@@ -109,7 +115,7 @@
                             </td>
                         </tr>
                         <tr style="height: 50px">
-                            <td width="370px" align="center">
+                            <td width="370px" align="center" >
                                 <button type="button" class="btn btn-primary" style="width:300px" id="btnBuscar">Buscar</button>
                             </td>
                             <td width="370px" align="center">
@@ -122,18 +128,26 @@
             </div>
         </div>
 
-        
-    </form>
-    <br />
+
+    </form>  
+    <div class="loader" ></div>
+   
+    <div class="alert alert-dismissible alert-primary">
+        <h6 class="alert-heading">Zoom</h6>
+        <h6 class="mb-0">1.- Dar click sobre el diagrama. <br />2.- <strong>ctrl +</strong> para aumentar o <strong>ctrl -</strong> para disminuir.</h6>
+    </div>
+ 
+
     <fieldset>
-        
+
         <div id="divdet" style="width:100%;">
             @{
                 Html.RenderPartial("Diagrama");
             }
         </div>
     </fieldset>
-
+    <br />
+    
 </body>
 </html>
 
@@ -143,12 +157,14 @@
     var datosRelacionesFinal = [];
 
     function limpiarfiltros() {
+        MostrarLoader();
         $("#AreasLista").empty;
         $("#AreasLista")[0].selectedIndex = 0;
         $("#AplicacionesLista").empty;
         $("#AplicacionesLista")[0].selectedIndex = 0;
         $("#BasesLista").empty;
         $("#BasesLista")[0].selectedIndex = 0;
+        OcultarLoader();
     }
 
     function CargaCuadros(idbd, _Tipo) {
@@ -163,7 +179,7 @@
                     datosCuadross.push({ key: parseInt(data[i].Numero), text: data[i].Tabla });
                 }
             },
-            error: function (errorData) { console.log("Request Failed: " + errorData); }
+            error: function (errorData) { console.log("Request Failed: " + errorData); OcultarLoader(); }
         });
         return datosCuadross;
     }
@@ -180,20 +196,27 @@
                        datosRelacioness.push({ from: parseInt(data[i].Desde), to: parseInt(data[i].Para), text: data[i].Nombre });
                 }
             },
-            error: function (errorData) { console.log("Request Failed: " + errorData); }
+            error: function (errorData) { console.log("Request Failed: " + errorData); OcultarLoader(); }
         });
         return datosRelacioness;
     }
 
     function ActualizaDiagrama(idbd) {
         datosCuadrossFinal = CargaCuadros(idbd, 1);
-        datosRelacionesFinal = CargaRelaciones(idbd,2)
-        $("#myDiagramDiv").empty;
-        $("#myDiagramDiv").html(onload = initER(datosCuadrossFinal, datosRelacionesFinal));
+        datosRelacionesFinal = CargaRelaciones(idbd, 2)
+        if (datosCuadrossFinal.length != 0) {
+            $("#myDiagramDiv").empty;
+            $("#myDiagramDiv").html(onload = initER(datosCuadrossFinal, datosRelacionesFinal));
+        }
+        else {
+            $("#myDiagramDiv").empty;
+            $("#myDiagramDiv").html('<br/><br/><p style="text-align:center;font-size:30px; font-weight:bold">No se encontró información en la Base de Datos</p>');
+        }
+      
     }
 
     $(document).ready(function() {
-
+         $(".loader").fadeOut();
         $("#AreasLista").change(function() {
             var a = $("#AreasLista Option:Selected").val();
             var url = '@Url.Content("~/")' + "DiagramaER/ActualizarAplicaciones";
@@ -233,9 +256,21 @@
         });
 
         $('#btnBuscar').click(function () {
+            MostrarLoader();
             var idbd = $("#BasesLista Option:Selected").val();
             myDiagram.div = null;
             ActualizaDiagrama(idbd)
+            OcultarLoader();
         });
     });
+</script>
+
+<script type="text/javascript">
+
+   function MostrarLoader() {
+        $(".loader").fadeIn();
+    }
+     function OcultarLoader() {
+        $(".loader").fadeOut();
+    }
 </script>

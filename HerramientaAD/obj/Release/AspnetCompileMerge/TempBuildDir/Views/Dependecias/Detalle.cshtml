@@ -5,15 +5,17 @@
 
 <table id="Tabla1" style="width: 100%; border-collapse: collapse;" cellpadding="0" cellspacing="0">
      @{
-        foreach (System.Xml.XmlNode proc in Model.DetalleXML.DocumentElement.SelectSingleNode("Objetos").SelectNodes("row"))
-        {
-            <tr class="GridViewScrollItem">
-                <td class="CampoMasCorto">@proc.Attributes["uso"].Value.ToString()</td>
-                <td class="CampoAnalisis">@proc.Attributes["nombre"].Value.ToString()</td>
-                <td class="CampoDescarga">@proc.Attributes["tipo"].Value.ToString()</td>
-            </tr>
-        }
-    }
+
+             foreach (System.Xml.XmlNode proc in Model.DetalleXML.DocumentElement.SelectSingleNode("Objetos").SelectNodes("row"))
+             {
+                <tr class="GridViewScrollItem">
+                    <td class="CampoMasCorto">@proc.Attributes["uso"].Value.ToString()</td>
+                    <td class="CampoAnalisis">@proc.Attributes["nombre"].Value.ToString()</td>
+                    <td class="CampoDescarga">@proc.Attributes["tipo"].Value.ToString()</td>
+                </tr>
+             }
+        
+     }
 
 
 

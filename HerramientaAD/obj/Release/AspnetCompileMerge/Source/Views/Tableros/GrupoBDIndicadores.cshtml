@@ -1,0 +1,275 @@
+﻿@model HerramientaAD.Models.GrupoBDModel
+
+<table width="100%" class="table-simple">
+    <tr class="table-primary">
+        <td colspan="2" align="center">
+            <p style="font-size:20px; font-weight:bold">Relación de uso de objetos de Base de Datos dentro del Código</p>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" style="padding:20px">
+            <table class="table-indicator" align="center">
+                <tr>
+                    <td>
+                        <div class="card border-primary mb-3" style="max-width: 20rem; height: 12rem">
+                            <div class="card-header">@Model.Indicadores.ElementAt(0).Nombre</div>
+                            <div class="card-body">
+                                <table class="table-indicator">
+                                    <tr>
+                                        <td rowspan="2">
+                                            <div class="contenedor">
+                                                <div class="box">
+                                                    <div class="chart1" data-percent="@Model.Indicadores.ElementAt(0).Porcentaje">@Model.Indicadores.ElementAt(0).Porcentaje</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td align="center" rowspan="2">
+                                            <div class="vl-blanco"></div>
+                                        </td>
+                                        <td>
+                                            <p class="card-text">En Uso</p>
+                                            <h1 class="card-title">@Model.Indicadores.ElementAt(0).Usados</h1>
+                                            <p class="card-text">No Usados</p>
+                                            <h4 class="card-title">@Model.Indicadores.ElementAt(0).NoUsados</h4>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="card border-primary mb-3" style="max-width: 20rem; height: 12rem">
+                            <div class="card-header">@Model.Indicadores.ElementAt(1).Nombre</div>
+                            <div class="card-body">
+                                <table class="table-indicator">
+                                    <tr>
+                                        <td rowspan="2">
+                                            <div class="contenedor">
+                                                <div class="box">
+                                                    <div class="chart2" data-percent="@Model.Indicadores.ElementAt(1).Porcentaje">@Model.Indicadores.ElementAt(1).Porcentaje</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td align="center" rowspan="2">
+                                            <div class="vl-blanco"></div>
+                                        </td>
+                                        <td>
+                                            <p class="card-text">En Uso</p>
+                                            <h1 class="card-title">@Model.Indicadores.ElementAt(1).Usados</h1>
+                                            <p class="card-text">No Usados</p>
+                                            <h4 class="card-title">@Model.Indicadores.ElementAt(1).NoUsados</h4>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="card border-primary mb-3" style="max-width: 20rem; height: 12rem">
+                            <div class="card-header">@Model.Indicadores.ElementAt(2).Nombre</div>
+                            <div class="card-body">
+                                <table class="table-indicator">
+                                    <tr>
+                                        <td rowspan="2">
+                                            <div class="contenedor">
+                                                <div class="box">
+                                                    <div class="chart3" data-percent="@Model.Indicadores.ElementAt(2).Porcentaje">@Model.Indicadores.ElementAt(2).Porcentaje</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td align="center" rowspan="2">
+                                            <div class="vl-blanco"></div>
+                                        </td>
+                                        <td>
+                                            <p class="card-text">En Uso</p>
+                                            <h1 class="card-title">@Model.Indicadores.ElementAt(2).Usados</h1>
+                                            <p class="card-text">No Usados</p>
+                                            <h4 class="card-title">@Model.Indicadores.ElementAt(2).NoUsados</h4>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="card border-primary mb-3" style="max-width: 20rem; height: 12rem">
+                            <div class="card-header">@Model.Indicadores.ElementAt(3).Nombre</div>
+                            <div class="card-body">
+                                <table class="table-indicator">
+                                    <tr>
+                                        <td rowspan="2">
+                                            <div class="contenedor">
+                                                <div class="box">
+                                                    <div class="chart4" data-percent="@Model.Indicadores.ElementAt(3).Porcentaje">@Model.Indicadores.ElementAt(3).Porcentaje</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td align="center" rowspan="2">
+                                            <div class="vl-blanco"></div>
+                                        </td>
+                                        <td>
+                                            <p class="card-text">En Uso</p>
+                                            <h1 class="card-title">@Model.Indicadores.ElementAt(3).Usados</h1>
+                                            <p class="card-text">No Usados</p>
+                                            <h4 class="card-title">@Model.Indicadores.ElementAt(3).NoUsados</h4>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="card border-primary mb-3" style="max-width: 20rem; height: 12rem">
+                            <div class="card-header">@Model.Indicadores.ElementAt(4).Nombre</div>
+                            <div class="card-body">
+                                <table class="table-indicator">
+                                    <tr>
+                                        <td rowspan="2">
+                                            <div class="contenedor">
+                                                <div class="box">
+                                                    <div class="chart5" data-percent="@Model.Indicadores.ElementAt(4).Porcentaje">@Model.Indicadores.ElementAt(4).Porcentaje</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td align="center" rowspan="2">
+                                            <div class="vl-blanco"></div>
+                                        </td>
+                                        <td>
+                                            <p class="card-text">En Uso</p>
+                                            <h1 class="card-title">@Model.Indicadores.ElementAt(4).Usados</h1>
+                                            <p class="card-text">No Usados</p>
+                                            <h4 class="card-title">@Model.Indicadores.ElementAt(4).NoUsados</h4>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="card border-primary mb-3" style="max-width: 20rem; height: 12rem">
+                            <div class="card-header">@Model.Indicadores.ElementAt(5).Nombre</div>
+                            <div class="card-body">
+                                <table class="table-indicator">
+                                    <tr>
+                                        <td rowspan="2">
+                                            <div class="contenedor">
+                                                <div class="box">
+                                                    <div class="chart6" data-percent="@Model.Indicadores.ElementAt(5).Porcentaje">@Model.Indicadores.ElementAt(5).Porcentaje</div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td align="center" rowspan="2">
+                                            <div class="vl-blanco"></div>
+                                        </td>
+                                        <td>
+                                            <p class="card-text">En Uso</p>
+                                            <h1 class="card-title">@Model.Indicadores.ElementAt(5).Usados</h1>
+                                            <p class="card-text">No Usados</p>
+                                            <h4 class="card-title">@Model.Indicadores.ElementAt(5).NoUsados</h4>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="card border-primary mb-3" style="max-width: 20rem; height: 12rem">
+                            <div class="card-header">@Model.Indicadores.ElementAt(6).Nombre</div>
+                            <div class="card-body">
+                                <table class="table-indicator">
+                                    <tr>
+                                        <td rowspan="2">
+                                            <div class="contenedor">
+                                                <div class="box">
+                                                    <img width="70" height="70" src="~/Images/conexion.png" />
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td align="center" rowspan="2">
+                                            <div class="vl-blanco"></div>
+                                        </td>
+                                        <td>
+                                            <p class="card-text">En Uso</p>
+                                            <h4 class="card-title">@Model.Indicadores.ElementAt(6).Usados</h4>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="card border-primary mb-3" style="max-width: 20rem; height: 12rem">
+                            <div class="card-header">@Model.Indicadores.ElementAt(7).Nombre</div>
+                            <div class="card-body">
+                                <table class="table-indicator">
+                                    <tr>
+                                        <td rowspan="2">
+                                            <div class="contenedor">
+                                                <div class="box">
+                                                    <img width="70" height="70" src="~/Images/crud.png" />
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td align="center" rowspan="2">
+                                            <div class="vl-blanco"></div>
+                                        </td>
+                                        <td>
+                                            <p class="card-text">En Uso</p>
+                                            <h4 class="card-title">@Model.Indicadores.ElementAt(7).Usados</h4>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+<script src="~/Scripts/easypiechart.js"></script>
+<script>
+    var element = document.querySelector('.chart1');
+    new EasyPieChart(element, {
+        scaleColor: false,
+        size: 90
+    });
+</script>
+<script>
+    var element = document.querySelector('.chart2');
+    new EasyPieChart(element, {
+        scaleColor: false,
+        size: 90
+    });
+</script>
+<script>
+    var element = document.querySelector('.chart3');
+    new EasyPieChart(element, {
+        scaleColor: false,
+        size: 90
+    });
+</script>
+<script>
+    var element = document.querySelector('.chart4');
+    new EasyPieChart(element, {
+        scaleColor: false,
+        size: 90
+    });
+</script>
+<script>
+    var element = document.querySelector('.chart5');
+    new EasyPieChart(element, {
+        scaleColor: false,
+        size: 90
+    });
+</script>
+<script>
+    var element = document.querySelector('.chart6');
+    new EasyPieChart(element, {
+        scaleColor: false,
+        size: 90
+    });
+</script>

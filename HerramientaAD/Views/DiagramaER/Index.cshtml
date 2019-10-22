@@ -155,7 +155,14 @@
 <script>
     var datosCuadrossFinal = [];
     var datosRelacionesFinal = [];
-
+         function Habilitarbtn() {
+             document.getElementById("btnBuscar").disabled = false;
+              document.getElementById("btnLimpiar").disabled = false;
+    }
+    function desabilitarbtn() {
+        document.getElementById("btnBuscar").disabled = true;
+         document.getElementById("btnLimpiar").disabled = true;
+    }
     function limpiarfiltros() {
         MostrarLoader();
         $("#AreasLista").empty;
@@ -216,8 +223,10 @@
     }
 
     $(document).ready(function() {
-         $(".loader").fadeOut();
-        $("#AreasLista").change(function() {
+        $(".loader").fadeOut();
+        desabilitarbtn();
+        $("#AreasLista").change(function () {
+            
             var a = $("#AreasLista Option:Selected").val();
             var url = '@Url.Content("~/")' + "DiagramaER/ActualizarAplicaciones";
             var ddlsource = "#AreasLista Option:Selected";
@@ -227,7 +236,7 @@
                 $.each(data, function (i, row) {
                     items += "<option value='" + row.Value + "'>" + row.Text + "</option>";
                 });
-                $("#AplicacionesLista").html(items);
+                $("#AplicacionesLista").html(items);              
             }).fail(function (jqxhr, textStatus, error) {
                 var err = textStatus + ", " + error;
                 console.log("Request Failed: " + err);
@@ -250,12 +259,19 @@
             });
         });
 
+   
+        $("#BasesLista").change(function () {
+            Habilitarbtn()
+        })
+
         $('#btnLimpiar').click(function () {
             myDiagram.div = null;
             limpiarfiltros();
+            desabilitarbtn();
         });
 
         $('#btnBuscar').click(function () {
+            document.getElementById("btnBuscar").disabled = true;
             MostrarLoader();
             var idbd = $("#BasesLista Option:Selected").val();
             myDiagram.div = null;
@@ -266,6 +282,8 @@
 </script>
 
 <script type="text/javascript">
+ 
+
 
    function MostrarLoader() {
         $(".loader").fadeIn();

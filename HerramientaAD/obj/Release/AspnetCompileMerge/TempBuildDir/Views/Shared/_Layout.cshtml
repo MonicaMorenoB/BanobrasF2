@@ -4,16 +4,19 @@
     <link href="~/Content/jquery-ui-1.10.4.css" rel="stylesheet" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title </title>
+    <link rel="shortcut icon" href="~/Images/logo_login.png">
+
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
-    <script>function openNav() {
-        document.getElementById("sidebar-menu").style.display = 'block'
+    <script>
+        function openNav() {
+            document.getElementById("sidebar-menu").style.display = 'block'
         }
-         function closeNav() {
-        document.getElementById("sidebar-menu").style.display = 'none'
-    }
+        function closeNav() {
+            document.getElementById("sidebar-menu").style.display = 'none'
+        }
     </script>
 </head>
 <body>
@@ -44,11 +47,15 @@
                     <li class="nav-item dropdown ">
                         <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true" onclick="openNav()">Ver  @ViewBag.NombreAplicacion</a>
                         <div id="sidebar-menu" onmouseleave="closeNav()" class="dropdown-menu show" x-placement="bottom-start" style="display:none; position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 38px, 0px);">
-                            <a class="dropdown-item" href="@Url.Action("Inicial", "Tableros", new { AplicacionID = ViewBag.Aplicacion } )">Tablero Aplicación</a>
-                            <a class="dropdown-item" href="@Url.Action("GrupoBD", "Tableros", new { AplicacionID = ViewBag.Aplicacion })">Objetos BD</a>
-                            <a class="dropdown-item" href="@Url.Action("AnalisisBD", "Tableros", new { AplicacionID = ViewBag.Aplicacion })">Analisis BD</a>
-                            <a class="dropdown-item" href="@Url.Action("GrupoWS", "Tableros", new { AplicacionID = ViewBag.Aplicacion })">Objetos WS</a>
-                            <a class="dropdown-item" href="@Url.Action("GrupoCM", "Tableros", new { AplicacionID = ViewBag.Aplicacion })">Objetos CM</a>
+                            <a class="dropdown-item" href="@Url.Action("Inicial", "Tableros", new { AplicacionID = ViewBag.Aplicacion } )">Tablero  @ViewBag.NombreAplicacion</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="@Url.Action("AnalisisBD", "Tableros", new { AplicacionID = ViewBag.Aplicacion })">Estadísticas de Base de Datos</a>
+                            <a class="dropdown-item" href="@Url.Action("AnalisisCM", "Tableros", new { AplicacionID = ViewBag.Aplicacion })">Diagrama de Clases, Funciones y Métodos</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="@Url.Action("GrupoBD", "Tableros", new { AplicacionID = ViewBag.Aplicacion })">Objetos de Base de Datos</a>
+                            <a class="dropdown-item" href="@Url.Action("GrupoCM", "Tableros", new { AplicacionID = ViewBag.Aplicacion })">Objetos de Clases, Funciones y Métodos</a>
+                            <a class="dropdown-item" href="@Url.Action("GrupoWS", "Tableros", new { AplicacionID = ViewBag.Aplicacion })">Objetos de Servicios e Interfaces</a>
+
                         </div>
                     </li>
                 }

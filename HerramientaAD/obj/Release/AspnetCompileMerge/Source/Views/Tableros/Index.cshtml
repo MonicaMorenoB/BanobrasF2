@@ -1,7 +1,7 @@
 ﻿@model HerramientaAD.Models.TableroGeneralModel
 
 @{
-    ViewBag.Title = "General";
+    ViewBag.Title = "Tablero General";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -10,7 +10,11 @@
     <p class="lead">Aplicaciones analizadas</p>
     <hr class="my-4">
 </div>
-<br />
+<div class="alert alert-dismissible alert-primary">
+    <h6>Listado de aplicaciones analizadas, selecciona una aplicación para ver su detalle.</h6>
+</div>
+
+
 <table class="table table-bordered">
     <thead>
     </thead>
@@ -24,8 +28,10 @@
                             <tbody>
                                 <tr>
                                     <td width="35%">@xmlNode.Attributes["AplicacionDescripcion"].Value.ToString()</td>
-                                    <td width="15%">@Html.ActionLink(xmlNode.Attributes["Aplicacion"].Value.ToString(), "Inicial", "Tableros", 
-                                                   new { AplicacionID = xmlNode.Attributes["AplicacionID"].Value }, null)</td>
+                                    <td width="15%">
+                                        @Html.ActionLink(xmlNode.Attributes["Aplicacion"].Value.ToString(), "Inicial", "Tableros",
+                                   new { AplicacionID = xmlNode.Attributes["AplicacionID"].Value }, null)
+                                    </td>
                                     <td><strong>Criticidad:</strong> </td>
                                     <td>@xmlNode.Attributes["Criticidad"].Value.ToString()</td>
                                     <td><img width="20" height="20" src="@Url.Content(xmlNode.Attributes["CriticidadImagen"].Value.ToString())" /></td>
@@ -52,3 +58,12 @@
     </tbody>
 </table>
 
+@*<br />
+<div class="alert alert-dismissible alert-primary">
+    <h6 class="alert-heading">Indicaciones</h6>
+    <h6>Ver resultados del análisis de alguna aplicación</h6>
+    <h6 class="mb-0">1.- Dar click sobre uno de los nombres en azul de alguna aplicación. </h6>
+    <h6 class="mb-0">2.- Mostrará el tablero de la aplicación elegida. </h6>
+    <h6 class="mb-0">3.- Navegar sobre el menú desplegable. </h6>
+</div>
+<br />*@
