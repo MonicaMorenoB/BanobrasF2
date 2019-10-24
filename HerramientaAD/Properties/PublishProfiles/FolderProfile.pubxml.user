@@ -16,16 +16,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/10/2013 17:29:20</publishTime>
     </File>
     <File Include="bin/App_global.asax.compiled">
-      <publishTime>10/22/2019 11:42:49</publishTime>
+      <publishTime>10/22/2019 13:35:39</publishTime>
     </File>
     <File Include="bin/App_global.asax.dll">
-      <publishTime>10/22/2019 11:42:49</publishTime>
+      <publishTime>10/22/2019 13:35:39</publishTime>
     </File>
     <File Include="bin/HerramientaAD.dll">
-      <publishTime>10/22/2019 11:42:38</publishTime>
+      <publishTime>10/22/2019 13:35:26</publishTime>
     </File>
     <File Include="bin/HerramientaAD.pdb">
-      <publishTime>10/22/2019 11:42:38</publishTime>
+      <publishTime>10/22/2019 13:35:26</publishTime>
     </File>
     <File Include="bin/JQChart.Web.Mvc.dll">
       <publishTime>06/10/2018 06:27:21</publishTime>
@@ -484,7 +484,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/19/2019 20:18:01</publishTime>
     </File>
     <File Include="PrecompiledApp.config">
-      <publishTime>10/22/2019 11:42:40</publishTime>
+      <publishTime>10/22/2019 13:35:29</publishTime>
     </File>
     <File Include="Scripts/Arrowheads.js">
       <publishTime>08/20/2019 11:08:00</publishTime>
@@ -559,7 +559,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/20/2019 12:47:21</publishTime>
     </File>
     <File Include="Views/Dependecias/Index.cshtml">
-      <publishTime>10/14/2019 16:38:37</publishTime>
+      <publishTime>10/22/2019 13:31:36</publishTime>
     </File>
     <File Include="Views/DetalleTecnico/Detalle.cshtml">
       <publishTime>08/14/2019 13:13:37</publishTime>
@@ -571,7 +571,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/12/2019 11:49:27</publishTime>
     </File>
     <File Include="Views/DiagramaER/Index.cshtml">
-      <publishTime>10/16/2019 12:09:55</publishTime>
+      <publishTime>10/22/2019 13:22:23</publishTime>
     </File>
     <File Include="Views/Login/Index.cshtml">
       <publishTime>09/12/2019 15:45:49</publishTime>

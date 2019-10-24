@@ -114,8 +114,15 @@
                                 </div>
                             </td>
                         </tr>
+                        <tr>
+                            <td>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.TablaID, "Tabla:")
+                                    @Html.DropDownListFor(m => m.TablaLista, new SelectList(Model.TablaLista, "Indice", "Texto"), "Selecciona", new { @class = "form-control" })
+                                </div>
+                            </td>
                         <tr style="height: 50px">
-                            <td width="370px" align="center" >
+                            <td width="370px" align="center">
                                 <button type="button" class="btn btn-primary" style="width:300px" id="btnBuscar">Buscar</button>
                             </td>
                             <td width="370px" align="center">
@@ -171,16 +178,19 @@
         $("#AplicacionesLista")[0].selectedIndex = 0;
         $("#BasesLista").empty;
         $("#BasesLista")[0].selectedIndex = 0;
+        $("#TablaLista").empty;
+        $("#TablaLista")[0].selectedIndex = 0;
         OcultarLoader();
     }
 
     function CargaCuadros(idbd, _Tipo) {
+        var tablita  = $("#TablaLista Option:Selected").text();
         var datosCuadross = [];
         $.ajax({
             async:false,
             type: "GET",
             url: "/DiagramaER/ArregloCuadroC",
-            data: { BaseDeDatosID: idbd, Tipo: _Tipo },            
+            data: { BaseDeDatosID: idbd, Tipo: _Tipo, Tabla:tablita  },            
              success: function (data) {                
                 for (var i = 0; i < data.length; i++) {
                     datosCuadross.push({ key: parseInt(data[i].Numero), text: data[i].Tabla });
@@ -192,12 +202,13 @@
     }
 
     function CargaRelaciones(idbd, _Tipo) {
+        var tablita  = $("#TablaLista Option:Selected").text();
         var datosRelacioness = [];
         $.ajax({
             async:false,
             type: "GET",
              url: "/DiagramaER/ArregloCuadroC",
-            data: { BaseDeDatosID: idbd, Tipo: _Tipo },
+            data: { BaseDeDatosID: idbd, Tipo: _Tipo, Tabla:tablita  },         
              success: function (data) {                
                 for (var i = 0; i < data.length; i++) {                   
                        datosRelacioness.push({ from: parseInt(data[i].Desde), to: parseInt(data[i].Para), text: data[i].Nombre });
@@ -236,7 +247,11 @@
                 $.each(data, function (i, row) {
                     items += "<option value='" + row.Value + "'>" + row.Text + "</option>";
                 });
-                $("#AplicacionesLista").html(items);              
+                $("#AplicacionesLista").html(items);  
+                $("#BasesLista").empty;
+                $("#BasesLista")[0].selectedIndex = 0;
+                $("#TablaLista").empty;
+                $("#TablaLista")[0].selectedIndex = 0;
             }).fail(function (jqxhr, textStatus, error) {
                 var err = textStatus + ", " + error;
                 console.log("Request Failed: " + err);
@@ -252,17 +267,35 @@
                 $.each(data, function (i, row) {
                     items += "<option value='" + row.Value + "'>" + row.Text + "</option>";
                 });
-                $("#BasesLista").html(items);
+                $("#BasesLista").html(items);                 
             }).fail(function (jqxhr, textStatus, error) {
                 var err = textStatus + ", " + error;
                 console.log("Request Failed: " + err);
             });
         });
 
-   
+        
         $("#BasesLista").change(function () {
+            var app = $("#BasesLista Option:Selected").val();
+            var url = '@Url.Content("~/")' + "DiagramaER/ArregloCuadroC";
+            $.getJSON(url, { BaseDeDatosID: app, Tipo: 3 }, function (data) {
+                var items = '';
+                $("#TablaLista").empty;
+                $.each(data, function (i, row) {
+                    items += "<option value='" + row.Indice + "'>" + row.Texto + "</option>";
+                });
+                $("#TablaLista").html(items);
+                Habilitarbtn()
+            }).fail(function (jqxhr, textStatus, error) {
+                var err = textStatus + ", " + error;
+                console.log("Request Failed: " + err);
+            });
+        });
+
+        $("#TablaLista").change(function () {
             Habilitarbtn()
-        })
+        });
+
 
         $('#btnLimpiar').click(function () {
             myDiagram.div = null;
@@ -288,7 +321,7 @@
    function MostrarLoader() {
         $(".loader").fadeIn();
     }
-     function OcultarLoader() {
+    function OcultarLoader() {
         $(".loader").fadeOut();
     }
 </script>

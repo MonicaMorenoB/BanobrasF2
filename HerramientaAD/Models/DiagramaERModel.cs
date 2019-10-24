@@ -38,6 +38,13 @@ namespace HerramientaAD.Models
             set { baseID = value; }
         }
 
+        private string tablaID;
+        public string TablaID
+        {
+            get { return tablaID; }
+            set { tablaID = value; }
+        }
+
         private List<ElementosDiagramaER.Cuadros> cuadros = new List<ElementosDiagramaER.Cuadros>();
         public List<ElementosDiagramaER.Cuadros> Cuadros
         {
@@ -71,6 +78,13 @@ namespace HerramientaAD.Models
         {
             get => basesLista;
             set => basesLista = value;
+        }
+
+        private List<ListasDesplegables> tablaLista = new List<ListasDesplegables>();
+        public List<ListasDesplegables> TablaLista
+        {
+            get => tablaLista;
+            set => tablaLista = value;
         }
 
         private XmlDocument resultadoXML;
@@ -109,12 +123,12 @@ namespace HerramientaAD.Models
         /// <param name="UsuarioID"></param>
         /// <param name="BaseDeDatosID"></param>
         /// <param name="tipo">1: son los cuadritos   2: son las relaciones</param>
-        public DiagramaERModel(int UsuarioID, int BaseDeDatosID, int _tipo)
+        public DiagramaERModel(int UsuarioID, int BaseDeDatosID, int _tipo, string Tabla, int Tipodos)
         {
-            if (datosDiagramaER.DiagramaERConsulta(_tipo, UsuarioID, BaseDeDatosID))
+            if (datosDiagramaER.DiagramaERConsulta(_tipo, UsuarioID, BaseDeDatosID, Tabla))
             {
                 XmlNode xmlNode = datosDiagramaER.ResultadoXML.DocumentElement.SelectSingleNode("DatosBD");
-                if (_tipo == 1) 
+                if (Tipodos == 1) 
                 {
                     foreach (XmlNode elemento in xmlNode.SelectNodes("row"))
                     {
@@ -124,7 +138,7 @@ namespace HerramientaAD.Models
                             );
                     }
                 }
-                else
+                else if(Tipodos == 2)
                 {
                     foreach (XmlNode elemento in xmlNode.SelectNodes("row"))
                     {
@@ -135,8 +149,27 @@ namespace HerramientaAD.Models
                             );
                     }
                 }
+                else
+                {
+
+                    tablaLista.Add(new ListasDesplegables(0, "Todas"));
+                    foreach (XmlNode elemento in xmlNode.SelectNodes("row"))
+                    {
+                        tablaLista.Add(new ListasDesplegables(
+                             int.Parse(elemento.Attributes["Numero"].Value.ToString())
+                            , elemento.Attributes["Tabla"].Value.ToString())
+                            );
+                    }
+                }
 
                 
+            }
+            else
+            {
+                if (Tipodos==3)
+                {
+                    tablaLista.Add(new ListasDesplegables(0, "No hay registros"));
+                }
             }
         }
     }

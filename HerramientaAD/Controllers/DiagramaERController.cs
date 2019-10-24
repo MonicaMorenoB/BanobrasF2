@@ -16,6 +16,7 @@ namespace HerramientaAD.Controllers
     {
         List<ListasDesplegables> aplicacionesLista = new List<ListasDesplegables>();
         List<ListasDesplegables> baseLista = new List<ListasDesplegables>();
+      
         DatosDetalleTecnico datosDetalleTecnico = new DatosDetalleTecnico();
         DatosDiagramaER datosDiagramaER = new DatosDiagramaER();
 
@@ -77,11 +78,14 @@ namespace HerramientaAD.Controllers
             return Json(new SelectList(baseLista, "Indice", "Texto"), JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult ActualizarDiagrama(int BaseDeDatosID, DiagramaERModel diagramaERModel)
+    
+    
+
+        public ActionResult ActualizarDiagrama(int BaseDeDatosID, DiagramaERModel diagramaERModel, string Tabla)
         {
             if (Session["UsuarioID"] != null)
             {
-                diagramaERModel.ResultadoXML = ObtenerDatos(1, int.Parse(Session["UsuarioID"].ToString()), BaseDeDatosID);
+                diagramaERModel.ResultadoXML = ObtenerDatos(1, int.Parse(Session["UsuarioID"].ToString()), BaseDeDatosID, Tabla);
                 XmlNode xmlNode = datosDiagramaER.ResultadoXML.DocumentElement.SelectSingleNode("DatosBD");
                 foreach (XmlNode elemento in xmlNode.SelectNodes("row"))
                 {
@@ -91,7 +95,7 @@ namespace HerramientaAD.Controllers
                         );
                 }
 
-                diagramaERModel.ResultadoXML = ObtenerDatos(2, int.Parse(Session["UsuarioID"].ToString()), BaseDeDatosID);
+                diagramaERModel.ResultadoXML = ObtenerDatos(2, int.Parse(Session["UsuarioID"].ToString()), BaseDeDatosID, Tabla);
                 xmlNode = datosDiagramaER.ResultadoXML.DocumentElement.SelectSingleNode("DatosBD");
                 foreach (XmlNode elemento in xmlNode.SelectNodes("row"))
                 {
@@ -110,10 +114,10 @@ namespace HerramientaAD.Controllers
             }
         }
 
-        public XmlDocument ObtenerDatos(int Tipo, int UsuarioID, int BaseDeDatosID)
+        public XmlDocument ObtenerDatos(int Tipo, int UsuarioID, int BaseDeDatosID, string Tabla)
         {
             XmlDocument detalleXML = new XmlDocument();
-            if (datosDiagramaER.DiagramaERConsulta(Tipo, UsuarioID, BaseDeDatosID))
+            if (datosDiagramaER.DiagramaERConsulta(Tipo, UsuarioID, BaseDeDatosID, Tabla))
             {
                 detalleXML = datosDiagramaER.ResultadoXML;
             }
@@ -124,19 +128,26 @@ namespace HerramientaAD.Controllers
         //MMOB
 
 
-        public JsonResult ArregloCuadroC(int BaseDeDatosID, int Tipo)
+        public JsonResult ArregloCuadroC(int BaseDeDatosID, int Tipo, string Tabla)
         {
+            var accion = (Tipo == 3 || Tipo == 1) ? 1 : 2;
             var cc = Json("", JsonRequestBehavior.AllowGet);
             if (Session["UsuarioID"] != null)
             {
-                var grupoDepModel = new DiagramaERModel(int.Parse(Session["UsuarioID"].ToString()), BaseDeDatosID, Tipo);
+                var grupoDepModel = new DiagramaERModel(int.Parse(Session["UsuarioID"].ToString()), BaseDeDatosID, accion, Tabla, Tipo);
                 if (Tipo == 1)
                 {
                     cc = Json(grupoDepModel.Cuadros, JsonRequestBehavior.AllowGet);
                 }
-                else
+                else if (Tipo == 2)
                 {
                     cc = Json(grupoDepModel.Relaciones, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    cc = Json(grupoDepModel.TablaLista, JsonRequestBehavior.AllowGet);
+
+                   
                 }
             }
             else

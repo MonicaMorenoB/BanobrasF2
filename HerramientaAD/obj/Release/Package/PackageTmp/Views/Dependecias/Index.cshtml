@@ -312,13 +312,14 @@
     }
     function Habilitarbtn() {
         document.getElementById("btnBuscar").disabled = false;
+        
     }
     function desabilitarbtn() {
         document.getElementById("btnBuscar").disabled = true;
     }
 
     function limpiarfiltros() {
-        
+        document.getElementById("btnBuscar").disabled = true;
         $("#AreasLista").empty;
         $("#AreasLista")[0].selectedIndex = 0;
         $("#AplicacionesLista").empty;
@@ -659,8 +660,7 @@
         
 
     }
-</script>
-<script type="text/javascript">
+
 
     function MostrarLoader() {
         $(".loader").fadeIn();

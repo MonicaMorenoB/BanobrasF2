@@ -39,10 +39,14 @@ namespace HerramientaAD.Controllers
                 XmlNode xmlNode = datosDetalleTecnico.ResultadoXML.DocumentElement.SelectSingleNode("Filtros");
                 foreach (XmlNode elemento in xmlNode.SelectNodes("row"))
                 {
-                    filtroLista.Add(new ListasDesplegables(
-                        int.Parse(elemento.Attributes["Numero"].Value.ToString()), 
-                        elemento.Attributes["Nombre"].Value.ToString())
-                        );
+                    var num = elemento.Attributes["Numero"].Value;
+                    
+                        if (num != "") 
+                    {
+                        filtroLista.Add(new ListasDesplegables(int.Parse(num.ToString()),
+                            elemento.Attributes["Nombre"].Value.ToString()));
+                    }
+
                 }
 
             }

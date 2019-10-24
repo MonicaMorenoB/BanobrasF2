@@ -19,7 +19,7 @@ namespace HerramientaAD.com.Datos
             get { return resultadoXML; }
         }
 
-        public bool DiagramaERConsulta(int Tipo, int UsuarioID, int BaseDeDatosID)
+        public bool DiagramaERConsulta(int Tipo, int UsuarioID, int BaseDeDatosID, String Tabla)
         {
             bool respuesta = false;
             try
@@ -28,6 +28,16 @@ namespace HerramientaAD.com.Datos
                 CargaParametro("@Tipo", SqlDbType.Int, 8, ParameterDirection.Input, Tipo);
                 CargaParametro("@Usuario", SqlDbType.Int, 8, ParameterDirection.Input, UsuarioID);
                 CargaParametro("@BDId", SqlDbType.Int, 8, ParameterDirection.Input, BaseDeDatosID);
+                if (Tabla != "Todas"  )
+                {
+                    CargaParametro("@Tabla", SqlDbType.VarChar, 100, ParameterDirection.Input, Tabla);
+                }
+                else if (Tabla != null && Tabla != "Todas" )
+                {
+                    CargaParametro("@Tabla", SqlDbType.VarChar, 100, ParameterDirection.Input, Tabla);
+                }
+                
+                
                 SqlDataReader Lector = AlmacenarStoredProcedureDataReader();
                 if (Lector.Read())
                 {
