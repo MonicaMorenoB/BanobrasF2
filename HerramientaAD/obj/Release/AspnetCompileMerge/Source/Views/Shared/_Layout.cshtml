@@ -18,61 +18,69 @@
             document.getElementById("sidebar-menu").style.display = 'none'
         }
     </script>
+    <style>
+
+
+    </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-        
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-
-
-        <div class="collapse navbar-collapse" id="navbarColor01">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="navbar-brand" href="@Url.Action("Index", "Tableros")">Tablero General</a>
-                </li>
-                <li class="nav-item">
-                    <a class="navbar-brand" href="@Url.Action("Index", "DetalleTecnico")">Detalle Técnico</a>
-                </li>
-                <li class="nav-item">
-                    <a class="navbar-brand" href="@Url.Action("Index", "DiagramaER",new {BaseDeDatosID = 1})">Diagrama E-R</a>
-                </li>
-                <li class="nav-item">
-                    <a class="navbar-brand" href="@Url.Action("Index", "Dependecias")">Dependencias</a>
-                </li>
-                @if (ViewBag.Aplicacion > 0)
-                {
-                    <li class="nav-item dropdown ">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true" onclick="openNav()">Ver  @ViewBag.NombreAplicacion</a>
-                        <div id="sidebar-menu" onmouseleave="closeNav()" class="dropdown-menu show" x-placement="bottom-start" style="display:none; position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 38px, 0px);">
-                            <a class="dropdown-item" href="@Url.Action("Inicial", "Tableros", new { AplicacionID = ViewBag.Aplicacion } )">Tablero  @ViewBag.NombreAplicacion</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="@Url.Action("AnalisisBD", "Tableros", new { AplicacionID = ViewBag.Aplicacion })">Estadísticas de Base de Datos</a>
-                            <a class="dropdown-item" href="@Url.Action("AnalisisCM", "Tableros", new { AplicacionID = ViewBag.Aplicacion })">Diagrama de Clases, Funciones y Métodos</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="@Url.Action("GrupoBD", "Tableros", new { AplicacionID = ViewBag.Aplicacion })">Objetos de Base de Datos</a>
-                            <a class="dropdown-item" href="@Url.Action("GrupoCM", "Tableros", new { AplicacionID = ViewBag.Aplicacion })">Objetos de Clases, Funciones y Métodos</a>
-                            <a class="dropdown-item" href="@Url.Action("GrupoWS", "Tableros", new { AplicacionID = ViewBag.Aplicacion })">Objetos de Servicios e Interfaces</a>
-
-                        </div>
+    <div class="fixed-top">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary  border-bottom border-white">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarColor01">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="navbar-brand" href="@Url.Action("Index", "Tableros")">Tablero General</a>
                     </li>
-                }
-            </ul>
-        </div>
+                    <li class="nav-item">
+                        <a class="navbar-brand" href="@Url.Action("Index", "DetalleTecnico")">Detalle Técnico</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="navbar-brand" href="@Url.Action("Index", "DiagramaER",new {BaseDeDatosID = 1})">Diagrama E-R</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="navbar-brand" href="@Url.Action("Index", "Dependecias")">Dependencias</a>
+                    </li>
+                    <li class="nav-item">                      
+                        <a class="navbar-brand"  href="/Procesos/index.html">Procesos</a>
+                    </li>
+                    @if (ViewBag.Aplicacion > 0)
+                    {
+                        <li class="nav-item dropdown ">
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="true" onclick="openNav()">Ver  @ViewBag.NombreAplicacion</a>
+                            <div id="sidebar-menu" onmouseleave="closeNav()" class="dropdown-menu show" x-placement="bottom-start" style="display:none; position: absolute; will-change: transform; top: 0px; left: 0px; transform: translate3d(0px, 38px, 0px);">
+                                <a class="dropdown-item" href="@Url.Action("Inicial", "Tableros", new { AplicacionID = ViewBag.Aplicacion } )">Tablero  @ViewBag.NombreAplicacion</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="@Url.Action("AnalisisBD", "Tableros", new { AplicacionID = ViewBag.Aplicacion })">Estadísticas de Base de Datos</a>
+                                <a class="dropdown-item" href="@Url.Action("AnalisisCM", "Tableros", new { AplicacionID = ViewBag.Aplicacion })">Diagrama de Clases, Funciones y Métodos</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="@Url.Action("GrupoBD", "Tableros", new { AplicacionID = ViewBag.Aplicacion })">Objetos de Base de Datos</a>
+                                <a class="dropdown-item" href="@Url.Action("GrupoCM", "Tableros", new { AplicacionID = ViewBag.Aplicacion })">Objetos de Clases, Funciones y Métodos</a>
+                                <a class="dropdown-item" href="@Url.Action("GrupoWS", "Tableros", new { AplicacionID = ViewBag.Aplicacion })">Objetos de Servicios e Interfaces</a>
 
-        <form class="form-inline my-2 my-lg-0">
-            <a class="navbar-brand my-2 my-sm-0" href="@Url.Action("Index", "Login")">Salir</a>
-        </form>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+            <form class="form-inline my-2 my-lg-0">
+                <a class="navbar-brand my-2 my-sm-0" href="@Url.Action("Index", "Login")">Salir</a>
+            </form>
+        </nav>
+        
+    </div>
 
-    </nav>
+
     <br />
+    <br />
+    <br />  
     <div class="container body-content">
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; Visor de resultados del Anális de Dependencias</p>
         </footer>
     </div>
 
@@ -80,4 +88,8 @@
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
+
+
+
 </html>
+

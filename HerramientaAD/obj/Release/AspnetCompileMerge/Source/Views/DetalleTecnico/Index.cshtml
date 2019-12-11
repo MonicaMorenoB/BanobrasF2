@@ -18,118 +18,119 @@
             text-align: center;
         }
     </style>
+  
 
-    <div class="jumbotron">
-        <h1 class="display-3">Detalle Técnico</h1>
-        <p class="lead">Ficha de resultados del Análisis</p>
-        <hr class="my-4">
-    </div>
-    <div class="alert alert-dismissible alert-primary">
-        <h6 class="mb-0">Información técnica sobre el código analizado de los tres grupos: Objetos de Base de Datos, Objetos de Servicio e Interfaces y Objetos de Clases y Métodos, selecciona un grupo y un filtro para comenzar.</h6>
-    </div>
-    <form>
-        <div class="card border-secondary mb-3" style="max-width: 200rem;">
-            <div class="card-header">Filtros</div>
-            <div class="card-body">
-                <fieldset>
-                    <table align="center">
-                        <tr style="height: 50px">
-                            <td width="370px" align="center">
-                                <button type="button" class="btn btn-primary" style="width:300px" id="btnFiltrosBD">Objetos de Base de Datos</button>
-                            </td>
-                            <td width="370px" align="center">
-                                <button type="button" class="btn btn-primary" style="width:300px" id="btnFiltrosWS">Objetos de Interfaces y Servicios</button>
-                            </td>
-                            <td width="370px" align="center">
-                                <button type="button" class="btn btn-primary" style="width:300px" id="btnFiltrosCM">Objetos de Clases y Métodos</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="form-group">
-                                    @Html.LabelFor(m => m.AreaID, "Area:")
-                                    @Html.DropDownListFor(m => m.AreasLista, new SelectList(Model.AreasLista, "Indice", "Texto"), "Selecciona", new { @class = "form-control" })
-                                </div>
-                            </td>
-                            <td>
-                                <div class="form-group">
-                                    @Html.LabelFor(m => m.AplicacionID, "Aplicación:")
-                                    @Html.DropDownListFor(m => m.AplicacionesLista, new SelectList(Model.AplicacionesLista, "Indice", "Texto"), "Selecciona", new { @class = "form-control" })
-                                </div>
-                            </td>
-                            <td>
-                                <div class="form-group">
-                                    <label for="checking" , id="Filtro1">Base de Datos:</label>
-                                    @Html.DropDownListFor(m => m.Filtro1Lista, new SelectList(Model.Filtro1Lista, "Indice", "Texto"), "Selecciona", new { @class = "form-control" })
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="form-group">
-                                    <label for="checking" , id="Filtro2">Objeto de Base de Datos:</label>
-                                    @Html.DropDownListFor(m => m.Filtro2Lista, new SelectList(Model.Filtro2Lista, "Indice", "Texto"), "Selecciona", new { @class = "form-control" })
-                                </div>
-                            </td>
-                            <td>
-                                <div class="form-group">
-                                    <label for="checking" , id="Filtro3">Archivo:</label>
-                                    @Html.DropDownListFor(m => m.Filtro3Lista, new SelectList(Model.Filtro3Lista, "Indice", "Texto"), "Selecciona", new { @class = "form-control" })
-                                </div>
-                            </td>
-                            <td>
-                                <div class="form-group">
-                                    <label for="checking" , id="Filtro4">Línea de Código:</label>
-                                    @Html.DropDownListFor(m => m.Filtro4Lista, new SelectList(Model.Filtro4Lista, "Indice", "Texto"), "Selecciona", new { @class = "form-control" })
-                                </div>
-                            </td>
-                        </tr>
-                        <tr style="height: 50px">
-                            <td width="370px" align="center">
-                                <button type="button" class="btn btn-primary" style="width:300px" id="btnBuscar">Buscar</button>
-                            </td>
-                        </tr>
-                    </table>
-                </fieldset>
+        <div class="jumbotron">
+            <h1 class="display-3">Detalle Técnico</h1>
+            <p class="lead">Ficha de resultados del Análisis</p>
+            <hr class="my-4">
+        </div>
+        <div class="alert alert-dismissible alert-primary">
+            <h6 class="mb-0">Información técnica sobre el código analizado de los tres grupos: Objetos de Base de Datos, Objetos de Servicio e Interfaces y Objetos de Clases y Métodos, selecciona un grupo y un filtro para comenzar.</h6>
+        </div>
+        <form>
+            <div class="card border-secondary mb-3" style="max-width: 200rem;">
+                <div class="card-header">Filtros</div>
+                <div class="card-body">
+                    <fieldset>
+                        <table align="center">
+                            <tr style="height: 50px">
+                                <td width="370px" align="center">
+                                    <button type="button" class="btn btn-primary" style="width:300px" id="btnFiltrosBD">Objetos de Base de Datos</button>
+                                </td>
+                                <td width="370px" align="center">
+                                    <button type="button" class="btn btn-primary" style="width:300px" id="btnFiltrosWS">Objetos de Interfaces y Servicios</button>
+                                </td>
+                                <td width="370px" align="center">
+                                    <button type="button" class="btn btn-primary" style="width:300px" id="btnFiltrosCM">Objetos de Clases y Métodos</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.AreaID, "Area:")
+                                        @Html.DropDownListFor(m => m.AreasLista, new SelectList(Model.AreasLista, "Indice", "Texto"), "Selecciona", new { @class = "form-control" })
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.AplicacionID, "Aplicación:")
+                                        @Html.DropDownListFor(m => m.AplicacionesLista, new SelectList(Model.AplicacionesLista, "Indice", "Texto"), "Selecciona", new { @class = "form-control" })
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <label for="checking" , id="Filtro1">Base de Datos:</label>
+                                        @Html.DropDownListFor(m => m.Filtro1Lista, new SelectList(Model.Filtro1Lista, "Indice", "Texto"), "Selecciona", new { @class = "form-control" })
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="form-group">
+                                        <label for="checking" , id="Filtro2">Objeto de Base de Datos:</label>
+                                        @Html.DropDownListFor(m => m.Filtro2Lista, new SelectList(Model.Filtro2Lista, "Indice", "Texto"), "Selecciona", new { @class = "form-control" })
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <label for="checking" , id="Filtro3">Archivo:</label>
+                                        @Html.DropDownListFor(m => m.Filtro3Lista, new SelectList(Model.Filtro3Lista, "Indice", "Texto"), "Selecciona", new { @class = "form-control" })
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <label for="checking" , id="Filtro4">Línea de Código:</label>
+                                        @Html.DropDownListFor(m => m.Filtro4Lista, new SelectList(Model.Filtro4Lista, "Indice", "Texto"), "Selecciona", new { @class = "form-control" })
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr style="height: 50px">
+                                <td width="370px" align="center">
+                                    <button type="button" class="btn btn-primary" style="width:300px" id="btnBuscar">Buscar</button>
+                                </td>
+                            </tr>
+                        </table>
+                    </fieldset>
+                </div>
             </div>
-        </div>
 
-    </form>
+        </form>
 
-    <fieldset>
-        <div class="loader" style="display:none"></div>
-        <div id="HGrid">
+        <fieldset>
+            <div class="loader" style="display:none"></div>
+            <div id="HGrid">
 
-            <table cellspacing="0" id="Tabla0" style="width: 100%; border-collapse: collapse; color: #fff; ">
-                <tr class="GridViewScrollHeader">
-                    <th class="CampoMasCorto"># Línea</th>
-                    <th class="CampoDescarga">Lenguaje</th>
-                    <th class="CampoAnalisis">Archivo</th>
-                    <th class="CampoAnalisis">Padre</th>
-                    <th class="CampoAnalisis">Nombre</th>
-                    <th>Tipo</th>
-                </tr>
-            </table>
-        </div>
-        <div id="divdet">
-            @{
-                Html.RenderPartial("Detalle");
-            }
-        </div>
+                <table cellspacing="0" id="Tabla0" style="width: 100%; border-collapse: collapse; color: #fff; ">
+                    <tr class="GridViewScrollHeader">
+                        <th class="CampoMasCorto"># Línea</th>
+                        <th class="CampoDescarga">Lenguaje</th>
+                        <th class="CampoAnalisis">Archivo</th>
+                        <th class="CampoAnalisis">Padre</th>
+                        <th class="CampoAnalisis">Nombre</th>
+                        <th>Tipo</th>
+                    </tr>
+                </table>
+            </div>
+            <div id="divdet">
+                @{
+                    Html.RenderPartial("Detalle");
+                }
+            </div>
 
-        <div id="divflotante1">
-            <table>
-                <tr>
-                    <td>
-                        <label id="lblauxc1"></label><br />
-                        <label id="lblauxc2"></label><br />
-                        <label id="lblauxc3"></label>
-                    </td>
-                </tr>
-            </table>
+            <div id="divflotante1">
+                <table>
+                    <tr>
+                        <td>
+                            <label id="lblauxc1"></label><br />
+                            <label id="lblauxc2"></label><br />
+                            <label id="lblauxc3"></label>
+                        </td>
+                    </tr>
+                </table>
 
-        </div>
-    </fieldset>
+            </div>
+        </fieldset>
 
 </body>
 </html>
