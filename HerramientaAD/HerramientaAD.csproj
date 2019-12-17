@@ -137,12 +137,14 @@
     <Compile Include="com.Datos\DatosDiagramaER.cs" />
     <Compile Include="com.Datos\DatosObjetosBD.cs" />
     <Compile Include="com.Datos\DatosObjetosCM.cs" />
+    <Compile Include="com.Datos\DatosObjetosResumenHallazgos.cs" />
     <Compile Include="com.Datos\DatosObjetosWS.cs" />
     <Compile Include="com.Utilerias\ElementosDeGrupo.cs" />
     <Compile Include="com.Datos\Usuarios.cs" />
     <Compile Include="com.Utilerias\ElementosDependencias.cs" />
     <Compile Include="com.Utilerias\ElementosDiagramaCM.cs" />
     <Compile Include="com.Utilerias\ElementosDiagramaER.cs" />
+    <Compile Include="com.Utilerias\ElementosHallazgosBD.cs" />
     <Compile Include="com.Utilerias\GestionBD.cs" />
     <Compile Include="com.Log\Log.cs" />
     <Compile Include="com.Utilerias\ListasImagen.cs" />
@@ -167,6 +169,8 @@
     <Compile Include="Models\GrupoCMModel.cs" />
     <Compile Include="Models\GrupoWSModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\MetricasModel.cs" />
+    <Compile Include="Models\ResumenHallazgosModel.cs" />
     <Compile Include="Models\TableroGeneralModel.cs" />
     <Compile Include="Models\TableroInicialModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -197,21 +201,32 @@
     <Content Include="Estilos\dependencias.css" />
     <Content Include="Estilos\detalleTecnico.css" />
     <Content Include="Estilos\Loader.css" />
+    <Content Include="Estilos\Metricas.css" />
     <Content Include="Images\archivos.png" />
+    <Content Include="Images\a_verde.png" />
     <Content Include="Images\clase.png" />
+    <Content Include="Images\commit_rollback.png" />
     <Content Include="Images\conexion.png" />
     <Content Include="Images\crud.png" />
+    <Content Include="Images\c_amarillo.png" />
     <Content Include="Images\disparador.png" />
+    <Content Include="Images\d_naranja.png" />
     <Content Include="Images\enlace.png" />
     <Content Include="Images\espacio.png" />
     <Content Include="Images\evento.png" />
+    <Content Include="Images\excepciones.png" />
+    <Content Include="Images\e_rojo.png" />
     <Content Include="Images\funcion.png" />
+    <Content Include="Images\indice.png" />
     <Content Include="Images\interfaz.png" />
     <Content Include="Images\libreria.png" />
+    <Content Include="Images\llaveForanea.png" />
+    <Content Include="Images\llavePrimaria.png" />
     <Content Include="Images\logo_login.png" />
     <Content Include="Images\metodo.png" />
     <Content Include="Images\middleware.png" />
     <Content Include="Images\objeto.png" />
+    <Content Include="Images\obsolescencia.png" />
     <Content Include="Images\pageLoader.gif" />
     <Content Include="Images\perl.png" />
     <Content Include="Images\presupuesto.png" />
@@ -219,6 +234,7 @@
     <Content Include="Images\RiesgoMercado.png" />
     <Content Include="Images\secuencia.png" />
     <Content Include="Images\tabla.png" />
+    <Content Include="Images\tablaBD.png" />
     <Content Include="Images\vista.png" />
     <Content Include="Images\VisualBasic.png" />
     <Content Include="Scripts\Arrowheads.js" />
@@ -311,6 +327,9 @@
     <Content Include="Views\Tableros\AnalisisBDDetalle.cshtml" />
     <Content Include="Views\Tableros\GrupoBDDetalle.cshtml" />
     <Content Include="Views\Tableros\GrupoBDIndicadores.cshtml" />
+    <Content Include="Views\Tableros\ResumenHallazgos.cshtml" />
+    <Content Include="Views\Tableros\Metricas.cshtml" />
+    <Content Include="Views\Tableros\ResumenHallazgosDetalle.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

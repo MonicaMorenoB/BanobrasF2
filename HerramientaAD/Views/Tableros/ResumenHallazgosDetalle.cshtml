@@ -1,0 +1,398 @@
+﻿@model HerramientaAD.Models.ResumenHallazgosModel
+
+
+
+<table width="100%" class="table-simple">
+    <tr class="table-primary">
+        <td colspan="2" align="center">
+            <p style="font-size:20px; font-weight:bold">Diseño y mantenibilidad</p>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" style="padding:20px">
+            <table class="table-indicator" align="center">
+                <tr>
+                    <td>
+                        <div class="card border-primary mb-3" style="max-width: 15rem; height: 10rem">
+                            <div class="card-header">Tablas</div>@*@Model.Indicadores.ElementAt(0).Nombre*@
+                            <div class="card-body">
+                                <table class="table-indicator">
+                                    <tr>
+                                        <td rowspan="2">
+                                            <div class="contenedor">
+                                                <div class="box">
+                                                    <img width="70" height="70" src="~/Images/tablaBD.png" />
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td align="center" rowspan="2">
+                                            <div class="vl-blanco"></div>
+                                        </td>
+                                        <td>
+                                            <p class="card-text">Dentro del estandar</p>
+                                            <h1 class="card-title"></h1>@*@Model.Indicadores.ElementAt(0).Usados*@
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="card border-primary mb-3" style="max-width: 20rem; height: 10rem">
+                            <div class="card-header">Llaves Primarias</div>@*@Model.Indicadores.ElementAt(1).Nombre*@
+                            <div class="card-body">
+                                <table class="table-indicator">
+                                    <tr>
+                                        <td rowspan="2">
+                                            <div class="contenedor">
+                                                <div class="box">
+                                                    <img width="70" height="70" src="~/Images/llavePrimaria.png" />
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td align="center" rowspan="2">
+                                            <div class="vl-blanco"></div>
+                                        </td>
+                                        <td>
+                                            <p class="card-text">Tablas sin PK</p>
+                                            <h1 class="card-title">@Model.HallazgosBD.ElementAt(0).Porcentaje</h1>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="card border-primary mb-3" style="max-width: 20rem; height: 10rem">
+                            <div class="card-header">Llaves Foraneas</div>
+                            <div class="card-body">
+                                <table class="table-indicator">
+                                    <tr>
+                                        <td rowspan="2">
+                                            <div class="contenedor">
+                                                <div class="box">
+                                                    <img width="70" height="70" src="~/Images/llaveForanea.png" />
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td align="center" rowspan="2">
+                                            <div class="vl-blanco"></div>
+                                        </td>
+                                        <td>
+                                            <p class="card-text">Tablas sin FK</p>
+                                            <h1 class="card-title">@Model.HallazgosBD.ElementAt(1).Porcentaje</h1>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="card border-primary mb-3" style="max-width: 20rem; height: 10rem">
+                            <div class="card-header">Indices</div>
+                            <div class="card-body">
+                                <table class="table-indicator">
+                                    <tr>
+                                        <td rowspan="2">
+                                            <div class="contenedor">
+                                                <div class="box">
+                                                    <img width="70" height="70" src="~/Images/indice.png" />
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td align="center" rowspan="2">
+                                            <div class="vl-blanco"></div>
+                                        </td>
+                                        <td>
+                                            <p class="card-text">Tablas sin IDX</p>
+                                            <h1 class="card-title">@Model.HallazgosBD.ElementAt(2).Porcentaje</h1>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="card border-primary mb-3" style="max-width: 20rem; height: 10rem">
+                            <div class="card-header">Tablas</div>@*@Model.Indicadores.ElementAt(0).Nombre*@
+                            <div class="card-body">
+                                <table class="table-indicator">
+                                    <tr>
+                                        <td rowspan="2">
+                                            <div class="contenedor">
+                                                <div class="box">
+                                                    <img width="70" height="70" src="~/Images/tablaBD.png" />
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td align="center" rowspan="2">
+                                            <div class="vl-blanco"></div>
+                                        </td>
+                                        <td>
+                                            <p class="card-text">Total</p>
+                                            <h1 class="card-title">@Model.HallazgosBD.ElementAt(3).Porcentaje</h1>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="card border-primary mb-3" style="max-width: 20rem; height: 10rem">
+                            <div class="card-header">Tablas</div>@*@Model.Indicadores.ElementAt(0).Nombre*@
+                            <div class="card-body">
+                                <table class="table-indicator">
+                                    <tr>
+                                        <td rowspan="2">
+                                            <div class="contenedor">
+                                                <div class="box">
+                                                    <img width="70" height="70" src="~/Images/tablaBD.png" />
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td align="center" rowspan="2">
+                                            <div class="vl-blanco"></div>
+                                        </td>
+                                        <td>
+                                            <p class="card-text">Vacias</p>
+                                            <h1 class="card-title">@Model.HallazgosBD.ElementAt(4).Porcentaje</h1>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="card border-primary mb-3" style="max-width: 20rem; height: 10rem">
+                            <div class="card-header">Excepciones</div>@*@Model.Indicadores.ElementAt(0).Nombre*@
+                            <div class="card-body">
+                                <table class="table-indicator">
+                                    <tr>
+                                        <td rowspan="2">
+                                            <div class="contenedor">
+                                                <div class="box">
+                                                    <img width="70" height="70" src="~/Images/excepciones.png" />
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td align="center" rowspan="2">
+                                            <div class="vl-blanco"></div>
+                                        </td>
+                                        <td>
+                                            <p class="card-text">Instrucciones</p>
+                                            <h1 class="card-title">@Model.HallazgosBD.ElementAt(5).Porcentaje</h1>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="card border-primary mb-3" style="max-width: 20rem; height: 10rem">
+                            <div class="card-header">Commit y Rollback</div>@*@Model.Indicadores.ElementAt(0).Nombre*@
+                            <div class="card-body">
+                                <table class="table-indicator">
+                                    <tr>
+                                        <td rowspan="2">
+                                            <div class="contenedor">
+                                                <div class="box">
+                                                    <img width="70" height="70" src="~/Images/commit_rollback.png" />
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td align="center" rowspan="2">
+                                            <div class="vl-blanco"></div>
+                                        </td>
+                                        <td>
+                                            <p class="card-text">Instrucciones</p>
+                                            <h1 class="card-title">@Model.HallazgosBD.ElementAt(6).Porcentaje</h1>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+
+
+    <tr class="table-primary">
+        <td colspan="2" align="center">
+            <p style="font-size:20px; font-weight:bold">Obsolescencia</p>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="3" style="padding:20px">
+            <table class="table-indicator" align="center">
+                <tr>
+                    <td colspan="2" style="width: 850px;"><p>@Model.ResultBDpartdos.ElementAt(0).Valor_Resultado</p></td>
+                    <td><img width="70" height="70" src="~/Images/obsolescencia.png" /></td>
+                </tr>
+            </table>
+
+        </td>
+
+    </tr>
+
+
+    <tr class="table-primary">
+        <td colspan="2" align="center">
+            <p style="font-size:20px; font-weight:bold">Calidad de código</p>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" style="padding:20px">
+            <table class="table-indicator" align="center">
+                <tr>
+                    <td colspan="2">
+                        <div class="alert alert-dismissible alert-danger">
+                            <strong>Fuera del estandar</strong>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+
+                    <td>
+                        <div class="card border-primary mb-3" style="max-width: 20rem; height: 10rem">
+                            <div class="card-header">Select *</div>
+                            <div class="card-body">
+                                <table class="table-indicator">
+                                    <tr>
+                                        <td rowspan="2">
+                                            <div class="contenedor">
+                                                <div class="box">
+                                                    <img width="70" height="70" src="~/Images/select_row.png" />
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td align="center" rowspan="2">
+                                            <div class="vl-blanco"></div>
+                                        </td>
+
+                                        <td>
+                                            <h1 class="card-title">@Model.HallazgosBD.ElementAt(7).Porcentaje</h1>
+                                            <p class="card-text">Objetos</p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="card border-primary mb-3" style="max-width: 20rem; height: 10rem">
+                            <div class="card-header">IF</div>
+                            <div class="card-body">
+                                <table class="table-indicator">
+                                    <tr>
+                                        <td rowspan="2">
+                                            <div class="contenedor">
+                                                <div class="box">
+                                                    <img width="70" height="70" src="~/Images/IF.png" />
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td align="center" rowspan="2">
+                                            <div class="vl-blanco"></div>
+                                        </td>
+                                        <td>
+                                            <h1 class="card-title">@Model.HallazgosBD.ElementAt(8).Porcentaje</h1>
+                                            <p class="card-text">Objetos</p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <table class="table-indicator" align="center">
+                <tr>
+                    <td>
+                        <div class="card border-primary mb-3" style="max-width: 20rem; height: 10rem">
+                            <div class="card-header">Riesgos críticos</div>@*@Model.Indicadores.ElementAt(0).Nombre*@
+                            <div class="card-body">
+                                <table class="table-indicator">
+                                    <tr>
+                                        <td>
+                                            <div class="contenedor" style="width:1px">
+                                                <div class="box">
+                                                    <img width="35" height="35" src="~/Images/alerta-rojo.png" />
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td align="center" rowspan="2">
+                                            <div class="vl-blanco"></div>
+                                        </td>
+                                        <td style="width:330px">
+                                            <ul>
+                                                <li>@Model.ResultBDpartdos.ElementAt(1).Valor_Resultado</li>
+
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="card border-primary mb-3" style="max-width: 20rem; height: 10rem">
+                            <div class="card-header">Riesgos altos</div>@*@Model.Indicadores.ElementAt(0).Nombre*@
+                            <div class="card-body">
+                                <table class="table-indicator">
+                                    <tr>
+                                        <td>
+                                            <div class="contenedor" style="width:1px">
+                                                <div class="box">
+                                                    <img width="35" height="35" src="~/Images/alerta-amarillo.png" />
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td align="center" rowspan="2">
+                                            <div class="vl-blanco"></div>
+                                        </td>
+                                        <td style="width:330px">
+                                            <ul>
+                                                <li>@Model.ResultBDpartdos.ElementAt(2).Valor_Resultado</li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="card border-primary mb-3" style="max-width: 20rem; height: 10rem">
+                            <div class="card-header">Riesgos medios</div>@*@Model.Indicadores.ElementAt(0).Nombre*@
+                            <div class="card-body">
+                                <table class="table-indicator">
+                                    <tr>
+                                        <td>
+                                            <div class="contenedor" style="width:1px">
+                                                <div class="box">
+                                                    <img width="35" height="35" src="~/Images/alerta-verde.png" />
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td align="center" rowspan="2">
+                                            <div class="vl-blanco"></div>
+                                        </td>
+                                        <td style="width:330px">
+                                            <ul>
+                                                <li>@Model.ResultBDpartdos.ElementAt(3).Valor_Resultado</li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+
+</table>

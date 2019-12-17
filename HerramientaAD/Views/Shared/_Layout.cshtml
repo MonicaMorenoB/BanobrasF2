@@ -43,8 +43,11 @@
                     <li class="nav-item">
                         <a class="navbar-brand" href="@Url.Action("Index", "Dependecias")">Dependencias</a>
                     </li>
-                    <li class="nav-item">                      
-                        <a class="navbar-brand"  href="/Procesos/index.html">Procesos</a>
+                    <li class="nav-item">
+                        <a class="navbar-brand" href="@Url.Action("Metricas", "Tableros", new { AplicacionID = 1 })">Metricas</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="navbar-brand" href="/Procesos/index.html" target="_blank" >Procesos</a>
                     </li>
                     @if (ViewBag.Aplicacion > 0)
                     {
@@ -59,6 +62,8 @@
                                 <a class="dropdown-item" href="@Url.Action("GrupoBD", "Tableros", new { AplicacionID = ViewBag.Aplicacion })">Objetos de Base de Datos</a>
                                 <a class="dropdown-item" href="@Url.Action("GrupoCM", "Tableros", new { AplicacionID = ViewBag.Aplicacion })">Objetos de Clases, Funciones y Métodos</a>
                                 <a class="dropdown-item" href="@Url.Action("GrupoWS", "Tableros", new { AplicacionID = ViewBag.Aplicacion })">Objetos de Servicios e Interfaces</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="@Url.Action("ResumenHallazgos", "Tableros", new { AplicacionID = ViewBag.Aplicacion, BaseDeDatosID = 0 })">Resumen de hallazgos</a>
 
                             </div>
                         </li>

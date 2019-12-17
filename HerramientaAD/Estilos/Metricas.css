@@ -1,0 +1,101 @@
+﻿/* Prevent the text contents of draggable elements from being selectable. */
+
+body {
+}
+
+
+#divflotante1 {
+    position: absolute;
+    display: none;
+    z-index: 4;
+    border: 1px solid black;
+    background-color: lightcyan;
+    font-size: 15px;
+    border-radius: 10px;
+  
+}
+
+#lblauxc1 {
+    color: darkblue;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+#lblauxc2 {
+    color: darkred;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+#lblauxc3 {
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+
+
+#divdet {
+    position: relative;
+    display: block;
+    width: 600px !important;
+    height: 430px;
+   
+    
+}
+
+#HGrid {
+    width: 220px !important;
+}
+
+
+.CampoCorto {
+    font-size: 11px;
+}
+
+.CampoMasCorto {
+    width: 80px;
+    cursor: pointer;
+}
+
+.CampoAnalisis {
+    width: 250px;
+}
+
+.CampoDescarga {
+    width: 108px;
+    cursor: pointer;
+}
+
+.GridViewScrollItem TD{
+    padding: 8px;
+    white-space: nowrap;
+    border: 1px solid #ced4da;
+    text-align: center;
+}
+
+.GridViewScrollItem2 TD {
+    padding: 8px;
+    white-space: nowrap;
+    border: 1px solid #ffffff;
+    text-align: center;   
+}
+
+.GridViewScrollHeader TH, .GridViewScrollHeader TD {
+    padding: 8px;
+    white-space: nowrap;
+    border: 1px solid #e6e6e6;
+    background-color: #2780E3;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+}
+
+.horizontal-scroll-contenedor {
+    width: 100px;
+    height: 50px;
+    margin: 0 10px 0 0;
+    padding: 0;
+    display: inline-block;
+}
+
+

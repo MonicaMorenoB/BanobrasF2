@@ -39,6 +39,35 @@ namespace HerramientaAD.Controllers
             }
         }
 
+        public ActionResult ResumenHallazgos(int AplicacionID, int BaseDeDatosID)
+        {
+            if (Session["UsuarioID"] != null)
+            {
+                var ResumenHallModel = new ResumenHallazgosModel(int.Parse(Session["UsuarioID"].ToString()), BaseDeDatosID, AplicacionID);
+                ViewBag.Aplicacion = AplicacionID;
+                ViewBag.NombreAplicacion = ResumenHallModel.HallazgosBD.ElementAt(0).NombreApp; //MMOB
+                return View(ResumenHallModel);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Login");
+            }
+        }
+        public ActionResult ResumenHallazgosDetalle(int AplicacionID, int BaseDeDatosID)
+        {
+            if (Session["UsuarioID"] != null)
+            {
+                var ResumenHallModel = new ResumenHallazgosModel(int.Parse(Session["UsuarioID"].ToString()), BaseDeDatosID, AplicacionID);
+                ViewBag.Aplicacion = AplicacionID;
+                ViewBag.NombreAplicacion = ResumenHallModel.HallazgosBD.ElementAt(0).NombreApp; //MMOB
+                return PartialView("ResumenHallazgosDetalle", ResumenHallModel);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Login");
+            }
+        }
+
         public ActionResult GrupoBD(int AplicacionID)
         {
             if (Session["UsuarioID"] != null)
@@ -75,7 +104,7 @@ namespace HerramientaAD.Controllers
             if (Session["UsuarioID"] != null)
             {
                 var grupoBDModel = new GrupoBDModel(int.Parse(Session["UsuarioID"].ToString()), BaseDeDatosID);
-                switch(Tipo)
+                switch (Tipo)
                 {
                     case 1:
                         datosGrafica = Json(grupoBDModel.ArchivosPie, JsonRequestBehavior.AllowGet);
@@ -107,14 +136,14 @@ namespace HerramientaAD.Controllers
             else
             {
                 return RedirectToAction("Index", "Login");
-            }           
+            }
         }
 
         public ActionResult AnalisisBDDetalle(int AplicacionID)
         {
             if (Session["UsuarioID"] != null)
             {
-                var analisisBDModel = new AnalisisBD(int.Parse(Session["UsuarioID"].ToString()), AplicacionID,1);
+                var analisisBDModel = new AnalisisBD(int.Parse(Session["UsuarioID"].ToString()), AplicacionID, 1);
                 ViewBag.Aplicacion = AplicacionID;
                 ViewBag.NombreAplicacion = analisisBDModel.Indicadores.ElementAt(0).NombreApp; //MMOB
                 return PartialView("AnalisisBDDetalle", analisisBDModel);
@@ -127,11 +156,11 @@ namespace HerramientaAD.Controllers
 
         public JsonResult CargaDatosAnalisisBD(int BaseDeDatosID, int Tipo)
         {
-            
+
             var datosGrafica = Json("", JsonRequestBehavior.AllowGet);
             if (Session["UsuarioID"] != null)
             {
-                var analisisBDModel = new AnalisisBD(int.Parse(Session["UsuarioID"].ToString()), BaseDeDatosID,2);
+                var analisisBDModel = new AnalisisBD(int.Parse(Session["UsuarioID"].ToString()), BaseDeDatosID, 2);
                 switch (Tipo)
                 {
                     case 1:
@@ -203,6 +232,8 @@ namespace HerramientaAD.Controllers
             }
         }
 
+
+
         public ActionResult GrupoCM(int AplicacionID)
         {
             if (Session["UsuarioID"] != null)
@@ -240,6 +271,22 @@ namespace HerramientaAD.Controllers
                 ViewBag.NombreAplicacion = analisisCMModel.Aplicacion; //MMOB
                 ViewBag.Aplicacion = AplicacionID;
                 return View(analisisCMModel);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Login");
+            }
+        }
+
+
+        public ActionResult Metricas(int AplicacionID)
+        {
+            if (Session["UsuarioID"] != null)
+            {
+
+                var ResumenHallModel = new MetricasModel(int.Parse(Session["UsuarioID"].ToString()), AplicacionID);
+               
+                return View(ResumenHallModel);
             }
             else
             {

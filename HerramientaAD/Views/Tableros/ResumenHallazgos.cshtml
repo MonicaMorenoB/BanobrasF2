@@ -1,0 +1,98 @@
+﻿@model HerramientaAD.Models.ResumenHallazgosModel
+
+@{
+    ViewBag.Title = "Resumen de hallazgos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<!DOCTYPE HTML>
+<html>
+
+<head>
+ 
+</head>
+
+<body>
+    <div class="jumbotron">
+        <h1 class="display-3">@Model.HallazgosBD.ElementAt(0).NombreApp</h1>
+        <p class="lead">Resumen de hallazgos.</p>
+        <hr class="my-4">
+    </div>
+
+    <div class="alert alert-dismissible alert-primary">
+        <h6 class="mb-0">Información estadística de los objetos de Servicios e Interfaces encontrados durante el análisis de la aplicación.</h6>
+    </div>
+
+    @if (Model.BasesLista.Count > 1)
+    {
+        <form>
+            <div class="card border-secondary mb-3" style="max-width: 200rem;">
+                <div class="card-header">Filtros</div>
+                <div class="card-body">
+                    <fieldset>
+                        <table align="left" border="0">
+                            <tr>
+                                <td>
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.BaseID, "Base de Datos:")
+                                        @Html.DropDownListFor(m => m.BasesLista, new SelectList(Model.BasesLista, "Indice", "Texto"), "Selecciona", new { @class = "form-control" })
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr style="height: 50px">
+                                <td width="370px" align="center">
+                                    <button type="button" class="btn btn-primary" style="width:300px" id="btnBuscar">Buscar</button>
+                                </td>
+                            </tr>
+                        </table>
+                    </fieldset>
+                </div>
+            </div>
+        </form>
+    }
+
+    <div id="Indicadores">
+        @{
+            Html.RenderPartial("ResumenHallazgosDetalle");
+        }
+    </div>
+
+  
+
+
+</body>
+
+</html>
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<script>
+  
+     function CargaResumenHallazgos(idbd, appID){
+         var dataList = [];
+         debugger;
+        $.ajax({
+            async: false,
+            type: "GET",
+            url: "/Tableros/ResumenHallazgosDetalle",
+            data: { AplicacionID: appID, BaseDeDatosID: idbd},
+             success: function (viewHTML) {
+                $("#Indicadores").empty;
+                $("#Indicadores").html(viewHTML);
+            },
+            error: function (errorData) {
+                console.log("Request Failed: " + errorData);
+            }
+        });
+        return dataList;
+    }
+
+       $(document).ready(function () {
+         //$(".loader").fadeOut();
+        $('#btnBuscar').click(function () {
+            //MostrarLoader();
+            var idbd = $("#BasesLista Option:Selected").val();
+           CargaResumenHallazgos(idbd, 0)
+        });
+    });
+</script>
