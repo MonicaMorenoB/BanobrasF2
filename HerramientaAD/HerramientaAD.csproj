@@ -137,6 +137,7 @@
     <Compile Include="com.Datos\DatosDiagramaER.cs" />
     <Compile Include="com.Datos\DatosObjetosBD.cs" />
     <Compile Include="com.Datos\DatosObjetosCM.cs" />
+    <Compile Include="com.Datos\DatosObjetosMetricas.cs" />
     <Compile Include="com.Datos\DatosObjetosResumenHallazgos.cs" />
     <Compile Include="com.Datos\DatosObjetosWS.cs" />
     <Compile Include="com.Utilerias\ElementosDeGrupo.cs" />
@@ -145,6 +146,7 @@
     <Compile Include="com.Utilerias\ElementosDiagramaCM.cs" />
     <Compile Include="com.Utilerias\ElementosDiagramaER.cs" />
     <Compile Include="com.Utilerias\ElementosHallazgosBD.cs" />
+    <Compile Include="com.Utilerias\ElementosMetricas.cs" />
     <Compile Include="com.Utilerias\GestionBD.cs" />
     <Compile Include="com.Log\Log.cs" />
     <Compile Include="com.Utilerias\ListasImagen.cs" />
@@ -204,6 +206,7 @@
     <Content Include="Estilos\Metricas.css" />
     <Content Include="Images\archivos.png" />
     <Content Include="Images\a_verde.png" />
+    <Content Include="Images\b_verdeFuerte.png" />
     <Content Include="Images\clase.png" />
     <Content Include="Images\commit_rollback.png" />
     <Content Include="Images\conexion.png" />
@@ -217,6 +220,7 @@
     <Content Include="Images\excepciones.png" />
     <Content Include="Images\e_rojo.png" />
     <Content Include="Images\funcion.png" />
+    <Content Include="Images\IF.png" />
     <Content Include="Images\indice.png" />
     <Content Include="Images\interfaz.png" />
     <Content Include="Images\libreria.png" />
@@ -231,10 +235,13 @@
     <Content Include="Images\perl.png" />
     <Content Include="Images\presupuesto.png" />
     <Content Include="Images\procedimiento.png" />
+    <Content Include="Images\Registros_tablas.png" />
     <Content Include="Images\RiesgoMercado.png" />
     <Content Include="Images\secuencia.png" />
+    <Content Include="Images\select_row.png" />
     <Content Include="Images\tabla.png" />
-    <Content Include="Images\tablaBD.png" />
+    <Content Include="Images\Tabla_vacias.png" />
+    <Content Include="Images\Total_Tablas.png" />
     <Content Include="Images\vista.png" />
     <Content Include="Images\VisualBasic.png" />
     <Content Include="Scripts\Arrowheads.js" />

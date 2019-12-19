@@ -279,12 +279,12 @@ namespace HerramientaAD.Controllers
         }
 
 
-        public ActionResult Metricas(int AplicacionID)
+        public ActionResult Metricas()
         {
             if (Session["UsuarioID"] != null)
             {
 
-                var ResumenHallModel = new MetricasModel(int.Parse(Session["UsuarioID"].ToString()), AplicacionID);
+                var ResumenHallModel = new MetricasModel(int.Parse(Session["UsuarioID"].ToString()));
                
                 return View(ResumenHallModel);
             }

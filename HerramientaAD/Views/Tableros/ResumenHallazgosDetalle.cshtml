@@ -14,14 +14,14 @@
                 <tr>
                     <td>
                         <div class="card border-primary mb-3" style="max-width: 15rem; height: 10rem">
-                            <div class="card-header">Tablas</div>@*@Model.Indicadores.ElementAt(0).Nombre*@
+                            <div class="card-header">Tablas con mayor registros</div>@*@Model.Indicadores.ElementAt(0).Nombre*@
                             <div class="card-body">
                                 <table class="table-indicator">
                                     <tr>
                                         <td rowspan="2">
                                             <div class="contenedor">
                                                 <div class="box">
-                                                    <img width="70" height="70" src="~/Images/tablaBD.png" />
+                                                    <img width="70" height="70" src="~/Images/Registros_tablas.png" />
                                                 </div>
                                             </div>
                                         </td>
@@ -29,8 +29,8 @@
                                             <div class="vl-blanco"></div>
                                         </td>
                                         <td>
-                                            <p class="card-text">Dentro del estandar</p>
-                                            <h1 class="card-title"></h1>@*@Model.Indicadores.ElementAt(0).Usados*@
+                                            <p class="card-text">De n tablas</p>
+                                            <h1 class="card-title">600</h1>@*@Model.Indicadores.ElementAt(0).Usados*@
                                         </td>
                                     </tr>
                                 </table>
@@ -64,7 +64,7 @@
                     </td>
                     <td>
                         <div class="card border-primary mb-3" style="max-width: 20rem; height: 10rem">
-                            <div class="card-header">Llaves Foraneas</div>
+                            <div class="card-header">Llaves Foráneas</div>
                             <div class="card-body">
                                 <table class="table-indicator">
                                     <tr>
@@ -89,7 +89,7 @@
                     </td>
                     <td>
                         <div class="card border-primary mb-3" style="max-width: 20rem; height: 10rem">
-                            <div class="card-header">Indices</div>
+                            <div class="card-header">Índices</div>
                             <div class="card-body">
                                 <table class="table-indicator">
                                     <tr>
@@ -116,14 +116,14 @@
                 <tr>
                     <td>
                         <div class="card border-primary mb-3" style="max-width: 20rem; height: 10rem">
-                            <div class="card-header">Tablas</div>@*@Model.Indicadores.ElementAt(0).Nombre*@
+                            <div class="card-header">Total de Tablas</div>@*@Model.Indicadores.ElementAt(0).Nombre*@
                             <div class="card-body">
                                 <table class="table-indicator">
                                     <tr>
                                         <td rowspan="2">
                                             <div class="contenedor">
                                                 <div class="box">
-                                                    <img width="70" height="70" src="~/Images/tablaBD.png" />
+                                                    <img width="70" height="70" src="~/Images/Total_Tablas.png" />
                                                 </div>
                                             </div>
                                         </td>
@@ -141,14 +141,14 @@
                     </td>
                     <td>
                         <div class="card border-primary mb-3" style="max-width: 20rem; height: 10rem">
-                            <div class="card-header">Tablas</div>@*@Model.Indicadores.ElementAt(0).Nombre*@
+                            <div class="card-header">% de Tablas vacías</div>@*@Model.Indicadores.ElementAt(0).Nombre*@
                             <div class="card-body">
                                 <table class="table-indicator">
                                     <tr>
                                         <td rowspan="2">
                                             <div class="contenedor">
                                                 <div class="box">
-                                                    <img width="70" height="70" src="~/Images/tablaBD.png" />
+                                                    <img width="70" height="70" src="~/Images/Tabla_vacias.png" />
                                                 </div>
                                             </div>
                                         </td>
@@ -230,7 +230,7 @@
             <table class="table-indicator" align="center">
                 <tr>
                     <td colspan="2" style="width: 850px;"><p>@Model.ResultBDpartdos.ElementAt(0).Valor_Resultado</p></td>
-                    <td><img width="70" height="70" src="~/Images/obsolescencia.png" /></td>
+                    <td><img width="70" height="70" src="~/Images/inactivo.png" /></td>
                 </tr>
             </table>
 
@@ -246,21 +246,35 @@
     </tr>
     <tr>
         <td colspan="2" style="padding:20px">
-            <table class="table-indicator" align="center">
-                <tr>
-                    <td colspan="2">
-                        <div class="alert alert-dismissible alert-danger">
-                            <strong>Fuera del estandar</strong>
-                        </div>
+            <table align="center">
+
+                <tr class="table-dark">
+                    <td colspan="3" align="left">
+                        <p class="" style="font-size:16px; font-weight:bold">&nbsp;&nbsp;&nbsp;&nbsp;Criterios de Evaluación</p>
                     </td>
+                </tr>
+
+                <tr class="table-dark">
+                    <td colspan="3" align="center">
+                        <table width="100%" align="center">
+                            <tr align="center">
+                                <td style="text-align:center; width:400px"> <span class="nota">Select *</span> > 1 </td>
+                                <td style="text-align:center; width:100px"> <span class="nota"></span> </td>
+                                <td style="text-align:center; width:400px"><span class="nota">IF</span> > 15 </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr >
+                    <td colspan="3" align="left" style="height:10px">  </td>
                 </tr>
                 <tr>
 
-                    <td>
-                        <div class="card border-primary mb-3" style="max-width: 20rem; height: 10rem">
+                    <td style="width:400px">
+                        <div class="card border-primary mb-3" style="max-width: 45rem; height: 10rem">
                             <div class="card-header">Select *</div>
                             <div class="card-body">
-                                <table class="table-indicator">
+                                <table class="table-indicator" style=" width: 400px;">
                                     <tr>
                                         <td rowspan="2">
                                             <div class="contenedor">
@@ -282,11 +296,12 @@
                             </div>
                         </div>
                     </td>
-                    <td>
-                        <div class="card border-primary mb-3" style="max-width: 20rem; height: 10rem">
+                    <td style="width:100px"></td>
+                    <td style="width:400px">
+                        <div class="card border-primary mb-3" style="max-width: 45rem; height: 10rem">
                             <div class="card-header">IF</div>
                             <div class="card-body">
-                                <table class="table-indicator">
+                                <table class="table-indicator" style=" width: 400px;">
                                     <tr>
                                         <td rowspan="2">
                                             <div class="contenedor">
@@ -308,7 +323,11 @@
                         </div>
                     </td>
                 </tr>
+                 <tr >
+                    <td colspan="3" align="left" style="height:20px">  </td>
+                </tr>
             </table>
+
             <table class="table-indicator" align="center">
                 <tr>
                     <td>

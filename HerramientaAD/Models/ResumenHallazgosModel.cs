@@ -50,8 +50,6 @@ namespace HerramientaAD.Models
             if (datosObjetosResumenHallazgos.ObjetosResultBDConsulta(TipoConsulta1, UsuarioID, BDID, AplicacionID))
             {
                 XmlNode xmlNode = datosObjetosResumenHallazgos.ResultadoXML.DocumentElement.SelectSingleNode("ResultadosBD");
-
-                //MMOB - Se creo código para la optención del nombre de la aplicación
                 if (aplicaciones.AplicacionesConsulta(UsuarioID, 0, AplicacionID))
                 {
                     XmlNode xmlApp = aplicaciones.ResultadoXML.DocumentElement.SelectSingleNode("Aplicaciones");
@@ -60,7 +58,17 @@ namespace HerramientaAD.Models
                         Nombreapp = elementoapp.Attributes["Aplicacion"].Value.ToString();
                     }
                 }
-                //MMOB
+                int contador = 0;
+                foreach (XmlNode elemento in xmlNode.SelectNodes("row"))
+                {
+                    contador = contador + 1;
+                }
+                if (contador == 6)
+                {
+                    hallazgosBD.Add(new ElementosHallazgosBD.ResultBD("PRIMARY KEY", "0%", Nombreapp));
+                    hallazgosBD.Add(new ElementosHallazgosBD.ResultBD("FOREIGN KEY", "0%", Nombreapp));
+                    hallazgosBD.Add(new ElementosHallazgosBD.ResultBD("INDEXES", "0%", Nombreapp));
+                }
                 foreach (XmlNode elemento in xmlNode.SelectNodes("row"))
                 {
                     hallazgosBD.Add(new ElementosHallazgosBD.ResultBD(
@@ -69,8 +77,6 @@ namespace HerramientaAD.Models
                         elemento.Attributes["Valor"].Value.ToString()
                         , Nombreapp)); //MMOB - Se agregó nuevo atributo "Nombreapp"
                 }
-
-
             }
             if (datosObjetosResumenHallazgos.ObjetosResultBDConsulta(TipoConsulta2, UsuarioID, BDID, AplicacionID))
             {
@@ -79,10 +85,9 @@ namespace HerramientaAD.Models
                 {
                     ResultBDpartdos.Add(new ElementosHallazgosBD.ResultBDpartdos(
                         elemento.Attributes["resultado"].Value.ToString()
-                        , elemento.Attributes["Valor_Resultado"].Value.ToString())); //MMOB - Se agregó nuevo atributo "Nombreapp"
+                        ,elemento.Attributes["Valor_Resultado"].Value.ToString())); //MMOB - Se agregó nuevo atributo "Nombreapp"
                 }
             }
-
             if (datosObjetosResumenHallazgos.ObjetosResultBDConsulta(TipoConsulta3, UsuarioID, BDID, AplicacionID))
             {
                 XmlNode xmlNode = datosObjetosResumenHallazgos.ResultadoXML.DocumentElement.SelectSingleNode("ResultadosBD");

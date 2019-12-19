@@ -63,684 +63,281 @@
                         </table>
                     </div>
                 </td>
-                <td >
-                    <div style=" overflow-x: scroll; width:800px">
+                <td>
+                    <div style=" overflow-x: scroll; width:900px">
                         <table id="Tabla1" style=" border-collapse: collapse;" cellpadding="0" cellspacing="0">
 
+
                             <tr class="GridViewScrollItem">
-                                <td class="CampoAnalisis">
-                                    <table style="margin: 0 auto;">
-                                        <tr class="GridViewScrollItem2">
-                                            <td><p>ABCDEFG</p></td>
-                                        </tr>
-                                        <tr class="GridViewScrollItem2">
-                                            <td>
-                                                <h6>Nombre completo de la applicación</h6>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                                <td class="CampoAnalisis">
-                                    <table style="margin: 0 auto;">
-                                        <tr class="GridViewScrollItem2">
-                                            <td><p>ABCDEFG</p></td>
-                                        </tr>
-                                        <tr class="GridViewScrollItem2">
-                                            <td>
-                                                <h6>Nombre completo de la applicación</h6>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                                <td class="CampoAnalisis">
-                                    <table style="margin: 0 auto;">
-                                        <tr class="GridViewScrollItem2">
-                                            <td><p>ABCDEFG</p></td>
-                                        </tr>
-                                        <tr class="GridViewScrollItem2">
-                                            <td>
-                                                <h6>Nombre completo de la applicación</h6>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                                <td class="CampoAnalisis">
-                                    <table style="margin: 0 auto;">
-                                        <tr class="GridViewScrollItem2">
-                                            <td><p>ABCDEFG</p></td>
-                                        </tr>
-                                        <tr class="GridViewScrollItem2">
-                                            <td>
-                                                <h6>Nombre completo de la applicación</h6>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                                <td class="CampoAnalisis">
-                                    <table style="margin: 0 auto;">
-                                        <tr class="GridViewScrollItem2">
-                                            <td><p>ABCDEFG</p></td>
-                                        </tr>
-                                        <tr class="GridViewScrollItem2">
-                                            <td>
-                                                <h6>Nombre completo de la applicación</h6>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                                <td class="CampoAnalisis">
-                                    <table style="margin: 0 auto;">
-                                        <tr class="GridViewScrollItem2">
-                                            <td><p>ABCDEFG</p></td>
-                                        </tr>
-                                        <tr class="GridViewScrollItem2">
-                                            <td>
-                                                <h6>Nombre completo de la applicación</h6>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                                <td class="CampoAnalisis">
-                                    <table style="margin: 0 auto;">
-                                        <tr class="GridViewScrollItem2">
-                                            <td><p>ABCDEFG</p></td>
-                                        </tr>
-                                        <tr class="GridViewScrollItem2">
-                                            <td>
-                                                <h6>Nombre completo de la applicación</h6>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                                <td class="CampoAnalisis">
-                                    <table style="margin: 0 auto;">
-                                        <tr class="GridViewScrollItem2">
-                                            <td><p>ABCDEFG</p></td>
-                                        </tr>
-                                        <tr class="GridViewScrollItem2">
-                                            <td>
-                                                <h6>Nombre completo de la applicación</h6>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
+                                @{
+                                    foreach (System.Xml.XmlNode proc in Model.DetalleXML.DocumentElement.SelectSingleNode("ResultadosMetricas").SelectNodes("row"))
+                                    {
+                                        <td class="CampoAnalisis">
+                                            <table style="margin: 0 auto;">
+                                                <tr class="GridViewScrollItem2">
+                                                    <td><p>@proc.Attributes["NombreApp"].Value.ToString()</p></td>
+                                                </tr>
+                                                <tr class="GridViewScrollItem2">
+                                                    <td>
+                                                        <h6>@proc.Attributes["NombreAppCompleto"].Value.ToString()</h6>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    }
+                                }
                             </tr>
 
                             <tr class="GridViewScrollItem">
-                                <td class="CampoAnalisis">
-                                    <table style="margin: 0 auto;">
-                                        <tr class="GridViewScrollItem2">
-                                            <td>123, 456 LDC</td>
-                                            <td>
-                                                <img width="25" height="25" src="~/Images/e_rojo.png" />
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                                <td class="CampoAnalisis">
-                                    <table style="margin: 0 auto;">
-                                        <tr class="GridViewScrollItem2">
-                                            <td>123, 456 LDC</td>
-                                            <td>
-                                                <img width="25" height="25" src="~/Images/e_rojo.png" />
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                                <td class="CampoAnalisis">
-                                    <table style="margin: 0 auto;">
-                                        <tr class="GridViewScrollItem2">
-                                            <td>123, 456 LDC</td>
-                                            <td>
-                                                <img width="25" height="25" src="~/Images/e_rojo.png" />
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                                <td class="CampoAnalisis">
-                                    <table style="margin: 0 auto;">
-                                        <tr class="GridViewScrollItem2">
-                                            <td>123, 456 LDC</td>
-                                            <td>
-                                                <img width="25" height="25" src="~/Images/e_rojo.png" />
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                                <td class="CampoAnalisis">
-                                    <table style="margin: 0 auto;">
-                                        <tr class="GridViewScrollItem2">
-                                            <td>123, 456 LDC</td>
-                                            <td>
-                                                <img width="25" height="25" src="~/Images/e_rojo.png" />
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                                <td class="CampoAnalisis">
-                                    <table style="margin: 0 auto;">
-                                        <tr class="GridViewScrollItem2">
-                                            <td>123, 456 LDC</td>
-                                            <td>
-                                                <img width="25" height="25" src="~/Images/e_rojo.png" />
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                                <td class="CampoAnalisis">
-                                    <table style="margin: 0 auto;">
-                                        <tr class="GridViewScrollItem2">
-                                            <td>123, 456 LDC</td>
-                                            <td>
-                                                <img width="25" height="25" src="~/Images/e_rojo.png" />
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                                <td class="CampoAnalisis">
-                                    <table style="margin: 0 auto;">
-                                        <tr class="GridViewScrollItem2">
-                                            <td>123, 456 LDC</td>
-                                            <td>
-                                                <img width="25" height="25" src="~/Images/e_rojo.png" />
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
+                                @{
+                                    foreach (System.Xml.XmlNode proc in Model.DetalleXML.DocumentElement.SelectSingleNode("ResultadosMetricas").SelectNodes("row"))
+                                    {
+                                        <td class="CampoAnalisis">
+                                            <table style="margin: 0 auto; width:100%">
+                                                <tr class="GridViewScrollItem2">
+                                                    <td style="text-align:left; width:25px">
+                                                        @if (int.Parse(proc.Attributes["Tamaño"].Value.ToString()) < 1000)
+                                                        {
+                                                            <img width="25" height="25" src="~/Images/a_verde.png" />
+                                                        }
+                                                        @if (int.Parse(proc.Attributes["Tamaño"].Value.ToString()) > 1000 && int.Parse(proc.Attributes["Tamaño"].Value.ToString()) < 3000)
+                                                        {
+                                                            <img width="25" height="25" src="~/Images/b_verdeFuerte.png" />
+                                                        }
+                                                        @if (int.Parse(proc.Attributes["Tamaño"].Value.ToString()) > 3000 && int.Parse(proc.Attributes["Tamaño"].Value.ToString()) < 50000)
+                                                        {
+                                                            <img width="25" height="25" src="~/Images/c_amarillo.png" />
+                                                        }
+                                                        @if (int.Parse(proc.Attributes["Tamaño"].Value.ToString()) > 50000 && int.Parse(proc.Attributes["Tamaño"].Value.ToString()) < 100000)
+                                                        {
+                                                            <img width="25" height="25" src="~/Images/d_naranja.png" />
+                                                        }
+                                                        @if (int.Parse(proc.Attributes["Tamaño"].Value.ToString()) > 10000)
+                                                        {
+                                                            <img width="25" height="25" src="~/Images/e_rojo.png" />
+                                                        }
+
+                                                    </td>
+                                                    <td>@String.Format("{0:n0}", int.Parse(proc.Attributes["Tamaño"].Value.ToString())) LDC</td>
+
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    }
+                                }
                             </tr>
 
                             <tr class="GridViewScrollItem">
-                                <td class="CampoAnalisis">
-                                    <table style="margin: 0 auto;">
-                                        <tr class="GridViewScrollItem2">
-                                            <td>123, 456 LDC</td>
-                                            <td>
-                                                <img width="25" height="25" src="~/Images/a_verde.png" />
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                                <td class="CampoAnalisis">
-                                    <table style="margin: 0 auto;">
-                                        <tr class="GridViewScrollItem2">
-                                            <td>123, 456 LDC</td>
-                                            <td>
-                                                <img width="25" height="25" src="~/Images/a_verde.png" />
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                                <td class="CampoAnalisis">
-                                    <table style="margin: 0 auto;">
-                                        <tr class="GridViewScrollItem2">
-                                            <td>123, 456 LDC</td>
-                                            <td>
-                                                <img width="25" height="25" src="~/Images/a_verde.png" />
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                                <td class="CampoAnalisis">
-                                    <table style="margin: 0 auto;">
-                                        <tr class="GridViewScrollItem2">
-                                            <td>123, 456 LDC</td>
-                                            <td>
-                                                <img width="25" height="25" src="~/Images/a_verde.png" />
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                                <td class="CampoAnalisis">
-                                    <table style="margin: 0 auto;">
-                                        <tr class="GridViewScrollItem2">
-                                            <td>123, 456 LDC</td>
-                                            <td>
-                                                <img width="25" height="25" src="~/Images/a_verde.png" />
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                                <td class="CampoAnalisis">
-                                    <table style="margin: 0 auto;">
-                                        <tr class="GridViewScrollItem2">
-                                            <td>123, 456 LDC</td>
-                                            <td>
-                                                <img width="25" height="25" src="~/Images/a_verde.png" />
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                                <td class="CampoAnalisis">
-                                    <table style="margin: 0 auto;">
-                                        <tr class="GridViewScrollItem2">
-                                            <td>123, 456 LDC</td>
-                                            <td>
-                                                <img width="25" height="25" src="~/Images/a_verde.png" />
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                                <td class="CampoAnalisis">
-                                    <table style="margin: 0 auto;">
-                                        <tr class="GridViewScrollItem2">
-                                            <td>123, 456 LDC</td>
-                                            <td>
-                                                <img width="25" height="25" src="~/Images/a_verde.png" />
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
+                                @{
+                                    foreach (System.Xml.XmlNode proc in Model.DetalleXML.DocumentElement.SelectSingleNode("ResultadosMetricas").SelectNodes("row"))
+                                    {
+                                        <td class="CampoAnalisis">
+                                            <table style="margin: 0 auto; width:100%">
+                                                <tr class="GridViewScrollItem2">
+                                                    <td style="text-align:left;  width:25px">
+                                                        @if (int.Parse(proc.Attributes["Obsolescencia"].Value.ToString()) == 1)
+                                                        {
+                                                            <img width="25" height="25" src="~/Images/a_verde.png" />
+                                                        }
+                                                        @if (int.Parse(proc.Attributes["Obsolescencia"].Value.ToString()) == 2)
+                                                        {
+                                                            <img width="25" height="25" src="~/Images/c_amarillo.png" />
+                                                        }
+                                                        @if (int.Parse(proc.Attributes["Obsolescencia"].Value.ToString()) == 3)
+                                                        {
+                                                            <img width="25" height="25" src="~/Images/e_rojo.png" />
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        @if (int.Parse(proc.Attributes["Obsolescencia"].Value.ToString()) == 1)
+                                                        {
+                                                            <p> Alto</p>
+                                                        }
+                                                        @if (int.Parse(proc.Attributes["Obsolescencia"].Value.ToString()) == 2)
+                                                        {
+                                                            <p>Medio</p>
+                                                        }
+                                                        @if (int.Parse(proc.Attributes["Obsolescencia"].Value.ToString()) == 3)
+                                                        {
+                                                            <p>Bajo</p>
+                                                        }
+                                                    </td>
+
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    }
+                                }
                             </tr>
 
                             <tr class="GridViewScrollItem">
-                                <td class="CampoAnalisis">
-                                    <table style="margin: 0 auto;">
-                                        <tr class="GridViewScrollItem2">
-                                            <td>123, 456 LDC</td>
-                                            <td>
-                                                <img width="25" height="25" src="~/Images/a_verde.png" />
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                                <td class="CampoAnalisis">
-                                    <table style="margin: 0 auto;">
-                                        <tr class="GridViewScrollItem2">
-                                            <td>123, 456 LDC</td>
-                                            <td>
-                                                <img width="25" height="25" src="~/Images/a_verde.png" />
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                                <td class="CampoAnalisis">
-                                    <table style="margin: 0 auto;">
-                                        <tr class="GridViewScrollItem2">
-                                            <td>123, 456 LDC</td>
-                                            <td>
-                                                <img width="25" height="25" src="~/Images/a_verde.png" />
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                                <td class="CampoAnalisis">
-                                    <table style="margin: 0 auto;">
-                                        <tr class="GridViewScrollItem2">
-                                            <td>123, 456 LDC</td>
-                                            <td>
-                                                <img width="25" height="25" src="~/Images/a_verde.png" />
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                                <td class="CampoAnalisis">
-                                    <table style="margin: 0 auto;">
-                                        <tr class="GridViewScrollItem2">
-                                            <td>123, 456 LDC</td>
-                                            <td>
-                                                <img width="25" height="25" src="~/Images/a_verde.png" />
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                                <td class="CampoAnalisis">
-                                    <table style="margin: 0 auto;">
-                                        <tr class="GridViewScrollItem2">
-                                            <td>123, 456 LDC</td>
-                                            <td>
-                                                <img width="25" height="25" src="~/Images/a_verde.png" />
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                                <td class="CampoAnalisis">
-                                    <table style="margin: 0 auto;">
-                                        <tr class="GridViewScrollItem2">
-                                            <td>123, 456 LDC</td>
-                                            <td>
-                                                <img width="25" height="25" src="~/Images/a_verde.png" />
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                                <td class="CampoAnalisis">
-                                    <table style="margin: 0 auto;">
-                                        <tr class="GridViewScrollItem2">
-                                            <td>123, 456 LDC</td>
-                                            <td>
-                                                <img width="25" height="25" src="~/Images/a_verde.png" />
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
+                                @{
+                                    foreach (System.Xml.XmlNode proc in Model.DetalleXML.DocumentElement.SelectSingleNode("ResultadosMetricas").SelectNodes("row"))
+                                    {
+                                        <td class="CampoAnalisis">
+                                            <table style="margin: 0 auto; width:100%">
+                                                <tr class="GridViewScrollItem2">
+                                                    <td style="text-align:left;  width:25px">
+                                                        <img width="25" height="25" src="~/Images/e_rojo.png" />
+                                                    </td>
+                                                    <td>@proc.Attributes["Mantenibilidad"].Value.ToString() </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    }
+                                }
                             </tr>
                             <tr class="GridViewScrollItem">
-                                <td class="CampoAnalisis">
-                                    <table style="margin: 0 auto;">
-                                        <tr class="GridViewScrollItem2">
-                                            <td>123, 456 LDC</td>
-                                            <td>
-                                                <img width="25" height="25" src="~/Images/a_verde.png" />
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                                <td class="CampoAnalisis">
-                                    <table style="margin: 0 auto;">
-                                        <tr class="GridViewScrollItem2">
-                                            <td>123, 456 LDC</td>
-                                            <td>
-                                                <img width="25" height="25" src="~/Images/a_verde.png" />
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                                <td class="CampoAnalisis">
-                                    <table style="margin: 0 auto;">
-                                        <tr class="GridViewScrollItem2">
-                                            <td>123, 456 LDC</td>
-                                            <td>
-                                                <img width="25" height="25" src="~/Images/a_verde.png" />
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                                <td class="CampoAnalisis">
-                                    <table style="margin: 0 auto;">
-                                        <tr class="GridViewScrollItem2">
-                                            <td>123, 456 LDC</td>
-                                            <td>
-                                                <img width="25" height="25" src="~/Images/a_verde.png" />
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                                <td class="CampoAnalisis">
-                                    <table style="margin: 0 auto;">
-                                        <tr class="GridViewScrollItem2">
-                                            <td>123, 456 LDC</td>
-                                            <td>
-                                                <img width="25" height="25" src="~/Images/a_verde.png" />
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                                <td class="CampoAnalisis">
-                                    <table style="margin: 0 auto;">
-                                        <tr class="GridViewScrollItem2">
-                                            <td>123, 456 LDC</td>
-                                            <td>
-                                                <img width="25" height="25" src="~/Images/a_verde.png" />
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                                <td class="CampoAnalisis">
-                                    <table style="margin: 0 auto;">
-                                        <tr class="GridViewScrollItem2">
-                                            <td>123, 456 LDC</td>
-                                            <td>
-                                                <img width="25" height="25" src="~/Images/a_verde.png" />
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                                <td class="CampoAnalisis">
-                                    <table style="margin: 0 auto;">
-                                        <tr class="GridViewScrollItem2">
-                                            <td>123, 456 LDC</td>
-                                            <td>
-                                                <img width="25" height="25" src="~/Images/a_verde.png" />
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
+                                @{
+                                    foreach (System.Xml.XmlNode proc in Model.DetalleXML.DocumentElement.SelectSingleNode("ResultadosMetricas").SelectNodes("row"))
+                                    {
+                                        <td class="CampoAnalisis">
+                                            <table style="margin: 0 auto; width:100%">
+                                                <tr class="GridViewScrollItem2">
+                                                    <td style="text-align:left;  width:25px">
+                                                        <img width="25" height="25" src="~/Images/e_rojo.png" />
+                                                    </td>
+                                                    <td>@proc.Attributes["Seguridad"].Value.ToString()</td>
+
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    }
+                                }
                             </tr>
                             <tr class="GridViewScrollItem">
-                                <td class="CampoAnalisis">
-                                    <table style="margin: 0 auto;">
-                                        <tr class="GridViewScrollItem2">
-                                            <td>123, 456 LDC</td>
-                                            <td>
-                                                <img width="25" height="25" src="~/Images/a_verde.png" />
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                                <td class="CampoAnalisis">
-                                    <table style="margin: 0 auto;">
-                                        <tr class="GridViewScrollItem2">
-                                            <td>123, 456 LDC</td>
-                                            <td>
-                                                <img width="25" height="25" src="~/Images/a_verde.png" />
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                                <td class="CampoAnalisis">
-                                    <table style="margin: 0 auto;">
-                                        <tr class="GridViewScrollItem2">
-                                            <td>123, 456 LDC</td>
-                                            <td>
-                                                <img width="25" height="25" src="~/Images/a_verde.png" />
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                                <td class="CampoAnalisis">
-                                    <table style="margin: 0 auto;">
-                                        <tr class="GridViewScrollItem2">
-                                            <td>123, 456 LDC</td>
-                                            <td>
-                                                <img width="25" height="25" src="~/Images/a_verde.png" />
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                                <td class="CampoAnalisis">
-                                    <table style="margin: 0 auto;">
-                                        <tr class="GridViewScrollItem2">
-                                            <td>123, 456 LDC</td>
-                                            <td>
-                                                <img width="25" height="25" src="~/Images/a_verde.png" />
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                                <td class="CampoAnalisis">
-                                    <table style="margin: 0 auto;">
-                                        <tr class="GridViewScrollItem2">
-                                            <td>123, 456 LDC</td>
-                                            <td>
-                                                <img width="25" height="25" src="~/Images/a_verde.png" />
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                                <td class="CampoAnalisis">
-                                    <table style="margin: 0 auto;">
-                                        <tr class="GridViewScrollItem2">
-                                            <td>123, 456 LDC</td>
-                                            <td>
-                                                <img width="25" height="25" src="~/Images/a_verde.png" />
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                                <td class="CampoAnalisis">
-                                    <table style="margin: 0 auto;">
-                                        <tr class="GridViewScrollItem2">
-                                            <td>123, 456 LDC</td>
-                                            <td>
-                                                <img width="25" height="25" src="~/Images/a_verde.png" />
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
+                                @{
+                                    foreach (System.Xml.XmlNode proc in Model.DetalleXML.DocumentElement.SelectSingleNode("ResultadosMetricas").SelectNodes("row"))
+                                    {
+                                        <td class="CampoAnalisis">
+                                            <table style="margin: 0 auto; width:100%">
+                                                <tr class="GridViewScrollItem2">
+                                                    <td style="text-align:left;  width:25px">
+                                                        <img width="25" height="25" src="~/Images/e_rojo.png" />
+                                                    </td>
+                                                    <td>@proc.Attributes["Confiabilidad"].Value.ToString()</td>
+
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    }
+                                }
                             </tr>
                             <tr class="GridViewScrollItem">
-                                <td class="CampoAnalisis">
-                                    <table style="margin: 0 auto;">
-                                        <tr class="GridViewScrollItem2">
-                                            <td>123, 456 LDC</td>
-                                            <td>
-                                                <img width="25" height="25" src="~/Images/a_verde.png" />
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                                <td class="CampoAnalisis">
-                                    <table style="margin: 0 auto;">
-                                        <tr class="GridViewScrollItem2">
-                                            <td>123, 456 LDC</td>
-                                            <td>
-                                                <img width="25" height="25" src="~/Images/a_verde.png" />
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                                <td class="CampoAnalisis">
-                                    <table style="margin: 0 auto;">
-                                        <tr class="GridViewScrollItem2">
-                                            <td>123, 456 LDC</td>
-                                            <td>
-                                                <img width="25" height="25" src="~/Images/a_verde.png" />
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                                <td class="CampoAnalisis">
-                                    <table style="margin: 0 auto;">
-                                        <tr class="GridViewScrollItem2">
-                                            <td>123, 456 LDC</td>
-                                            <td>
-                                                <img width="25" height="25" src="~/Images/a_verde.png" />
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                                <td class="CampoAnalisis">
-                                    <table style="margin: 0 auto;">
-                                        <tr class="GridViewScrollItem2">
-                                            <td>123, 456 LDC</td>
-                                            <td>
-                                                <img width="25" height="25" src="~/Images/a_verde.png" />
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                                <td class="CampoAnalisis">
-                                    <table style="margin: 0 auto;">
-                                        <tr class="GridViewScrollItem2">
-                                            <td>123, 456 LDC</td>
-                                            <td>
-                                                <img width="25" height="25" src="~/Images/a_verde.png" />
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                                <td class="CampoAnalisis">
-                                    <table style="margin: 0 auto;">
-                                        <tr class="GridViewScrollItem2">
-                                            <td>123, 456 LDC</td>
-                                            <td>
-                                                <img width="25" height="25" src="~/Images/a_verde.png" />
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                                <td class="CampoAnalisis">
-                                    <table style="margin: 0 auto;">
-                                        <tr class="GridViewScrollItem2">
-                                            <td>123, 456 LDC</td>
-                                            <td>
-                                                <img width="25" height="25" src="~/Images/a_verde.png" />
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
+                                @{
+                                    foreach (System.Xml.XmlNode proc in Model.DetalleXML.DocumentElement.SelectSingleNode("ResultadosMetricas").SelectNodes("row"))
+                                    {
+                                        <td class="CampoAnalisis">
+                                            <table style="margin: 0 auto; width:100%">
+                                                <tr class="GridViewScrollItem2">
+                                                    <td style="text-align:left;  width:25px">
+                                                        @if (int.Parse(proc.Attributes["ObjBD"].Value.ToString()) > 90)
+                                                        {
+                                                            <img width="25" height="25" src="~/Images/a_verde.png" />
+                                                        }
+                                                        @if (int.Parse(proc.Attributes["ObjBD"].Value.ToString()) >= 75 && int.Parse(proc.Attributes["ObjBD"].Value.ToString()) <= 90)
+                                                        {
+                                                            <img width="25" height="25" src="~/Images/b_verdeFuerte.png" />
+                                                        }
+                                                        @if (int.Parse(proc.Attributes["ObjBD"].Value.ToString()) >= 60 && int.Parse(proc.Attributes["ObjBD"].Value.ToString()) <= 74)
+                                                        {
+                                                            <img width="25" height="25" src="~/Images/c_amarillo.png" />
+                                                        }
+                                                        @if (int.Parse(proc.Attributes["ObjBD"].Value.ToString()) >= 45 && int.Parse(proc.Attributes["ObjBD"].Value.ToString()) <= 59)
+                                                        {
+                                                            <img width="25" height="25" src="~/Images/d_naranja.png" />
+                                                        }
+                                                        @if (int.Parse(proc.Attributes["ObjBD"].Value.ToString()) < 45)
+                                                        {
+                                                            <img width="25" height="25" src="~/Images/e_rojo.png" />
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        @if (int.Parse(proc.Attributes["ObjBD"].Value.ToString()) > 90)
+                                                        {
+                                                            <p>@proc.Attributes["ObjBD"].Value.ToString() % - Excelente</p>
+                                                        }
+                                                        @if (int.Parse(proc.Attributes["ObjBD"].Value.ToString()) >= 75 && int.Parse(proc.Attributes["ObjBD"].Value.ToString()) <= 90)
+                                                        {
+                                                            <p>@proc.Attributes["ObjBD"].Value.ToString() % - Alta</p>
+                                                        }
+                                                        @if (int.Parse(proc.Attributes["ObjBD"].Value.ToString()) >= 60 && int.Parse(proc.Attributes["ObjBD"].Value.ToString()) <= 74)
+                                                        {
+                                                            <p>@proc.Attributes["ObjBD"].Value.ToString() % - Media</p>
+                                                        }
+                                                        @if (int.Parse(proc.Attributes["ObjBD"].Value.ToString()) >= 45 && int.Parse(proc.Attributes["ObjBD"].Value.ToString()) <= 59)
+                                                        {
+                                                            <p>@proc.Attributes["ObjBD"].Value.ToString() % - Baja</p>
+                                                        }
+                                                        @if (int.Parse(proc.Attributes["ObjBD"].Value.ToString()) < 45)
+                                                        {
+                                                            <p>@proc.Attributes["ObjBD"].Value.ToString() % - Muy Baja</p>
+                                                        }
+                                                    </td>
+
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    }
+                                }
                             </tr>
                             <tr class="GridViewScrollItem">
-                                <td class="CampoAnalisis">
-                                    <table style="margin: 0 auto;">
-                                        <tr class="GridViewScrollItem2">
-                                            <td>123, 456 LDC</td>
-                                            <td>
-                                                <img width="25" height="25" src="~/Images/a_verde.png" />
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                                <td class="CampoAnalisis">
-                                    <table style="margin: 0 auto;">
-                                        <tr class="GridViewScrollItem2">
-                                            <td>123, 456 LDC</td>
-                                            <td>
-                                                <img width="25" height="25" src="~/Images/a_verde.png" />
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                                <td class="CampoAnalisis">
-                                    <table style="margin: 0 auto;">
-                                        <tr class="GridViewScrollItem2">
-                                            <td>123, 456 LDC</td>
-                                            <td>
-                                                <img width="25" height="25" src="~/Images/a_verde.png" />
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                                <td class="CampoAnalisis">
-                                    <table style="margin: 0 auto;">
-                                        <tr class="GridViewScrollItem2">
-                                            <td>123, 456 LDC</td>
-                                            <td>
-                                                <img width="25" height="25" src="~/Images/a_verde.png" />
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                                <td class="CampoAnalisis">
-                                    <table style="margin: 0 auto;">
-                                        <tr class="GridViewScrollItem2">
-                                            <td>123, 456 LDC</td>
-                                            <td>
-                                                <img width="25" height="25" src="~/Images/a_verde.png" />
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                                <td class="CampoAnalisis">
-                                    <table style="margin: 0 auto;">
-                                        <tr class="GridViewScrollItem2">
-                                            <td>123, 456 LDC</td>
-                                            <td>
-                                                <img width="25" height="25" src="~/Images/a_verde.png" />
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                                <td class="CampoAnalisis">
-                                    <table style="margin: 0 auto;">
-                                        <tr class="GridViewScrollItem2">
-                                            <td>123, 456 LDC</td>
-                                            <td>
-                                                <img width="25" height="25" src="~/Images/a_verde.png" />
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                                <td class="CampoAnalisis">
-                                    <table style="margin: 0 auto;">
-                                        <tr class="GridViewScrollItem2">
-                                            <td>123, 456 LDC</td>
-                                            <td>
-                                                <img width="25" height="25" src="~/Images/a_verde.png" />
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
+                                @{
+                                    foreach (System.Xml.XmlNode proc in Model.DetalleXML.DocumentElement.SelectSingleNode("ResultadosMetricas").SelectNodes("row"))
+                                    {
+                                        <td class="CampoAnalisis">
+                                            <table style="margin: 0 auto; width:100%">
+                                                <tr class="GridViewScrollItem2">
+                                                    <td style="text-align:left;  width:25px">
+                                                        @if (int.Parse(proc.Attributes["Ser_Inter"].Value.ToString()) == 0)
+                                                        {
+                                                            <img width="25" height="25" src="~/Images/a_verde.png" />
+                                                        }
+                                                        @if (int.Parse(proc.Attributes["Ser_Inter"].Value.ToString()) >= 1 && int.Parse(proc.Attributes["Ser_Inter"].Value.ToString()) <= 3)
+                                                        {
+                                                            <img width="25" height="25" src="~/Images/b_verdeFuerte.png" />
+                                                        }
+                                                        @if (int.Parse(proc.Attributes["Ser_Inter"].Value.ToString()) >= 4 && int.Parse(proc.Attributes["Ser_Inter"].Value.ToString()) <= 5)
+                                                        {
+                                                            <img width="25" height="25" src="~/Images/c_amarillo.png" />
+                                                        }
+                                                        @if (int.Parse(proc.Attributes["Ser_Inter"].Value.ToString()) >= 6 && int.Parse(proc.Attributes["Ser_Inter"].Value.ToString()) <= 8)
+                                                        {
+                                                            <img width="25" height="25" src="~/Images/d_naranja.png" />
+                                                        }
+                                                        @if (int.Parse(proc.Attributes["Ser_Inter"].Value.ToString()) > 8)
+                                                        {
+                                                            <img width="25" height="25" src="~/Images/e_rojo.png" />
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        @if (int.Parse(proc.Attributes["Ser_Inter"].Value.ToString()) == 0)
+                                                        {
+                                                            <p>@proc.Attributes["Ser_Inter"].Value.ToString() Encontrados</p>
+                                                        }
+                                                        @if (int.Parse(proc.Attributes["Ser_Inter"].Value.ToString()) >= 1 && int.Parse(proc.Attributes["Ser_Inter"].Value.ToString()) <= 3)
+                                                        {
+                                                            <p>@proc.Attributes["Ser_Inter"].Value.ToString() Encontrados</p>
+                                                        }
+                                                        @if (int.Parse(proc.Attributes["Ser_Inter"].Value.ToString()) >= 4 && int.Parse(proc.Attributes["Ser_Inter"].Value.ToString()) <= 5)
+                                                        {
+                                                            <p>@proc.Attributes["Ser_Inter"].Value.ToString() Encontrados</p>
+                                                        }
+                                                        @if (int.Parse(proc.Attributes["Ser_Inter"].Value.ToString()) >= 6 && int.Parse(proc.Attributes["Ser_Inter"].Value.ToString()) <= 8)
+                                                        {
+                                                            <p>@proc.Attributes["Ser_Inter"].Value.ToString() Encontrados</p>
+                                                        }
+                                                        @if (int.Parse(proc.Attributes["Ser_Inter"].Value.ToString()) > 8)
+                                                        {
+                                                            <p>@proc.Attributes["Ser_Inter"].Value.ToString() Encontrados</p>
+                                                        }
+                                                    </td>
+
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    }
+                                }
                             </tr>
 
 
@@ -751,57 +348,351 @@
         </table>
 
 
-        
-        
+        <br /><br />
+        <div class="card text-white bg-primary mb-3" style="max-width: 100%;">
+            <div class="card-header">Métricas de las aplicaciones</div>
+
+        </div>
+        @*Líneas de código*@
+        <div class="card border-primary mb-3" style="max-width: 100%;">
+            <div class="card-header">Tamaño (Por Líneas de Código):</div>
+            <div class="card-body">
+                <table>
+                    <tr>
+                        <td style="width:221.6px">
+                            <table style="margin: 0 auto;">
+                                <tr class="">
+                                    <td style="width: 35px;">
+                                        <img width="25" height="25" src="~/Images/a_verde.png" />
+                                    </td>
+                                    <td>Menos de 1,000 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+                                </tr>
+                            </table>
+                        </td>
+                        <td style="width:221.6px">
+                            <table style="margin: 0 auto;">
+                                <tr class="">
+                                    <td style="width: 35px;">
+                                        <img width="25" height="25" src="~/Images/b_verdeFuerte.png" />
+                                    </td>
+                                    <td>Entre 1,000 y 3,000 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+                                </tr>
+                            </table>
+                        </td>
+                        <td style="width:221.6px">
+                            <table style="margin: 0 auto;">
+                                <tr class="">
+                                    <td style="width: 35px;">
+                                        <img width="25" height="25" src="~/Images/c_amarillo.png" />
+                                    </td>
+                                    <td>Entre 3,000 y 50,000 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+                                </tr>
+                            </table>
+                        </td>
+                        <td style="width:221.6px">
+                            <table style="margin: 0 auto;">
+                                <tr class="">
+                                    <td style="width: 35px;">
+                                        <img width="25" height="25" src="~/Images/d_naranja.png" />
+                                    </td>
+                                    <td>Entre 50,000 y 100,000 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+                                </tr>
+                            </table>
+                        </td>
+                        <td style="width:221.6px">
+                            <table style="margin: 0 auto;">
+                                <tr class="">
+                                    <td style="width: 35px;">
+                                        <img width="25" height="25" src="~/Images/e_rojo.png" />
+                                    </td>
+                                    <td>Más de 100,000 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        @*Obsolescencia*@
+        <div class="card border-primary mb-3" style="width: auto;">
+            <div class="card-header">Obsolescencia:</div>
+            <div class="card-body">
+                <table>
+                    <tr>
+                        <td style="width:369.5px">
+                            <table style="margin: 0 auto;">
+                                <tr class="">
+                                    <td style="width: 40px;">
+                                        <img width="25" height="25" src="~/Images/a_verde.png" />
+                                    </td>
+                                    <td>
+                                        Lenguaje actualizado y  con soporte por parte del fabricante.
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td style="width:369.5px">
+                            <table style="margin: 0 auto;">
+                                <tr class="">
+                                    <td style="width: 40px;">
+                                        <img width="25" height="25" src="~/Images/c_amarillo.png" />
+                                    </td>
+                                    <td>
+                                        Lenguaje con al menos dos años más de soporte y actualizaciones.
+                                    </td>
+
+                                </tr>
+                            </table>
+                        </td>
+                        <td style="width:369.5px">
+                            <table style="margin: 0 auto;">
+                                <tr class="">
+                                    <td style="width: 40px;">
+                                        <img width="25" height="25" src="~/Images/e_rojo.png" />
+                                    </td>
+                                    <td>
+                                        Lenguaje desactualizado y sin soporte por parte del fabricante.
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="card border-primary mb-3" style="max-width: 100%;">
+            <div class="card-header">Mantenibilidad, Confiabilidad, Seguridad (Hallazgos idetificados que afectan directamente al Factor de Impacto):</div>
+            <div class="card-body">
+                <table>
+                    <tr>
+                        <td style="width:221.6px">
+                            <table style="margin: 0 auto;">
+                                <tr class="">
+                                    <td style="width: 35px;">
+                                        <img width="25" height="25" src="~/Images/a_verde.png" />
+                                    </td>
+                                    <td>
+                                        0 hallazgos identificados.
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td style="width:221.6px">
+                            <table style="margin: 0 auto;">
+                                <tr class="">
+                                    <td style="width: 35px;">
+                                        <img width="25" height="25" src="~/Images/b_verdeFuerte.png" />
+                                    </td>
+                                    <td>
+                                        Al menos 1 hallazgo de Impacto Bajo.
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td style="width:221.6px">
+                            <table style="margin: 0 auto;">
+                                <tr class="">
+                                    <td style="width: 35px;">
+                                        <img width="25" height="25" src="~/Images/c_amarillo.png" />
+                                    </td>
+                                    <td>
+                                        Al menos 1 hallazgo de Impacto Medio.
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td style="width:221.6px">
+                            <table style="margin: 0 auto;">
+                                <tr class="">
+                                    <td style="width: 35px;">
+                                        <img width="25" height="25" src="~/Images/d_naranja.png" />
+                                    </td>
+                                    <td>
+                                        Más de 1 hallazgo de Impacto Medio.
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td style="width:221.6px">
+                            <table style="margin: 0 auto;">
+                                <tr class="">
+                                    <td style="width: 35px;">
+                                        <img width="25" height="25" src="~/Images/e_rojo.png" />
+                                    </td>
+                                    <td>
+                                        Al menos 1 hallazgo con Impacto Alto.
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="card border-primary mb-3" style="max-width: 100%;">
+            <div class="card-header">Objetos de Base de Datos (Usabilidad del Total de Objetos):</div>
+            <div class="card-body">
+                <table>
+                    <tr>
+                        <td style="width:221.6px">
+                            <table style="margin: 0 auto;">
+                                <tr class="">
+                                    <td style="width: 35px;">
+                                        <img width="25" height="25" src="~/Images/a_verde.png" />
+                                    </td>
+                                    <td>
+                                        Más de 90% &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td style="width:221.6px">
+                            <table style="margin: 0 auto;">
+                                <tr class="">
+                                    <td style="width: 35px;">
+                                        <img width="25" height="25" src="~/Images/b_verdeFuerte.png" />
+                                    </td>
+                                    <td>
+                                        Entre el 75% y 90% &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td style="width:221.6px">
+                            <table style="margin: 0 auto;">
+                                <tr class="">
+                                    <td style="width: 35px;">
+                                        <img width="25" height="25" src="~/Images/c_amarillo.png" />
+                                    </td>
+                                    <td>
+                                        Entre el 60% y 74% &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td style="width:221.6px">
+                            <table style="margin: 0 auto;">
+                                <tr class="">
+                                    <td style="width: 35px;">
+                                        <img width="25" height="25" src="~/Images/d_naranja.png" />
+                                    </td>
+                                    <td>
+                                        Entre 45% y 59% &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td style="width:221.6px">
+                            <table style="margin: 0 auto;">
+                                <tr class="">
+                                    <td style="width: 35px;">
+                                        <img width="25" height="25" src="~/Images/e_rojo.png" />
+                                    </td>
+                                    <td>
+                                        Menor del 45% &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="card border-primary mb-3" style="max-width: 100%;">
+            <div class="card-header">Servicios e Interfaces (Entre más servicios más compleja es la aplicación):</div>
+            <div class="card-body">
+                <table>
+                    <tr>
+                        <td style="width:221.6px">
+                            <table style="margin: 0 auto;">
+                                <tr class="">
+                                    <td style="width: 35px;">
+                                        <img width="25" height="25" src="~/Images/a_verde.png" />
+                                    </td>
+                                    <td>
+                                        0 Servicios. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td style="width:221.6px">
+                            <table style="margin: 0 auto;">
+                                <tr class="">
+                                    <td style="width: 35px;">
+                                        <img width="25" height="25" src="~/Images/b_verdeFuerte.png" />
+                                    </td>
+                                    <td>
+                                        Entre 1 y 3.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td style="width:221.6px">
+                            <table style="margin: 0 auto;">
+                                <tr class="">
+                                    <td style="width: 35px;">
+                                        <img width="25" height="25" src="~/Images/c_amarillo.png" />
+                                    </td>
+                                    <td>
+                                        Entre 4 y 5.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td style="width:221.6px">
+                            <table style="margin: 0 auto;">
+                                <tr class="">
+                                    <td style="width: 35px;">
+                                        <img width="25" height="25" src="~/Images/d_naranja.png" />
+                                    </td>
+                                    <td>
+                                        Entre 5 y 8.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td style="width:221.6px">
+                            <table style="margin: 0 auto;">
+                                <tr class="">
+                                    <td style="width: 35px;">
+                                        <img width="25" height="25" src="~/Images/e_rojo.png" />
+                                    </td>
+                                    <td>
+                                        Más de 8 Servicios.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+
 
 
     </fieldset>
 
 
-    @*<fieldset>
 
-            <div id="HGrid">
-
-                <table cellspacing="0" id="Tabla0" style="width: 100%; border-collapse: collapse; color: #fff; ">
-                    <tr class="GridViewScrollHeader">
-                        <th class="CampoMasCorto">Aplicación</th>
-                        <th class="CampoDescarga">Tamaño</th>
-                        <th class="CampoAnalisis">Obsolescencia</th>
-                        <th class="CampoAnalisis">Mantenibilidad</th>
-                        <th class="CampoAnalisis">Seguridad</th>
-                        <th class="CampoAnalisis">Confiabilidad</th>
-                        <th class="CampoAnalisis">Obj. de Base de Datos</th>
-                        <th class="CampoAnalisis">Servicios e Interfaces</th>
-
-                    </tr>
-                </table>
-            </div>
-            <div id="divdet">
-                <table id="Tabla1" style="width: 100%; border-collapse: collapse;" cellpadding="0" cellspacing="0">
-
-
-                    <tr class="GridViewScrollItem">
-                        <td class="CampoMasCorto"> abcdefabcdefabcdef </td>
-                        <td class="CampoDescarga"> abcdef </td>
-                        <td class="CampoAnalisis"> abcdef </td>
-                        <td class="CampoAnalisis"> abcdef </td>
-                        <td class="CampoAnalisis"> abcdef </td>
-                        <td class="CampoAnalisis"> abcdef </td>
-                        <td class="CampoAnalisis"> abcdef </td>
-                        <td class="CampoAnalisis"> abcdef </td>
-
-                    </tr>
-
-
-                </table>
-            </div>
-
-
-        </fieldset>*@
 
     <script src="~/Scripts/jquery-3.3.1.js"></script>
 </body>
 
 </html>
+
 
 
