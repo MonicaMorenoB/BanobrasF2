@@ -29,8 +29,8 @@
                                             <div class="vl-blanco"></div>
                                         </td>
                                         <td>
-                                            <p class="card-text">De n tablas</p>
-                                            <h1 class="card-title">600</h1>@*@Model.Indicadores.ElementAt(0).Usados*@
+                                            <p class="card-text">Millones</p>
+                                            <h1 class="card-title">130</h1>@*@Model.Indicadores.ElementAt(0).Usados*@
                                         </td>
                                     </tr>
                                 </table>
@@ -229,14 +229,41 @@
         <td colspan="3" style="padding:20px">
             <table class="table-indicator" align="center">
                 <tr>
-                    <td colspan="2" style="width: 850px;"><p>@Model.ResultBDpartdos.ElementAt(0).Valor_Resultado</p></td>
-                    <td><img width="70" height="70" src="~/Images/inactivo.png" /></td>
+                    <td>
+                        <div class="card border-primary mb-3" style="max-width: 60rem; height: 10rem">
+                            @*<div class="card-header">Select *</div>*@
+                            <div class="card-body">
+                                <br />
+                                <table class="table-indicator" style=" width: 100%;">
+
+                                    <tr>
+                                        <td rowspan="2">
+                                            <div class="contenedor">
+                                                <div class="box">
+                                                    <img width="70" height="70" src="~/Images/inactivo.png" />
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td align="center" rowspan="2">
+                                            <div class="vl-blanco"></div>
+                                        </td>
+
+                                        <td>
+
+                                            <p class="card-text">@Model.ResultBDpartdos.ElementAt(0).Valor_Resultado</p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </td>
                 </tr>
-            </table>
 
+                
+                </table>
         </td>
-
     </tr>
+
 
 
     <tr class="table-primary">

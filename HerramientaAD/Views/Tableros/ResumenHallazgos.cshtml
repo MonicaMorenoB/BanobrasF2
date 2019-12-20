@@ -17,12 +17,12 @@
 <body>
     <div class="jumbotron">
         <h1 class="display-3">@Model.HallazgosBD.ElementAt(0).NombreApp</h1>
-        <p class="lead">Resumen de hallazgos.</p>
+        <p class="lead">Resumen del análisis de la Bases de Datos.</p>
         <hr class="my-4">
     </div>
 
     <div class="alert alert-dismissible alert-primary">
-        <h6 class="mb-0">Información estadística de los objetos de Servicios e Interfaces encontrados durante el análisis de la aplicación.</h6>
+        <h6 class="mb-0">Resumen de los principales hallazgos encontrados durante el análisis de las Bases de Datos.</h6>
     </div>
 
     @if (Model.BasesLista.Count > 1)
